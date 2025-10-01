@@ -1,0 +1,252 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import url('/branding/branding.css');
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  
+  /* HTK Custom Colors */
+  --htk-black: #000000;
+  --htk-gold: #B9975B;
+  --htk-platinum: #E5E4E2;
+  --htk-charcoal: #111111;
+  --htk-dark-gold: #8C6A3C;
+  --htk-light-gold: #D4C4A8;
+  --htk-offwhite: #F8F7F5;
+  --htk-form-bg: #222222;
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: var(--htk-black);
+  --foreground: var(--htk-platinum);
+  --card: var(--htk-charcoal);
+  --card-foreground: var(--htk-platinum);
+  --popover: var(--htk-charcoal);
+  --popover-foreground: var(--htk-platinum);
+  --primary: var(--htk-gold);
+  --primary-foreground: var(--htk-black);
+  --secondary: var(--htk-charcoal);
+  --secondary-foreground: var(--htk-platinum);
+  --muted: var(--htk-charcoal);
+  --muted-foreground: var(--htk-platinum);
+  --accent: var(--htk-charcoal);
+  --accent-foreground: var(--htk-platinum);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: rgba(185, 151, 91, 0.2);
+  --input: var(--htk-form-bg);
+  --ring: var(--htk-gold);
+  --chart-1: var(--htk-gold);
+  --chart-2: var(--htk-light-gold);
+  --chart-3: var(--htk-dark-gold);
+  --chart-4: var(--htk-platinum);
+  --chart-5: var(--htk-offwhite);
+  --sidebar: var(--htk-charcoal);
+  --sidebar-foreground: var(--htk-platinum);
+  --sidebar-primary: var(--htk-gold);
+  --sidebar-primary-foreground: var(--htk-black);
+  --sidebar-accent: var(--htk-charcoal);
+  --sidebar-accent-foreground: var(--htk-platinum);
+  --sidebar-border: rgba(185, 151, 91, 0.2);
+  --sidebar-ring: var(--htk-gold);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--htk-font-body);
+    background: var(--htk-black);
+    color: var(--htk-offwhite);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* HTK Custom Utility Classes */
+.htk-bg-primary {
+  background: var(--htk-black);
+}
+
+.htk-bg-secondary {
+  background: var(--htk-charcoal);
+}
+
+.htk-gold-text {
+  color: var(--htk-gold);
+}
+
+.htk-platinum-text {
+  color: var(--htk-platinum);
+}
+
+.htk-brand-text {
+  font-family: var(--htk-font-heading);
+  color: var(--htk-gold);
+  font-weight: 700;
+}
+
+.htk-nav {
+  background: var(--htk-black);
+  border-bottom: 1px solid rgba(185, 151, 91, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.htk-nav-link {
+  color: var(--htk-platinum);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--htk-transition);
+  padding: 0.5rem 1rem;
+  border-radius: var(--htk-radius-sm);
+}
+
+.htk-nav-link:hover {
+  color: var(--htk-gold);
+  background: rgba(185, 151, 91, 0.1);
+}
+
+.htk-nav-link.active {
+  color: var(--htk-gold);
+  background: rgba(185, 151, 91, 0.15);
+}
+
+.htk-button-primary {
+  background: linear-gradient(45deg, var(--htk-dark-gold), var(--htk-gold), var(--htk-dark-gold));
+  color: var(--htk-black);
+  border: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.htk-button-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(45deg, #6b4e2b, #a0804b, #6b4e2b);
+}
+
+.htk-card {
+  background: var(--htk-charcoal);
+  border: 1px solid rgba(185, 151, 91, 0.2);
+  border-radius: var(--htk-radius);
+  transition: all 0.3s ease;
+}
+
+.htk-card:hover {
+  border-color: var(--htk-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.htk-input {
+  background: var(--htk-form-bg);
+  border: 1px solid rgba(185, 151, 91, 0.3);
+  color: var(--htk-gold);
+  border-radius: var(--htk-radius);
+}
+
+.htk-input:focus {
+  border-color: var(--htk-gold);
+  box-shadow: 0 0 0 3px rgba(185, 151, 91, 0.1);
+}
+
+.htk-input::placeholder {
+  color: rgba(248, 247, 245, 0.5);
+}
+
+.htk-label {
+  color: var(--htk-gold);
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.5px;
+}
+
+.htk-badge-gold {
+  background: var(--htk-gold);
+  color: var(--htk-black);
+}
+
+.htk-animate-fade-in {
+  animation: htk-fade-in 0.6s ease-out;
+}
+
+.htk-animate-scale-in {
+  animation: htk-scale-in 0.4s ease-out;
+}
+
+@keyframes htk-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes htk-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 2rem; }
+  h3 { font-size: 1.75rem; }
+  h4 { font-size: 1.25rem; }
+  h5 { font-size: 1.125rem; }
+  h6 { font-size: 1rem; }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.5rem; }
+}

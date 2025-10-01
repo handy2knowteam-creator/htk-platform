@@ -1,0 +1,341 @@
+/* 
+ * HTK OFFICIAL BRANDING THEME
+ * HandyToKnow Premium Trade Platform
+ * This file contains the official HTK brand colors, fonts, and styling
+ */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* HTK Brand Colors - Official Specification */
+:root {
+  /* Primary Brand Colors */
+  --htk-black: #000000;
+  --htk-gold: #B9975B;
+  --htk-platinum: #E5E4E2;
+  
+  /* Supporting Colors */
+  --htk-charcoal: #111111;
+  --htk-dark-gold: #8C6A3C;
+  --htk-light-gold: #D4C4A8;
+  --htk-offwhite: #F8F7F5;
+  --htk-form-bg: #222222;
+  
+  /* Semantic Colors */
+  --htk-success: #10B981;
+  --htk-warning: #F59E0B;
+  --htk-error: #EF4444;
+  --htk-info: #3B82F6;
+  
+  /* Typography */
+  --htk-font-heading: 'Cinzel', serif;
+  --htk-font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  
+  /* Spacing & Layout */
+  --htk-radius: 10px;
+  --htk-radius-sm: 6px;
+  --htk-radius-lg: 16px;
+  --htk-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  --htk-shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.3);
+  
+  /* Transitions */
+  --htk-transition: all 0.3s ease;
+  --htk-transition-fast: all 0.15s ease;
+}
+
+/* Global Typography */
+body {
+  font-family: var(--htk-font-body);
+  background: var(--htk-black);
+  color: var(--htk-offwhite);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--htk-font-heading);
+  color: var(--htk-platinum);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+  margin: 0 0 1rem 0;
+}
+
+h1 { font-size: 3.5rem; }
+h2 { font-size: 2.5rem; }
+h3 { font-size: 2rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+/* HTK Brand Components */
+.htk-logo {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--htk-radius-sm);
+}
+
+.htk-brand-text {
+  font-family: var(--htk-font-heading);
+  color: var(--htk-gold);
+  font-weight: 700;
+}
+
+.htk-gold-text {
+  color: var(--htk-gold);
+}
+
+.htk-platinum-text {
+  color: var(--htk-platinum);
+}
+
+/* HTK Button System */
+.htk-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: var(--htk-radius);
+  font-family: var(--htk-font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: var(--htk-transition);
+  box-shadow: var(--htk-shadow);
+}
+
+.htk-button-primary {
+  background: linear-gradient(45deg, var(--htk-dark-gold), var(--htk-gold), var(--htk-dark-gold));
+  color: var(--htk-black);
+}
+
+.htk-button-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--htk-shadow-lg);
+  background: linear-gradient(45deg, #6b4e2b, #a0804b, #6b4e2b);
+}
+
+.htk-button-secondary {
+  background: transparent;
+  color: var(--htk-platinum);
+  border: 2px solid var(--htk-gold);
+  box-shadow: none;
+}
+
+.htk-button-secondary:hover {
+  background: var(--htk-gold);
+  color: var(--htk-black);
+}
+
+.htk-button-ghost {
+  background: transparent;
+  color: var(--htk-gold);
+  box-shadow: none;
+}
+
+.htk-button-ghost:hover {
+  background: rgba(185, 151, 91, 0.1);
+}
+
+/* HTK Card System */
+.htk-card {
+  background: var(--htk-charcoal);
+  border: 1px solid rgba(185, 151, 91, 0.2);
+  border-radius: var(--htk-radius);
+  padding: 1.5rem;
+  box-shadow: var(--htk-shadow);
+  transition: var(--htk-transition);
+}
+
+.htk-card:hover {
+  border-color: var(--htk-gold);
+  transform: translateY(-2px);
+  box-shadow: var(--htk-shadow-lg);
+}
+
+.htk-card-dark {
+  background: var(--htk-black);
+}
+
+/* HTK Form Elements */
+.htk-input {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--htk-form-bg);
+  border: 1px solid rgba(185, 151, 91, 0.3);
+  border-radius: var(--htk-radius);
+  color: var(--htk-gold);
+  font-family: var(--htk-font-body);
+  font-size: 1rem;
+  transition: var(--htk-transition);
+  box-sizing: border-box;
+}
+
+.htk-input:focus {
+  outline: none;
+  border-color: var(--htk-gold);
+  box-shadow: 0 0 0 3px rgba(185, 151, 91, 0.1);
+}
+
+.htk-input::placeholder {
+  color: rgba(248, 247, 245, 0.5);
+}
+
+.htk-label {
+  display: block;
+  color: var(--htk-gold);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  letter-spacing: 0.5px;
+}
+
+/* HTK Navigation */
+.htk-nav {
+  background: var(--htk-black);
+  border-bottom: 1px solid rgba(185, 151, 91, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.htk-nav-link {
+  color: var(--htk-platinum);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--htk-transition);
+  padding: 0.5rem 1rem;
+  border-radius: var(--htk-radius-sm);
+}
+
+.htk-nav-link:hover {
+  color: var(--htk-gold);
+  background: rgba(185, 151, 91, 0.1);
+}
+
+.htk-nav-link.active {
+  color: var(--htk-gold);
+  background: rgba(185, 151, 91, 0.15);
+}
+
+/* HTK Backgrounds */
+.htk-bg-primary {
+  background: var(--htk-black);
+}
+
+.htk-bg-secondary {
+  background: var(--htk-charcoal);
+}
+
+.htk-bg-gradient {
+  background: linear-gradient(135deg, var(--htk-black) 0%, var(--htk-charcoal) 100%);
+}
+
+.htk-bg-gold-gradient {
+  background: linear-gradient(135deg, var(--htk-gold) 0%, var(--htk-dark-gold) 100%);
+}
+
+/* HTK Status Indicators */
+.htk-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.htk-badge-gold {
+  background: var(--htk-gold);
+  color: var(--htk-black);
+}
+
+.htk-badge-success {
+  background: var(--htk-success);
+  color: white;
+}
+
+.htk-badge-warning {
+  background: var(--htk-warning);
+  color: white;
+}
+
+.htk-badge-error {
+  background: var(--htk-error);
+  color: white;
+}
+
+/* HTK Animations */
+@keyframes htk-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes htk-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.htk-animate-fade-in {
+  animation: htk-fade-in 0.6s ease-out;
+}
+
+.htk-animate-scale-in {
+  animation: htk-scale-in 0.4s ease-out;
+}
+
+/* HTK Utilities */
+.htk-text-center { text-align: center; }
+.htk-text-left { text-align: left; }
+.htk-text-right { text-align: right; }
+
+.htk-font-heading { font-family: var(--htk-font-heading); }
+.htk-font-body { font-family: var(--htk-font-body); }
+
+.htk-shadow { box-shadow: var(--htk-shadow); }
+.htk-shadow-lg { box-shadow: var(--htk-shadow-lg); }
+
+.htk-rounded { border-radius: var(--htk-radius); }
+.htk-rounded-sm { border-radius: var(--htk-radius-sm); }
+.htk-rounded-lg { border-radius: var(--htk-radius-lg); }
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 2rem; }
+  h3 { font-size: 1.75rem; }
+  h4 { font-size: 1.25rem; }
+  h5 { font-size: 1.125rem; }
+  h6 { font-size: 1rem; }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.5rem; }
+  
+  .htk-button {
+    padding: 10px 20px;
+    font-size: 0.875rem;
+  }
+  
+  .htk-card {
+    padding: 1rem;
+  }
+}
