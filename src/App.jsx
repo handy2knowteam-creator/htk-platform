@@ -31,6 +31,7 @@ function HTKNavigation() {
             <Link to="/trades" className={`htk-nav-link ${location.pathname === '/trades' ? 'active' : ''}`}>Find Trades</Link>
             <Link to="/post" className={`htk-nav-link ${location.pathname === '/post' ? 'active' : ''}`}>Post Job</Link>
             <Link to="/competitions" className={`htk-nav-link ${location.pathname === '/competitions' ? 'active' : ''}`}>Competitions</Link>
+            <Link to="/leaderboards" className={`htk-nav-link ${location.pathname === '/leaderboards' ? 'active' : ''}`}>Leaderboards</Link>
             <Link to="/community" className={`htk-nav-link ${location.pathname === '/community' ? 'active' : ''}`}>Community</Link>
             <Link to="/contact" className={`htk-nav-link ${location.pathname === '/contact' ? 'active' : ''}`}>Contact</Link>
           </div>
@@ -839,8 +840,362 @@ function TradeDashboard() {
   )
 }
 
+// Leaderboards Page
+function LeaderboardsPage() {
+  const [activeTab, setActiveTab] = useState('monthly')
+  
+  const leaderboardData = {
+    monthly: [
+      { rank: 1, name: "Mike Thompson", trade: "Plumber", rating: 4.9, jobs: 15, revenue: "£3,200", badge: "🥇" },
+      { rank: 2, name: "Sarah Johnson", trade: "Electrician", rating: 4.8, jobs: 12, revenue: "£2,800", badge: "🥈" },
+      { rank: 3, name: "David Wilson", trade: "Carpenter", rating: 4.7, jobs: 10, revenue: "£2,400", badge: "🥉" },
+      { rank: 4, name: "Emma Davis", trade: "Painter", rating: 4.6, jobs: 8, revenue: "£1,900", badge: "" },
+      { rank: 5, name: "James Brown", trade: "Roofer", rating: 4.5, jobs: 7, revenue: "£1,600", badge: "" }
+    ],
+    yearly: [
+      { rank: 1, name: "Sarah Johnson", trade: "Electrician", rating: 4.9, jobs: 145, revenue: "£32,000", badge: "🏆" },
+      { rank: 2, name: "Mike Thompson", trade: "Plumber", rating: 4.8, jobs: 132, revenue: "£28,500", badge: "🥇" },
+      { rank: 3, name: "David Wilson", trade: "Carpenter", rating: 4.7, jobs: 118, revenue: "£25,200", badge: "🥈" }
+    ]
+  }
+
+  return (
+    <div className="htk-bg-primary min-h-screen">
+      <HTKNavigation />
+      
+      <div className="container mx-auto px-4 py-16">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold mb-4 htk-gold-text">Leaderboards</h1>
+          <p className="text-xl text-htk-platinum/80">Top performing tradespeople in the HTK community</p>
+        </div>
+
+        {/* Tab Navigation */}
+        <div className="flex justify-center mb-8">
+          <div className="flex bg-htk-secondary rounded-lg p-1">
+            <button
+              onClick={() => setActiveTab('monthly')}
+              className={`px-6 py-2 rounded-md transition-colors ${
+                activeTab === 'monthly' 
+                  ? 'bg-htk-gold text-black font-semibold' 
+                  : 'text-htk-platinum hover:text-htk-gold'
+              }`}
+            >
+              This Month
+            </button>
+            <button
+              onClick={() => setActiveTab('yearly')}
+              className={`px-6 py-2 rounded-md transition-colors ${
+                activeTab === 'yearly' 
+                  ? 'bg-htk-gold text-black font-semibold' 
+                  : 'text-htk-platinum hover:text-htk-gold'
+              }`}
+            >
+              This Year
+            </button>
+          </div>
+        </div>
+
+        {/* Leaderboard */}
+        <div className="max-w-4xl mx-auto">
+          <Card className="htk-card">
+            <CardHeader>
+              <CardTitle className="htk-gold-text text-center">
+                {activeTab === 'monthly' ? 'Tradesperson of the Month' : 'Tradesperson of the Year'}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {leaderboardData[activeTab].map((trader) => (
+                  <div key={trader.rank} className="flex items-center justify-between p-4 bg-htk-secondary rounded-lg">
+                    <div className="flex items-center space-x-4">
+                      <div className="text-2xl font-bold htk-gold-text w-8">
+                        {trader.badge || `#${trader.rank}`}
+                      </div>
+                      <div>
+                        <h3 className="font-semibold htk-platinum-text">{trader.name}</h3>
+                        <p className="text-htk-platinum/80">{trader.trade}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-6 text-center">
+                      <div>
+                        <div className="text-htk-gold font-semibold">{trader.rating}</div>
+                        <div className="text-xs text-htk-platinum/60">Rating</div>
+                      </div>
+                      <div>
+                        <div className="text-htk-gold font-semibold">{trader.jobs}</div>
+                        <div className="text-xs text-htk-platinum/60">Jobs</div>
+                      </div>
+                      <div>
+                        <div className="text-htk-gold font-semibold">{trader.revenue}</div>
+                        <div className="text-xs text-htk-platinum/60">Revenue</div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Achievement Badges */}
+        <div className="mt-12">
+          <h2 className="text-2xl font-bold text-center mb-8 htk-gold-text">Achievement Badges</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-htk-gold rounded-full flex items-center justify-center mx-auto mb-2">
+                <Trophy className="w-8 h-8 text-black" />
+              </div>
+              <h3 className="font-semibold htk-platinum-text">Top Performer</h3>
+              <p className="text-xs text-htk-platinum/60">100+ jobs completed</p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-htk-gold rounded-full flex items-center justify-center mx-auto mb-2">
+                <Star className="w-8 h-8 text-black" />
+              </div>
+              <h3 className="font-semibold htk-platinum-text">5-Star Pro</h3>
+              <p className="text-xs text-htk-platinum/60">4.8+ average rating</p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-htk-gold rounded-full flex items-center justify-center mx-auto mb-2">
+                <Zap className="w-8 h-8 text-black" />
+              </div>
+              <h3 className="font-semibold htk-platinum-text">Speed Demon</h3>
+              <p className="text-xs text-htk-platinum/60">Quick response time</p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-htk-gold rounded-full flex items-center justify-center mx-auto mb-2">
+                <Shield className="w-8 h-8 text-black" />
+              </div>
+              <h3 className="font-semibold htk-platinum-text">Verified Pro</h3>
+              <p className="text-xs text-htk-platinum/60">Identity verified</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <HTKFooter />
+    </div>
+  )
+}
+
+// Trade Profile Page
+function TradeProfilePage() {
+  const [showRatingModal, setShowRatingModal] = useState(false)
+  const [ratings, setRatings] = useState({
+    quality: 0,
+    punctuality: 0,
+    communication: 0,
+    cleanliness: 0,
+    value: 0
+  })
+
+  const handleRatingSubmit = () => {
+    alert('Rating submitted successfully!')
+    setShowRatingModal(false)
+    setRatings({ quality: 0, punctuality: 0, communication: 0, cleanliness: 0, value: 0 })
+  }
+
+  return (
+    <div className="htk-bg-primary min-h-screen">
+      <HTKNavigation />
+      
+      <div className="container mx-auto px-4 py-16">
+        <div className="max-w-4xl mx-auto">
+          {/* Profile Header */}
+          <Card className="htk-card mb-8">
+            <CardContent className="p-8">
+              <div className="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
+                <div className="w-32 h-32 bg-htk-secondary rounded-full flex items-center justify-center">
+                  <Users className="w-16 h-16 text-htk-gold" />
+                </div>
+                <div className="flex-1 text-center md:text-left">
+                  <h1 className="text-3xl font-bold htk-gold-text mb-2">Mike Thompson</h1>
+                  <p className="text-xl text-htk-platinum/80 mb-4">Master Plumber • Manchester</p>
+                  <div className="flex items-center justify-center md:justify-start space-x-4 mb-4">
+                    <div className="flex items-center">
+                      <Star className="w-5 h-5 text-htk-gold mr-1" />
+                      <span className="htk-gold-text font-semibold">4.9</span>
+                      <span className="text-htk-platinum/60 ml-1">(28 reviews)</span>
+                    </div>
+                    <Badge className="htk-badge-gold">Verified</Badge>
+                    <Badge className="htk-badge-gold">Premium</Badge>
+                  </div>
+                  <p className="text-htk-platinum/80">
+                    Experienced plumber with 15+ years in the trade. Specializing in residential and commercial plumbing solutions.
+                  </p>
+                </div>
+                <div className="text-center">
+                  <Button className="htk-button-primary mb-2">Contact Mike</Button>
+                  <Button 
+                    variant="outline" 
+                    className="border-htk-gold text-htk-gold hover:bg-htk-gold hover:text-black"
+                    onClick={() => setShowRatingModal(true)}
+                  >
+                    Rate & Review
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Portfolio & Media */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <Card className="htk-card">
+              <CardHeader>
+                <CardTitle className="htk-gold-text">Portfolio</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="aspect-square bg-htk-secondary rounded-lg flex items-center justify-center">
+                    <span className="text-htk-platinum/60">Photo 1</span>
+                  </div>
+                  <div className="aspect-square bg-htk-secondary rounded-lg flex items-center justify-center">
+                    <span className="text-htk-platinum/60">Photo 2</span>
+                  </div>
+                  <div className="aspect-square bg-htk-secondary rounded-lg flex items-center justify-center">
+                    <span className="text-htk-platinum/60">Photo 3</span>
+                  </div>
+                  <div className="aspect-square bg-htk-secondary rounded-lg flex items-center justify-center">
+                    <span className="text-htk-platinum/60">Photo 4</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="htk-card">
+              <CardHeader>
+                <CardTitle className="htk-gold-text">Video Introduction</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="aspect-video bg-htk-secondary rounded-lg flex items-center justify-center">
+                  <div className="text-center">
+                    <Play className="w-12 h-12 text-htk-gold mx-auto mb-2" />
+                    <p className="text-htk-platinum/60">Video coming soon</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Reviews */}
+          <Card className="htk-card">
+            <CardHeader>
+              <CardTitle className="htk-gold-text">Customer Reviews</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-6">
+                <div className="border-b border-htk-gold/20 pb-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="font-semibold htk-platinum-text">John Smith</h4>
+                    <div className="flex items-center">
+                      {[1,2,3,4,5].map(star => (
+                        <Star key={star} className="w-4 h-4 text-htk-gold fill-current" />
+                      ))}
+                    </div>
+                  </div>
+                  <p className="text-htk-platinum/80">
+                    "Excellent work on our bathroom renovation. Mike was professional, punctual, and cleaned up after himself. Highly recommended!"
+                  </p>
+                  <p className="text-htk-platinum/60 text-sm mt-2">2 weeks ago</p>
+                </div>
+                <div className="border-b border-htk-gold/20 pb-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="font-semibold htk-platinum-text">Sarah Wilson</h4>
+                    <div className="flex items-center">
+                      {[1,2,3,4,5].map(star => (
+                        <Star key={star} className="w-4 h-4 text-htk-gold fill-current" />
+                      ))}
+                    </div>
+                  </div>
+                  <p className="text-htk-platinum/80">
+                    "Fixed our emergency leak quickly and efficiently. Great communication throughout the process."
+                  </p>
+                  <p className="text-htk-platinum/60 text-sm mt-2">1 month ago</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Rating Modal */}
+        <Dialog open={showRatingModal} onOpenChange={setShowRatingModal}>
+          <DialogContent className="htk-card max-w-md">
+            <DialogHeader>
+              <DialogTitle className="htk-gold-text">Rate Mike Thompson</DialogTitle>
+              <DialogDescription className="text-htk-platinum/80">
+                Rate your experience across these 5 criteria
+              </DialogDescription>
+            </DialogHeader>
+            <div className="space-y-6">
+              {Object.entries(ratings).map(([criteria, rating]) => (
+                <div key={criteria}>
+                  <Label className="htk-label capitalize">{criteria}</Label>
+                  <div className="flex items-center space-x-2 mt-2">
+                    {[1,2,3,4,5].map(star => (
+                      <button
+                        key={star}
+                        onClick={() => setRatings({...ratings, [criteria]: star})}
+                        className="focus:outline-none"
+                      >
+                        <Star 
+                          className={`w-6 h-6 ${
+                            star <= rating ? 'text-htk-gold fill-current' : 'text-htk-platinum/30'
+                          }`} 
+                        />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ))}
+              <div>
+                <Label className="htk-label">Written Review (Optional)</Label>
+                <Textarea 
+                  placeholder="Share your experience..."
+                  className="htk-input mt-2"
+                />
+              </div>
+              <Button onClick={handleRatingSubmit} className="w-full htk-button-primary">
+                Submit Rating
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
+      </div>
+
+      <HTKFooter />
+    </div>
+  )
+}
+
 // Community Pages
 function CompetitionsPage() {
+  const competitions = [
+    {
+      title: "Tradesperson of the Month",
+      description: "Compete for the highest customer satisfaction rating this month",
+      prize: "£500 cash + Featured profile",
+      deadline: "End of month",
+      participants: 45,
+      status: "active"
+    },
+    {
+      title: "Best Bathroom Renovation",
+      description: "Submit your best bathroom transformation photos",
+      prize: "£1,000 + Tool vouchers",
+      deadline: "15 days left",
+      participants: 23,
+      status: "active"
+    },
+    {
+      title: "Customer Choice Award",
+      description: "Most recommended tradesperson by customers",
+      prize: "£750 + Premium badge",
+      deadline: "30 days left",
+      participants: 67,
+      status: "active"
+    }
+  ]
+
   return (
     <div className="htk-bg-primary min-h-screen">
       <HTKNavigation />
@@ -851,12 +1206,67 @@ function CompetitionsPage() {
           <p className="text-xl text-htk-platinum/80">Compete with fellow tradespeople and win amazing prizes</p>
         </div>
 
-        <div className="text-center py-16">
-          <Trophy className="w-16 h-16 text-htk-gold mx-auto mb-4" />
-          <h3 className="text-2xl font-semibold htk-gold-text mb-2">Coming Soon</h3>
-          <p className="text-htk-platinum/80 max-w-md mx-auto">
-            Exciting competitions and challenges are coming to HTK. Stay tuned for updates!
-          </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {competitions.map((comp, index) => (
+            <Card key={index} className="htk-card">
+              <CardHeader>
+                <div className="flex items-center justify-between mb-2">
+                  <Trophy className="w-8 h-8 text-htk-gold" />
+                  <Badge className="htk-badge-gold">{comp.status}</Badge>
+                </div>
+                <CardTitle className="htk-gold-text">{comp.title}</CardTitle>
+                <CardDescription className="text-htk-platinum/80">{comp.description}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="font-semibold htk-platinum-text mb-1">Prize</h4>
+                    <p className="text-htk-gold">{comp.prize}</p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold htk-platinum-text mb-1">Deadline</h4>
+                    <p className="text-htk-platinum/80">{comp.deadline}</p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold htk-platinum-text mb-1">Participants</h4>
+                    <p className="text-htk-platinum/80">{comp.participants} tradespeople</p>
+                  </div>
+                  <Button className="w-full htk-button-primary">Enter Competition</Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* Past Winners */}
+        <div className="mt-16">
+          <h2 className="text-3xl font-bold text-center mb-8 htk-gold-text">Recent Winners</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <div className="text-center">
+              <div className="w-20 h-20 bg-htk-gold rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">🥇</span>
+              </div>
+              <h3 className="font-semibold htk-platinum-text">Sarah Johnson</h3>
+              <p className="text-htk-platinum/80">October Tradesperson</p>
+              <p className="text-htk-gold">Electrician • Liverpool</p>
+            </div>
+            <div className="text-center">
+              <div className="w-20 h-20 bg-htk-gold rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">🏆</span>
+              </div>
+              <h3 className="font-semibold htk-platinum-text">Mike Thompson</h3>
+              <p className="text-htk-platinum/80">Best Kitchen Renovation</p>
+              <p className="text-htk-gold">Plumber • Manchester</p>
+            </div>
+            <div className="text-center">
+              <div className="w-20 h-20 bg-htk-gold rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">⭐</span>
+              </div>
+              <h3 className="font-semibold htk-platinum-text">David Wilson</h3>
+              <p className="text-htk-platinum/80">Customer Choice Award</p>
+              <p className="text-htk-gold">Carpenter • Birmingham</p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -866,6 +1276,30 @@ function CompetitionsPage() {
 }
 
 function SponsorsPage() {
+  const sponsors = [
+    {
+      name: "ToolStation",
+      description: "Professional tools and equipment",
+      benefit: "15% discount for HTK members",
+      logo: "🔧",
+      tier: "Gold Partner"
+    },
+    {
+      name: "Screwfix",
+      description: "Trade supplies and materials",
+      benefit: "Trade account benefits",
+      logo: "🔩",
+      tier: "Silver Partner"
+    },
+    {
+      name: "Wickes",
+      description: "Building materials and supplies",
+      benefit: "Bulk purchase discounts",
+      logo: "🏗️",
+      tier: "Bronze Partner"
+    }
+  ]
+
   return (
     <div className="htk-bg-primary min-h-screen">
       <HTKNavigation />
@@ -876,12 +1310,63 @@ function SponsorsPage() {
           <p className="text-xl text-htk-platinum/80">Partners who support the HTK community</p>
         </div>
 
-        <div className="text-center py-16">
-          <Shield className="w-16 h-16 text-htk-gold mx-auto mb-4" />
-          <h3 className="text-2xl font-semibold htk-gold-text mb-2">Coming Soon</h3>
-          <p className="text-htk-platinum/80 max-w-md mx-auto">
-            We're building partnerships with leading brands in the trade industry.
-          </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
+          {sponsors.map((sponsor, index) => (
+            <Card key={index} className="htk-card">
+              <CardHeader className="text-center">
+                <div className="text-6xl mb-4">{sponsor.logo}</div>
+                <CardTitle className="htk-gold-text">{sponsor.name}</CardTitle>
+                <Badge className="htk-badge-gold">{sponsor.tier}</Badge>
+              </CardHeader>
+              <CardContent className="text-center">
+                <p className="text-htk-platinum/80 mb-4">{sponsor.description}</p>
+                <div className="bg-htk-secondary p-4 rounded-lg">
+                  <h4 className="font-semibold htk-gold-text mb-2">Member Benefit</h4>
+                  <p className="text-htk-platinum/80">{sponsor.benefit}</p>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* Partnership Benefits */}
+        <div className="text-center">
+          <h2 className="text-3xl font-bold mb-8 htk-gold-text">Partnership Benefits</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
+            <div className="text-center">
+              <Shield className="w-12 h-12 text-htk-gold mx-auto mb-4" />
+              <h3 className="font-semibold htk-platinum-text mb-2">Exclusive Discounts</h3>
+              <p className="text-htk-platinum/60 text-sm">Special pricing for HTK members</p>
+            </div>
+            <div className="text-center">
+              <Award className="w-12 h-12 text-htk-gold mx-auto mb-4" />
+              <h3 className="font-semibold htk-platinum-text mb-2">Quality Guarantee</h3>
+              <p className="text-htk-platinum/60 text-sm">Verified quality products</p>
+            </div>
+            <div className="text-center">
+              <Zap className="w-12 h-12 text-htk-gold mx-auto mb-4" />
+              <h3 className="font-semibold htk-platinum-text mb-2">Fast Delivery</h3>
+              <p className="text-htk-platinum/60 text-sm">Priority shipping options</p>
+            </div>
+            <div className="text-center">
+              <Users className="w-12 h-12 text-htk-gold mx-auto mb-4" />
+              <h3 className="font-semibold htk-platinum-text mb-2">Trade Support</h3>
+              <p className="text-htk-platinum/60 text-sm">Dedicated trade customer service</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Become a Partner */}
+        <div className="mt-16 text-center">
+          <Card className="htk-card max-w-2xl mx-auto">
+            <CardContent className="p-8">
+              <h3 className="text-2xl font-bold htk-gold-text mb-4">Become a Partner</h3>
+              <p className="text-htk-platinum/80 mb-6">
+                Join our growing network of partners and reach thousands of professional tradespeople.
+              </p>
+              <Button className="htk-button-primary">Contact Partnership Team</Button>
+            </CardContent>
+          </Card>
         </div>
       </div>
 
@@ -891,6 +1376,30 @@ function SponsorsPage() {
 }
 
 function CommunityPage() {
+  const forumTopics = [
+    {
+      title: "Best practices for customer communication",
+      author: "Mike Thompson",
+      replies: 23,
+      lastActivity: "2 hours ago",
+      category: "Tips & Advice"
+    },
+    {
+      title: "Recommended tools for bathroom renovations",
+      author: "Sarah Johnson", 
+      replies: 15,
+      lastActivity: "4 hours ago",
+      category: "Tools & Equipment"
+    },
+    {
+      title: "How to handle difficult customers",
+      author: "David Wilson",
+      replies: 31,
+      lastActivity: "1 day ago",
+      category: "Business"
+    }
+  ]
+
   return (
     <div className="htk-bg-primary min-h-screen">
       <HTKNavigation />
@@ -901,12 +1410,101 @@ function CommunityPage() {
           <p className="text-xl text-htk-platinum/80">Connect with fellow tradespeople and customers</p>
         </div>
 
-        <div className="text-center py-16">
-          <Users className="w-16 h-16 text-htk-gold mx-auto mb-4" />
-          <h3 className="text-2xl font-semibold htk-gold-text mb-2">Coming Soon</h3>
-          <p className="text-htk-platinum/80 max-w-md mx-auto">
-            A vibrant community space for sharing tips, advice, and connecting with peers.
-          </p>
+        {/* Community Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+          <Card className="htk-card text-center">
+            <CardContent className="p-6">
+              <Users className="w-8 h-8 text-htk-gold mx-auto mb-2" />
+              <div className="text-2xl font-bold htk-gold-text">2,500+</div>
+              <div className="text-htk-platinum/80 text-sm">Active Members</div>
+            </CardContent>
+          </Card>
+          <Card className="htk-card text-center">
+            <CardContent className="p-6">
+              <Calendar className="w-8 h-8 text-htk-gold mx-auto mb-2" />
+              <div className="text-2xl font-bold htk-gold-text">150+</div>
+              <div className="text-htk-platinum/80 text-sm">Daily Posts</div>
+            </CardContent>
+          </Card>
+          <Card className="htk-card text-center">
+            <CardContent className="p-6">
+              <Trophy className="w-8 h-8 text-htk-gold mx-auto mb-2" />
+              <div className="text-2xl font-bold htk-gold-text">50+</div>
+              <div className="text-htk-platinum/80 text-sm">Expert Contributors</div>
+            </CardContent>
+          </Card>
+          <Card className="htk-card text-center">
+            <CardContent className="p-6">
+              <Star className="w-8 h-8 text-htk-gold mx-auto mb-2" />
+              <div className="text-2xl font-bold htk-gold-text">4.9/5</div>
+              <div className="text-htk-platinum/80 text-sm">Community Rating</div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Forum Topics */}
+        <div className="max-w-4xl mx-auto mb-12">
+          <h2 className="text-2xl font-bold mb-6 htk-gold-text">Recent Discussions</h2>
+          <div className="space-y-4">
+            {forumTopics.map((topic, index) => (
+              <Card key={index} className="htk-card">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-3 mb-2">
+                        <Badge className="htk-badge-gold">{topic.category}</Badge>
+                        <h3 className="font-semibold htk-platinum-text">{topic.title}</h3>
+                      </div>
+                      <div className="flex items-center space-x-4 text-sm text-htk-platinum/60">
+                        <span>By {topic.author}</span>
+                        <span>•</span>
+                        <span>{topic.replies} replies</span>
+                        <span>•</span>
+                        <span>{topic.lastActivity}</span>
+                      </div>
+                    </div>
+                    <Button variant="ghost" className="text-htk-gold hover:text-htk-gold">
+                      Join Discussion
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Community Guidelines */}
+        <div className="max-w-2xl mx-auto text-center">
+          <Card className="htk-card">
+            <CardHeader>
+              <CardTitle className="htk-gold-text">Community Guidelines</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4 text-left">
+                <div className="flex items-start space-x-3">
+                  <Shield className="w-5 h-5 text-htk-gold mt-1" />
+                  <div>
+                    <h4 className="font-semibold htk-platinum-text">Be Respectful</h4>
+                    <p className="text-htk-platinum/80 text-sm">Treat all members with courtesy and professionalism</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <Star className="w-5 h-5 text-htk-gold mt-1" />
+                  <div>
+                    <h4 className="font-semibold htk-platinum-text">Share Knowledge</h4>
+                    <p className="text-htk-platinum/80 text-sm">Help others by sharing your expertise and experience</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <Users className="w-5 h-5 text-htk-gold mt-1" />
+                  <div>
+                    <h4 className="font-semibold htk-platinum-text">Stay On Topic</h4>
+                    <p className="text-htk-platinum/80 text-sm">Keep discussions relevant to trades and the HTK community</p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
 
@@ -1088,9 +1686,11 @@ function App() {
           <Route path="/dashboard/customer" element={<CustomerDashboard />} />
           <Route path="/dashboard/trade" element={<TradeDashboard />} />
           <Route path="/competitions" element={<CompetitionsPage />} />
+          <Route path="/leaderboards" element={<LeaderboardsPage />} />
           <Route path="/sponsors" element={<SponsorsPage />} />
           <Route path="/community" element={<CommunityPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/trade-profile/:id" element={<TradeProfilePage />} />
           <Route path="/success" element={<SuccessPage />} />
         </Routes>
       </div>
