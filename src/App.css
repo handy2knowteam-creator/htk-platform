@@ -250,3 +250,87 @@
   h2 { font-size: 1.75rem; }
   h3 { font-size: 1.5rem; }
 }
+
+
+/* Mobile Menu Fixes */
+@media (max-width: 768px) {
+  .htk-nav .hidden.md\\:flex {
+    display: none !important;
+  }
+  
+  .htk-nav .md\\:hidden {
+    display: block !important;
+  }
+  
+  .htk-nav .md\\:hidden button {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    color: var(--htk-gold);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .htk-nav .md\\:hidden button:hover {
+    color: var(--htk-platinum);
+  }
+  
+  .htk-nav .md\\:hidden button svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+/* Mobile Menu Dropdown */
+.mobile-menu-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(185, 151, 91, 0.2);
+  z-index: 50;
+}
+
+.mobile-menu-dropdown a {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: var(--htk-platinum);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(185, 151, 91, 0.1);
+  transition: all 0.2s ease;
+}
+
+.mobile-menu-dropdown a:hover,
+.mobile-menu-dropdown a.active {
+  color: var(--htk-gold);
+  background: rgba(185, 151, 91, 0.1);
+}
+
+.mobile-menu-dropdown .auth-section {
+  padding: 1rem;
+  border-top: 1px solid rgba(185, 151, 91, 0.2);
+}
+
+.mobile-menu-dropdown .auth-section button {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.mobile-menu-link {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: var(--htk-platinum);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(185, 151, 91, 0.1);
+  transition: all 0.2s ease;
+}
+
+.mobile-menu-link:hover,
+.mobile-menu-link.active {
+  color: var(--htk-gold);
+  background: rgba(185, 151, 91, 0.1);
+}

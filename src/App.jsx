@@ -14,6 +14,7 @@ import './App.css'
 function HTKNavigation() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [userType, setUserType] = useState(null)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const location = useLocation()
 
   return (
@@ -25,6 +26,7 @@ function HTKNavigation() {
             <span className="htk-brand-text text-xl font-bold">HandyToKnow</span>
           </Link>
           
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
             <Link to="/" className={`htk-nav-link ${location.pathname === '/' ? 'active' : ''}`}>Home</Link>
             <Link to="/pricing" className={`htk-nav-link ${location.pathname === '/pricing' ? 'active' : ''}`}>Pricing</Link>
@@ -36,7 +38,8 @@ function HTKNavigation() {
             <Link to="/contact" className={`htk-nav-link ${location.pathname === '/contact' ? 'active' : ''}`}>Contact</Link>
           </div>
 
-          <div className="flex items-center space-x-4">
+          {/* Desktop Auth Buttons */}
+          <div className="hidden md:flex items-center space-x-4">
             {!isLoggedIn ? (
               <>
                 <Link to="/login">
@@ -61,7 +64,118 @@ function HTKNavigation() {
               </>
             )}
           </div>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="text-htk-gold hover:text-htk-platinum focus:outline-none focus:text-htk-platinum"
+              aria-label="Toggle mobile menu"
+            >
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                {mobileMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+          </div>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="mobile-menu-dropdown md:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              <Link 
+                to="/" 
+                className={`mobile-menu-link ${location.pathname === '/' ? 'active' : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Home
+              </Link>
+              <Link 
+                to="/pricing" 
+                className={`mobile-menu-link ${location.pathname === '/pricing' ? 'active' : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Pricing
+              </Link>
+              <Link 
+                to="/trades" 
+                className={`mobile-menu-link ${location.pathname === '/trades' ? 'active' : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Find Trades
+              </Link>
+              <Link 
+                to="/post" 
+                className={`mobile-menu-link ${location.pathname === '/post' ? 'active' : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Post Job
+              </Link>
+              <Link 
+                to="/competitions" 
+                className={`mobile-menu-link ${location.pathname === '/competitions' ? 'active' : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Competitions
+              </Link>
+              <Link 
+                to="/leaderboards" 
+                className={`mobile-menu-link ${location.pathname === '/leaderboards' ? 'active' : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Leaderboards
+              </Link>
+              <Link 
+                to="/community" 
+                className={`mobile-menu-link ${location.pathname === '/community' ? 'active' : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Community
+              </Link>
+              <Link 
+                to="/contact" 
+                className={`mobile-menu-link ${location.pathname === '/contact' ? 'active' : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Contact
+              </Link>
+              
+              {/* Mobile Auth Buttons */}
+              <div className="auth-section">
+                {!isLoggedIn ? (
+                  <div className="space-y-2">
+                    <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
+                      <Button variant="ghost" className="w-full text-htk-platinum hover:text-htk-gold">Login</Button>
+                    </Link>
+                    <Link to="/signup" onClick={() => setMobileMenuOpen(false)}>
+                      <Button className="w-full htk-button-primary">Join HTK</Button>
+                    </Link>
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    <Link to={userType === 'trade' ? '/dashboard/trade' : '/dashboard/customer'} onClick={() => setMobileMenuOpen(false)}>
+                      <Button variant="ghost" className="w-full text-htk-platinum hover:text-htk-gold">Dashboard</Button>
+                    </Link>
+                    <Button 
+                      variant="ghost" 
+                      onClick={() => {
+                        setIsLoggedIn(false)
+                        setMobileMenuOpen(false)
+                      }}
+                      className="w-full text-htk-platinum hover:text-htk-gold"
+                    >
+                      Logout
+                    </Button>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   )
