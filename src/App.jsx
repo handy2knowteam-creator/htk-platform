@@ -331,31 +331,70 @@ function TradeSignup() {
       setIsSubmitting(true)
 
       try {
-        const tradeData = {
+        // Create Stripe price IDs for each plan
+        const stripePriceIds = {
+          'Silver': import.meta.env.VITE_STRIPE_SILVER_PRICE_ID || 'price_1QCqGJP123456789silver',
+          'Gold': import.meta.env.VITE_STRIPE_GOLD_PRICE_ID || 'price_1QCqGJP123456789gold',
+          'Platinum': import.meta.env.VITE_STRIPE_PLATINUM_PRICE_ID || 'price_1QCqGJP123456789platinum'
+        }
+
+        const priceId = stripePriceIds[formData.selectedPlan]
+        
+        if (!priceId) {
+          throw new Error('Invalid subscription plan selected')
+        }
+
+        // Save trade data temporarily (will be completed after payment)
+        const tempTradeData = {
           id: Date.now().toString(),
           ...formData,
           type: 'trade',
           registeredAt: new Date().toISOString(),
-          status: 'pending',
-          subscriptionStatus: 'pending'
+          status: 'payment_pending',
+          subscriptionStatus: 'payment_pending'
         }
 
-        // Save to localStorage
-        const existingTrades = JSON.parse(localStorage.getItem('htk_trades') || '[]')
-        existingTrades.push(tradeData)
-        localStorage.setItem('htk_trades', JSON.stringify(existingTrades))
+        // Store temporarily for completion after payment
+        sessionStorage.setItem('pending_trade_registration', JSON.stringify(tempTradeData))
 
-        const existingUsers = JSON.parse(localStorage.getItem('htk_users') || '[]')
-        existingUsers.push(tradeData)
-        localStorage.setItem('htk_users', JSON.stringify(existingUsers))
+        // Create Stripe checkout session
+        const response = await fetch('/.netlify/functions/create-checkout-session', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            priceId: priceId,
+            successUrl: `${window.location.origin}/success?type=trade&plan=${formData.selectedPlan}&session_id={CHECKOUT_SESSION_ID}`,
+            cancelUrl: `${window.location.origin}/trade-signup?step=3`,
+            customerEmail: formData.email,
+            metadata: {
+              tradeId: tempTradeData.id,
+              businessName: formData.businessName,
+              contactName: formData.contactName,
+              plan: formData.selectedPlan
+            }
+          })
+        })
 
-        alert(`Thank you ${formData.contactName}! Your trade registration has been submitted. You'll receive payment instructions shortly.`)
-        navigate('/success?type=trade&plan=' + formData.selectedPlan)
+        if (!response.ok) {
+          const errorData = await response.json()
+          throw new Error(errorData.error || 'Failed to create checkout session')
+        }
+
+        const { sessionId } = await response.json()
+
+        // Redirect to Stripe Checkout
+        const stripe = window.Stripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || 'pk_test_51QCqGJP123456789_test_key')
+        const { error } = await stripe.redirectToCheckout({ sessionId })
+
+        if (error) {
+          throw new Error(error.message)
+        }
 
       } catch (error) {
-        console.error('Trade registration error:', error)
-        alert('Registration failed. Please try again.')
-      } finally {
+        console.error('Payment processing error:', error)
+        alert(`Payment processing failed: ${error.message}. Please try again or contact support.`)
         setIsSubmitting(false)
       }
     }
@@ -2403,21 +2442,130 @@ function SuccessPage() {
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
   const type = searchParams.get('type')
+  const plan = searchParams.get('plan')
+  const sessionId = searchParams.get('session_id')
+  const [paymentStatus, setPaymentStatus] = useState('processing')
+  const [tradeData, setTradeData] = useState(null)
+
+  useEffect(() => {
+    if (type === 'trade' && sessionId) {
+      completeTradeRegistration()
+    }
+  }, [type, sessionId])
+
+  const completeTradeRegistration = async () => {
+    try {
+      const response = await fetch('/.netlify/functions/complete-trade-registration', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ sessionId })
+      })
+
+      if (response.ok) {
+        const result = await response.json()
+        setTradeData(result.trade)
+        setPaymentStatus('success')
+        
+        // Complete the registration by saving to localStorage
+        const existingTrades = JSON.parse(localStorage.getItem('htk_trades') || '[]')
+        existingTrades.push(result.trade)
+        localStorage.setItem('htk_trades', JSON.stringify(existingTrades))
+
+        const existingUsers = JSON.parse(localStorage.getItem('htk_users') || '[]')
+        existingUsers.push(result.trade)
+        localStorage.setItem('htk_users', JSON.stringify(existingUsers))
+
+        // Clear pending registration
+        sessionStorage.removeItem('pending_trade_registration')
+      } else {
+        setPaymentStatus('error')
+      }
+    } catch (error) {
+      console.error('Error completing registration:', error)
+      setPaymentStatus('error')
+    }
+  }
+
+  const renderTradeSuccess = () => {
+    if (paymentStatus === 'processing') {
+      return (
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-htk-gold mx-auto mb-4"></div>
+          <p className="text-htk-platinum/80">Processing your payment...</p>
+        </div>
+      )
+    }
+
+    if (paymentStatus === 'error') {
+      return (
+        <div className="text-center">
+          <h1 className="text-3xl font-bold text-red-400 mb-4">Payment Error</h1>
+          <p className="text-htk-platinum/80 mb-8">
+            There was an issue processing your payment. Please contact support or try again.
+          </p>
+          <Link to="/trade-signup">
+            <Button className="htk-button-primary mr-4">Try Again</Button>
+          </Link>
+          <Link to="/contact">
+            <Button className="htk-button-secondary">Contact Support</Button>
+          </Link>
+        </div>
+      )
+    }
+
+    return (
+      <div className="text-center">
+        <div className="mb-6">
+          <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h1 className="text-3xl font-bold htk-gold-text mb-4">Payment Successful!</h1>
+          <p className="text-htk-platinum/80 mb-6">
+            Welcome to HandyToKnow! Your {plan} subscription is now active.
+          </p>
+        </div>
+
+        <div className="bg-htk-secondary/20 rounded-lg p-6 mb-8 max-w-md mx-auto">
+          <h3 className="text-lg font-semibold htk-gold-text mb-4">What's Next?</h3>
+          <ul className="text-left text-htk-platinum/80 space-y-2">
+            <li>• Check your email for welcome instructions</li>
+            <li>• Complete your trade profile</li>
+            <li>• Start receiving customer leads</li>
+            <li>• Build your reputation with reviews</li>
+          </ul>
+        </div>
+
+        <div className="space-x-4">
+          <Link to="/dashboard/trade">
+            <Button className="htk-button-primary">Go to Dashboard</Button>
+          </Link>
+          <Link to="/">
+            <Button className="htk-button-secondary">Return Home</Button>
+          </Link>
+        </div>
+      </div>
+    )
+  }
   
   return (
     <div className="htk-bg-primary min-h-screen">
       <HTKNavigation />
-      <div className="container mx-auto px-4 py-16 text-center">
-        <h1 className="text-3xl font-bold htk-gold-text mb-8">Success!</h1>
-        <p className="text-htk-platinum/80 mb-8">
-          {type === 'customer' 
-            ? "Your job request has been submitted. We'll be in touch within 24 hours."
-            : "Your trade registration has been submitted. You'll receive payment instructions shortly."
-          }
-        </p>
-        <Link to="/">
-          <Button className="htk-button-primary">Return Home</Button>
-        </Link>
+      <div className="container mx-auto px-4 py-16">
+        {type === 'trade' ? renderTradeSuccess() : (
+          <div className="text-center">
+            <h1 className="text-3xl font-bold htk-gold-text mb-8">Success!</h1>
+            <p className="text-htk-platinum/80 mb-8">
+              Your job request has been submitted. We'll be in touch within 24 hours.
+            </p>
+            <Link to="/">
+              <Button className="htk-button-primary">Return Home</Button>
+            </Link>
+          </div>
+        )}
       </div>
       <HTKFooter />
     </div>
