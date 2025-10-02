@@ -1,0 +1,97 @@
+/* Mobile Performance Optimizations for HTK */
+
+/* Reduce animations on mobile for better performance */
+@media (max-width: 768px) {
+  * {
+    animation-duration: 0.1s !important;
+    transition-duration: 0.1s !important;
+  }
+  
+  /* Optimize transforms for mobile */
+  .htk-button-primary,
+  .htk-button-secondary {
+    transform: none !important;
+    will-change: auto !important;
+  }
+  
+  /* Reduce box shadows on mobile */
+  .htk-card {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  /* Optimize images for mobile */
+  img {
+    image-rendering: optimizeSpeed !important;
+    transform: translateZ(0) !important;
+  }
+  
+  /* Reduce gradient complexity on mobile */
+  .htk-button-primary {
+    background: #B9975B !important;
+  }
+  
+  /* Optimize scrolling */
+  body {
+    -webkit-overflow-scrolling: touch !important;
+    overflow-scrolling: touch !important;
+  }
+  
+  /* Reduce repaints */
+  .container {
+    contain: layout style !important;
+  }
+  
+  /* Optimize text rendering */
+  * {
+    text-rendering: optimizeSpeed !important;
+    -webkit-font-smoothing: subpixel-antialiased !important;
+  }
+}
+
+/* iPhone specific optimizations */
+@media (max-width: 414px) {
+  /* Reduce padding for smaller screens */
+  .py-20 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  
+  .py-16 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  /* Optimize grid layouts */
+  .grid {
+    display: block !important;
+  }
+  
+  .grid > * {
+    margin-bottom: 1rem !important;
+  }
+  
+  /* Reduce font sizes slightly for better performance */
+  .text-4xl {
+    font-size: 2rem !important;
+  }
+  
+  .text-6xl {
+    font-size: 2.5rem !important;
+  }
+}
+
+/* Performance critical optimizations */
+.htk-performance-optimized {
+  contain: layout style paint !important;
+  will-change: auto !important;
+  transform: translateZ(0) !important;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
