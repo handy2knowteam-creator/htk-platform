@@ -942,13 +942,11 @@ function HTKNavigation() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <Link to="/" className={`htk-nav-link ${location.pathname === '/' ? 'active' : ''}`}>Home</Link>
-            <Link to="/pricing" className={`htk-nav-link ${location.pathname === '/pricing' ? 'active' : ''}`}>Pricing</Link>
+            <Link to="/how-it-works" className={`htk-nav-link ${location.pathname === '/how-it-works' ? 'active' : ''}`}>How it works</Link>
+            <Link to="/ask-a-trade" className={`htk-nav-link ${location.pathname === '/ask-a-trade' ? 'active' : ''}`}>Ask a trade</Link>
+            <Link to="/cost-guides" className={`htk-nav-link ${location.pathname === '/cost-guides' ? 'active' : ''}`}>Cost guides</Link>
+            <Link to="/post" className={`htk-nav-link ${location.pathname === '/post' ? 'active' : ''}`}>Post a Job</Link>
             <Link to="/trades" className={`htk-nav-link ${location.pathname === '/trades' ? 'active' : ''}`}>Find Trades</Link>
-            <Link to="/post" className={`htk-nav-link ${location.pathname === '/post' ? 'active' : ''}`}>Post Job</Link>
-            <Link to="/competitions" className={`htk-nav-link ${location.pathname === '/competitions' ? 'active' : ''}`}>Competitions</Link>
-            <Link to="/leaderboards" className={`htk-nav-link ${location.pathname === '/leaderboards' ? 'active' : ''}`}>Leaderboards</Link>
-            <Link to="/community" className={`htk-nav-link ${location.pathname === '/community' ? 'active' : ''}`}>Community</Link>
-            <Link to="/contact" className={`htk-nav-link ${location.pathname === '/contact' ? 'active' : ''}`}>Contact</Link>
           </div>
 
           {/* Auth Buttons */}
@@ -1153,6 +1151,9 @@ function App() {
           <Route path="/customer-signup" element={<CustomerSignup />} />
           <Route path="/trade-signup" element={<TradeSignup />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/how-it-works" element={<HowItWorksPage />} />
+          <Route path="/ask-a-trade" element={<AskATradePage />} />
+          <Route path="/cost-guides" element={<CostGuidesPage />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/trades" element={<TradesPage />} />
           <Route path="/post" element={<PostJobPage />} />
@@ -1182,11 +1183,25 @@ function HomePage() {
       <section className="py-20">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold htk-gold-text mb-6">
-            Connecting Local Trades with Customers
+            Find Tradespeople, Compare Up to 3 Quotes!
           </h1>
           <p className="text-xl text-htk-platinum/80 mb-8 max-w-3xl mx-auto">
-            The premium platform built by trades, for trades. Get quality leads, grow your business, and connect with customers who value your expertise.
+            It's FREE and there are no obligations
           </p>
+          
+          {/* Postcode Search */}
+          <div className="max-w-md mx-auto mb-8">
+            <div className="flex">
+              <input 
+                type="text" 
+                placeholder="Enter your postcode" 
+                className="flex-1 px-4 py-3 rounded-l-lg text-black text-lg border-0"
+              />
+              <button className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black px-8 py-3 rounded-r-lg font-semibold text-lg hover:from-yellow-500 hover:to-yellow-700 transition-all">
+                Get Started
+              </button>
+            </div>
+          </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <Link to="/customer-signup">
@@ -1202,7 +1217,7 @@ function HomePage() {
           </div>
           
           <p className="text-htk-platinum/60">
-            Or <Link to="/trades" className="htk-gold-text hover:underline">browse tradespeople without signing up</Link>
+            Over 50,000 tradespeople nationwide use HandyToKnow
           </p>
         </div>
       </section>
@@ -1242,28 +1257,272 @@ function HomePage() {
                 <span className="text-2xl font-bold text-black">1</span>
               </div>
               <h3 className="text-xl font-semibold htk-platinum-text mb-2">Post Your Job</h3>
-              <p className="text-htk-platinum/80">Describe your project and budget. It takes less than 2 minutes.</p>
+              <p className="text-htk-platinum/80">Tell us about the work you need doing around your home.</p>
             </div>
             
             <div className="text-center">
               <div className="w-16 h-16 bg-htk-gold rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl font-bold text-black">2</span>
               </div>
-              <h3 className="text-xl font-semibold htk-platinum-text mb-2">Get Matched</h3>
-              <p className="text-htk-platinum/80">We connect you with verified local tradespeople who want your job.</p>
+              <h3 className="text-xl font-semibold htk-platinum-text mb-2">Receive up to 3 quotes</h3>
+              <p className="text-htk-platinum/80">Up to 3 local trades will then be in touch to quote for the work.</p>
             </div>
             
             <div className="text-center">
               <div className="w-16 h-16 bg-htk-gold rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl font-bold text-black">3</span>
               </div>
-              <h3 className="text-xl font-semibold htk-platinum-text mb-2">Get It Done</h3>
-              <p className="text-htk-platinum/80">Choose your tradesperson, agree on price, and get your job completed.</p>
+              <h3 className="text-xl font-semibold htk-platinum-text mb-2">Choose your tradesperson</h3>
+              <p className="text-htk-platinum/80">Compare quotes then choose your preferred tradesman.</p>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Recent Completed Jobs */}
+      <section className="py-20 htk-bg-secondary">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold htk-gold-text text-center mb-12">Recent Completed Jobs</h2>
+          <p className="text-center text-htk-platinum/80 mb-12">Join over 1,000,000 happy homeowners who have posted their job on HandyToKnow</p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Card className="htk-card">
+              <CardContent className="p-6">
+                <div className="mb-4">
+                  <h3 className="font-semibold htk-gold-text">Plumber job in Manchester</h3>
+                  <p className="text-sm text-htk-platinum/60 mb-2">Review for Mike Thompson</p>
+                </div>
+                <p className="text-htk-platinum/80 mb-4">
+                  "Excellent tradesman. Professional, tidy and very good finished job. Will have Mike back again and could safely recommend to anyone."
+                </p>
+                <div className="flex items-center">
+                  {[1,2,3,4,5].map(i => (
+                    <Star key={i} className="h-4 w-4 fill-htk-gold text-htk-gold" />
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="htk-card">
+              <CardContent className="p-6">
+                <div className="mb-4">
+                  <h3 className="font-semibold htk-gold-text">Electrician job in London</h3>
+                  <p className="text-sm text-htk-platinum/60 mb-2">Review for Sarah Johnson</p>
+                </div>
+                <p className="text-htk-platinum/80 mb-4">
+                  "Sarah arrived on time and was friendly and polite. The job was well done and the area was tidied up on completion. Very happy."
+                </p>
+                <div className="flex items-center">
+                  {[1,2,3,4,5].map(i => (
+                    <Star key={i} className="h-4 w-4 fill-htk-gold text-htk-gold" />
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="htk-card">
+              <CardContent className="p-6">
+                <div className="mb-4">
+                  <h3 className="font-semibold htk-gold-text">Carpenter job in Birmingham</h3>
+                  <p className="text-sm text-htk-platinum/60 mb-2">Review for David Wilson</p>
+                </div>
+                <p className="text-htk-platinum/80 mb-4">
+                  "Couldn't give a higher recommendation! He did a fabulous job and was very warm and professional."
+                </p>
+                <div className="flex items-center">
+                  {[1,2,3,4,5].map(i => (
+                    <Star key={i} className="h-4 w-4 fill-htk-gold text-htk-gold" />
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      <HTKFooter />
+    </div>
+  )
+}
+
+// How It Works Page
+function HowItWorksPage() {
+  return (
+    <div className="htk-bg-primary min-h-screen">
+      <HTKNavigation />
+      <div className="container mx-auto px-4 py-16">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-4xl font-bold htk-gold-text text-center mb-8">How HandyToKnow Works</h1>
+          <p className="text-xl text-htk-platinum/80 text-center mb-12">
+            Getting quality tradespeople for your home has never been easier
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <div className="text-center">
+              <div className="w-20 h-20 bg-htk-gold rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-3xl font-bold text-black">1</span>
+              </div>
+              <h3 className="text-2xl font-semibold htk-gold-text mb-4">Tell us what you need</h3>
+              <p className="text-htk-platinum/80">Answer a few questions about your project. It takes less than 2 minutes and it's completely free.</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-20 h-20 bg-htk-gold rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-3xl font-bold text-black">2</span>
+              </div>
+              <h3 className="text-2xl font-semibold htk-gold-text mb-4">Get matched with trades</h3>
+              <p className="text-htk-platinum/80">We'll find up to 3 trusted local tradespeople who are available and want to quote for your job.</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-20 h-20 bg-htk-gold rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-3xl font-bold text-black">3</span>
+              </div>
+              <h3 className="text-2xl font-semibold htk-gold-text mb-4">Compare and choose</h3>
+              <p className="text-htk-platinum/80">Compare quotes, read reviews, and choose the tradesperson that's right for you and your budget.</p>
+            </div>
+          </div>
+          
+          <div className="text-center">
+            <Link to="/customer-signup">
+              <Button className="htk-button-primary text-lg px-8 py-4">
+                Get Started - It's Free
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+      <HTKFooter />
+    </div>
+  )
+}
+
+// Ask a Trade Page
+function AskATradePage() {
+  return (
+    <div className="htk-bg-primary min-h-screen">
+      <HTKNavigation />
+      <div className="container mx-auto px-4 py-16">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-4xl font-bold htk-gold-text text-center mb-8">Ask a Trade</h1>
+          <p className="text-xl text-htk-platinum/80 text-center mb-12">
+            Get expert advice from verified tradespeople
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Card className="htk-card">
+              <CardHeader>
+                <CardTitle className="htk-gold-text">Recent Questions</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="border-b border-htk-gold/20 pb-4">
+                  <h3 className="font-semibold htk-platinum-text mb-2">How much should I expect to pay for a new boiler?</h3>
+                  <p className="text-sm text-htk-platinum/60 mb-2">Asked by Sarah M. • 2 hours ago</p>
+                  <p className="text-htk-platinum/80">Looking to replace my old boiler. What's a reasonable price range for a good quality combi boiler including installation?</p>
+                  <div className="mt-2">
+                    <span className="text-sm htk-gold-text">3 expert answers</span>
+                  </div>
+                </div>
+                
+                <div className="border-b border-htk-gold/20 pb-4">
+                  <h3 className="font-semibold htk-platinum-text mb-2">Best time of year for roof repairs?</h3>
+                  <p className="text-sm text-htk-platinum/60 mb-2">Asked by John D. • 1 day ago</p>
+                  <p className="text-htk-platinum/80">When is the best time to get roof work done? Weather considerations and cost factors?</p>
+                  <div className="mt-2">
+                    <span className="text-sm htk-gold-text">5 expert answers</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card className="htk-card">
+              <CardHeader>
+                <CardTitle className="htk-gold-text">Ask Your Question</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <form className="space-y-4">
+                  <div>
+                    <Label className="htk-gold-text">Your Question</Label>
+                    <Textarea 
+                      placeholder="What would you like to ask our expert tradespeople?"
+                      className="htk-input"
+                      rows={4}
+                    />
+                  </div>
+                  <div>
+                    <Label className="htk-gold-text">Category</Label>
+                    <select className="htk-input w-full">
+                      <option>Select a category</option>
+                      <option>Plumbing</option>
+                      <option>Electrical</option>
+                      <option>Building</option>
+                      <option>Roofing</option>
+                      <option>Heating</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <Button className="htk-button-primary w-full">
+                    Ask Question
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+      <HTKFooter />
+    </div>
+  )
+}
+
+// Cost Guides Page
+function CostGuidesPage() {
+  const costGuides = [
+    { title: "Boiler Installation Cost", range: "£1,500 - £3,500", description: "Complete guide to boiler replacement costs including labour and materials" },
+    { title: "Kitchen Extension Cost", range: "£15,000 - £30,000", description: "Everything you need to know about single-storey kitchen extension costs" },
+    { title: "Bathroom Renovation Cost", range: "£3,000 - £8,000", description: "Full bathroom refurbishment costs from budget to luxury" },
+    { title: "Roof Replacement Cost", range: "£5,000 - £15,000", description: "Complete roof replacement costs for different property types" },
+    { title: "Driveway Installation Cost", range: "£1,200 - £4,000", description: "Block paving, tarmac and gravel driveway installation costs" },
+    { title: "Central Heating Cost", range: "£2,500 - £6,000", description: "Full central heating system installation costs and considerations" }
+  ]
+
+  return (
+    <div className="htk-bg-primary min-h-screen">
+      <HTKNavigation />
+      <div className="container mx-auto px-4 py-16">
+        <div className="max-w-6xl mx-auto">
+          <h1 className="text-4xl font-bold htk-gold-text text-center mb-8">Cost Guides</h1>
+          <p className="text-xl text-htk-platinum/80 text-center mb-12">
+            Get realistic price estimates for your home improvement projects
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {costGuides.map((guide, index) => (
+              <Card key={index} className="htk-card hover:border-htk-gold/40 transition-colors cursor-pointer">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold htk-gold-text mb-2">{guide.title}</h3>
+                  <div className="text-2xl font-bold htk-platinum-text mb-3">{guide.range}</div>
+                  <p className="text-htk-platinum/80 mb-4">{guide.description}</p>
+                  <Button className="htk-button-secondary w-full">
+                    View Full Guide
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          
+          <div className="text-center mt-12">
+            <p className="text-htk-platinum/80 mb-6">
+              Need a more accurate quote for your specific project?
+            </p>
+            <Link to="/customer-signup">
+              <Button className="htk-button-primary text-lg px-8 py-4">
+                Get Personalized Quotes
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
       <HTKFooter />
     </div>
   )
