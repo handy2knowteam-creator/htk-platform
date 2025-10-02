@@ -1,5 +1,5 @@
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom'
 import { Button } from '@/components/ui/button.jsx'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card.jsx'
 import { Input } from '@/components/ui/input.jsx'
@@ -1271,12 +1271,124 @@ function HomePage() {
 
 // Placeholder components for existing pages
 function PricingPage() {
+  const plans = [
+    {
+      name: 'Bronze',
+      price: '£29',
+      period: '/month',
+      features: [
+        '5 leads per month',
+        'Basic profile listing',
+        'Customer contact details',
+        'Email support'
+      ],
+      popular: false
+    },
+    {
+      name: 'Silver',
+      price: '£49',
+      period: '/month',
+      features: [
+        '15 leads per month',
+        'Enhanced profile with photos',
+        'Priority listing',
+        'Customer contact details',
+        'Phone support',
+        'Basic analytics'
+      ],
+      popular: true
+    },
+    {
+      name: 'Gold',
+      price: '£79',
+      period: '/month',
+      features: [
+        '30 leads per month',
+        'Premium profile with video',
+        'Top priority listing',
+        'Customer contact details',
+        'Priority phone support',
+        'Advanced analytics',
+        'Marketing tools'
+      ],
+      popular: false
+    },
+    {
+      name: 'Platinum',
+      price: '£129',
+      period: '/month',
+      features: [
+        'Unlimited leads',
+        'Premium profile with video',
+        'Featured listing',
+        'Customer contact details',
+        'Dedicated account manager',
+        'Advanced analytics',
+        'Marketing tools',
+        'API access'
+      ],
+      popular: false
+    }
+  ]
+
   return (
     <div className="htk-bg-primary min-h-screen">
       <HTKNavigation />
       <div className="container mx-auto px-4 py-16">
-        <h1 className="text-3xl font-bold htk-gold-text text-center mb-8">Pricing Plans</h1>
-        <p className="text-center text-htk-platinum/80">Choose the plan that works for your business</p>
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold htk-gold-text mb-4">Pricing Plans</h1>
+          <p className="text-xl text-htk-platinum/80 max-w-2xl mx-auto">
+            Choose the plan that works for your business. All plans include verified customer leads and professional tools.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+          {plans.map((plan, index) => (
+            <Card key={index} className={`htk-card relative ${plan.popular ? 'border-htk-gold' : ''}`}>
+              {plan.popular && (
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                  <Badge className="bg-htk-gold text-htk-charcoal font-semibold px-4 py-1">
+                    Most Popular
+                  </Badge>
+                </div>
+              )}
+              
+              <CardHeader className="text-center pb-8">
+                <CardTitle className="htk-gold-text text-2xl mb-2">{plan.name}</CardTitle>
+                <div className="mb-4">
+                  <span className="text-4xl font-bold htk-platinum-text">{plan.price}</span>
+                  <span className="text-htk-platinum/60">{plan.period}</span>
+                </div>
+              </CardHeader>
+              
+              <CardContent className="space-y-4">
+                <ul className="space-y-3">
+                  {plan.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="flex items-center text-htk-platinum/80">
+                      <Star className="h-4 w-4 text-htk-gold mr-3 flex-shrink-0" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                
+                <Button className={`w-full mt-6 ${plan.popular ? 'htk-button-primary' : 'htk-button-secondary'}`}>
+                  Choose {plan.name}
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <p className="text-htk-platinum/60 mb-4">All plans include:</p>
+          <div className="flex flex-wrap justify-center gap-6 text-sm text-htk-platinum/80">
+            <span>✓ Verified customer leads</span>
+            <span>✓ Professional profile</span>
+            <span>✓ Secure payments</span>
+            <span>✓ Customer reviews</span>
+            <span>✓ Mobile app access</span>
+          </div>
+        </div>
       </div>
       <HTKFooter />
     </div>
@@ -1284,12 +1396,240 @@ function PricingPage() {
 }
 
 function TradesPage() {
+  const [searchTerm, setSearchTerm] = useState('')
+  const [selectedTrade, setSelectedTrade] = useState('all')
+  const [location, setLocation] = useState('')
+
+  const trades = [
+    {
+      id: 1,
+      name: 'Mike Thompson',
+      trade: 'Plumber',
+      rating: 4.9,
+      reviews: 28,
+      location: 'London, SW1',
+      image: '/api/placeholder/100/100',
+      specialties: ['Emergency Repairs', 'Bathroom Installation', 'Boiler Service'],
+      verified: true,
+      responseTime: '< 2 hours'
+    },
+    {
+      id: 2,
+      name: 'Sarah Johnson',
+      trade: 'Electrician',
+      rating: 4.8,
+      reviews: 35,
+      location: 'London, NW3',
+      image: '/api/placeholder/100/100',
+      specialties: ['Rewiring', 'Smart Home Setup', 'Safety Inspections'],
+      verified: true,
+      responseTime: '< 1 hour'
+    },
+    {
+      id: 3,
+      name: 'David Wilson',
+      trade: 'Carpenter',
+      rating: 4.7,
+      reviews: 22,
+      location: 'London, SE10',
+      image: '/api/placeholder/100/100',
+      specialties: ['Kitchen Fitting', 'Built-in Storage', 'Flooring'],
+      verified: true,
+      responseTime: '< 3 hours'
+    },
+    {
+      id: 4,
+      name: 'Emma Brown',
+      trade: 'Painter',
+      rating: 4.9,
+      reviews: 31,
+      location: 'London, W2',
+      image: '/api/placeholder/100/100',
+      specialties: ['Interior Painting', 'Exterior Painting', 'Wallpapering'],
+      verified: true,
+      responseTime: '< 2 hours'
+    }
+  ]
+
+  const tradeTypes = ['all', 'plumber', 'electrician', 'carpenter', 'painter', 'builder', 'gardener']
+
+  const filteredTrades = trades.filter(trade => {
+    const matchesSearch = trade.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         trade.trade.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         trade.specialties.some(s => s.toLowerCase().includes(searchTerm.toLowerCase()))
+    const matchesTrade = selectedTrade === 'all' || trade.trade.toLowerCase() === selectedTrade
+    const matchesLocation = !location || trade.location.toLowerCase().includes(location.toLowerCase())
+    
+    return matchesSearch && matchesTrade && matchesLocation
+  })
+
   return (
     <div className="htk-bg-primary min-h-screen">
       <HTKNavigation />
       <div className="container mx-auto px-4 py-16">
-        <h1 className="text-3xl font-bold htk-gold-text text-center mb-8">Find Trades</h1>
-        <p className="text-center text-htk-platinum/80">Browse verified tradespeople in your area</p>
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold htk-gold-text mb-4">Find Trades</h1>
+          <p className="text-xl text-htk-platinum/80 max-w-2xl mx-auto">
+            Browse verified tradespeople in your area. All our professionals are vetted, insured, and rated by real customers.
+          </p>
+        </div>
+
+        {/* Search and Filters */}
+        <div className="max-w-4xl mx-auto mb-12">
+          <Card className="htk-card">
+            <CardContent className="p-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div>
+                  <Label className="htk-gold-text mb-2 block">Search</Label>
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-htk-platinum/60 h-4 w-4" />
+                    <Input
+                      placeholder="Search by name, trade, or specialty..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="htk-input pl-10"
+                    />
+                  </div>
+                </div>
+                
+                <div>
+                  <Label className="htk-gold-text mb-2 block">Trade Type</Label>
+                  <select
+                    value={selectedTrade}
+                    onChange={(e) => setSelectedTrade(e.target.value)}
+                    className="htk-input w-full"
+                  >
+                    {tradeTypes.map(type => (
+                      <option key={type} value={type}>
+                        {type === 'all' ? 'All Trades' : type.charAt(0).toUpperCase() + type.slice(1)}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                
+                <div>
+                  <Label className="htk-gold-text mb-2 block">Location</Label>
+                  <div className="relative">
+                    <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-htk-platinum/60 h-4 w-4" />
+                    <Input
+                      placeholder="Enter postcode or area..."
+                      value={location}
+                      onChange={(e) => setLocation(e.target.value)}
+                      className="htk-input pl-10"
+                    />
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex flex-wrap gap-2">
+                {tradeTypes.slice(1).map(type => (
+                  <Button
+                    key={type}
+                    variant={selectedTrade === type ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setSelectedTrade(type)}
+                    className={selectedTrade === type ? "htk-button-primary" : "htk-button-secondary"}
+                  >
+                    {type.charAt(0).toUpperCase() + type.slice(1)}
+                  </Button>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Results */}
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-semibold htk-gold-text">
+              {filteredTrades.length} Professional{filteredTrades.length !== 1 ? 's' : ''} Found
+            </h2>
+            <div className="text-htk-platinum/60">
+              Showing results for {selectedTrade === 'all' ? 'all trades' : selectedTrade}
+              {location && ` in ${location}`}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredTrades.map(trade => (
+              <Card key={trade.id} className="htk-card hover:border-htk-gold/40 transition-all duration-300">
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="w-16 h-16 bg-htk-gold/20 rounded-full flex items-center justify-center">
+                      <Users className="h-8 w-8 text-htk-gold" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h3 className="font-semibold htk-platinum-text">{trade.name}</h3>
+                        {trade.verified && (
+                          <Badge className="bg-htk-gold text-htk-charcoal text-xs">
+                            Verified
+                          </Badge>
+                        )}
+                      </div>
+                      <p className="text-htk-gold font-medium">{trade.trade}</p>
+                      <p className="text-htk-platinum/60 text-sm">{trade.location}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="flex items-center gap-1">
+                      <Star className="h-4 w-4 text-htk-gold fill-current" />
+                      <span className="font-semibold htk-platinum-text">{trade.rating}</span>
+                      <span className="text-htk-platinum/60 text-sm">({trade.reviews} reviews)</span>
+                    </div>
+                    <div className="flex items-center gap-1 text-sm text-htk-platinum/60">
+                      <Clock className="h-3 w-3" />
+                      {trade.responseTime}
+                    </div>
+                  </div>
+
+                  <div className="mb-4">
+                    <p className="text-sm text-htk-platinum/80 mb-2">Specialties:</p>
+                    <div className="flex flex-wrap gap-1">
+                      {trade.specialties.map((specialty, index) => (
+                        <Badge key={index} variant="outline" className="text-xs text-htk-gold border-htk-gold/40">
+                          {specialty}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex gap-2">
+                    <Button className="flex-1 htk-button-primary">
+                      View Profile
+                    </Button>
+                    <Button className="htk-button-secondary">
+                      Contact
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {filteredTrades.length === 0 && (
+            <div className="text-center py-12">
+              <div className="w-24 h-24 bg-htk-gold/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Search className="h-12 w-12 text-htk-gold" />
+              </div>
+              <h3 className="text-xl font-semibold htk-gold-text mb-2">No trades found</h3>
+              <p className="text-htk-platinum/60 mb-4">
+                Try adjusting your search criteria or location
+              </p>
+              <Button 
+                onClick={() => {
+                  setSearchTerm('')
+                  setSelectedTrade('all')
+                  setLocation('')
+                }}
+                className="htk-button-secondary"
+              >
+                Clear Filters
+              </Button>
+            </div>
+          )}
+        </div>
       </div>
       <HTKFooter />
     </div>
@@ -1297,12 +1637,332 @@ function TradesPage() {
 }
 
 function PostJobPage() {
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    category: '',
+    budget: '',
+    timeline: '',
+    location: '',
+    contactName: '',
+    contactEmail: '',
+    contactPhone: '',
+    photos: []
+  })
+  const [currentStep, setCurrentStep] = useState(1)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const categories = [
+    'Plumbing', 'Electrical', 'Carpentry', 'Painting & Decorating', 
+    'Building & Construction', 'Gardening & Landscaping', 'Cleaning',
+    'Roofing', 'Heating & Cooling', 'Flooring', 'Kitchen & Bathroom',
+    'Handyman Services', 'Other'
+  ]
+
+  const budgetRanges = [
+    'Under £500', '£500 - £1,000', '£1,000 - £2,500', '£2,500 - £5,000',
+    '£5,000 - £10,000', '£10,000 - £20,000', 'Over £20,000', 'Not sure'
+  ]
+
+  const timelineOptions = [
+    'ASAP', 'Within 1 week', 'Within 2 weeks', 'Within 1 month',
+    'Within 3 months', 'Flexible', 'Not sure'
+  ]
+
+  const handleInputChange = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }))
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    
+    alert('Job posted successfully! You will receive quotes from verified tradespeople soon.')
+    setIsSubmitting(false)
+    
+    // Reset form
+    setFormData({
+      title: '', description: '', category: '', budget: '', timeline: '',
+      location: '', contactName: '', contactEmail: '', contactPhone: '', photos: []
+    })
+    setCurrentStep(1)
+  }
+
+  const nextStep = () => {
+    if (currentStep < 3) setCurrentStep(currentStep + 1)
+  }
+
+  const prevStep = () => {
+    if (currentStep > 1) setCurrentStep(currentStep - 1)
+  }
+
   return (
     <div className="htk-bg-primary min-h-screen">
       <HTKNavigation />
       <div className="container mx-auto px-4 py-16">
-        <h1 className="text-3xl font-bold htk-gold-text text-center mb-8">Post a Job</h1>
-        <p className="text-center text-htk-platinum/80">Tell us about your project and get quotes</p>
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h1 className="text-4xl font-bold htk-gold-text mb-4">Post a Job</h1>
+            <p className="text-xl text-htk-platinum/80 max-w-2xl mx-auto">
+              Describe your project and get quotes from verified tradespeople in your area
+            </p>
+          </div>
+
+          {/* Progress Steps */}
+          <div className="flex items-center justify-center mb-12">
+            <div className="flex items-center space-x-4">
+              {[1, 2, 3].map((step) => (
+                <div key={step} className="flex items-center">
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
+                    currentStep >= step 
+                      ? 'bg-htk-gold text-htk-charcoal' 
+                      : 'bg-htk-platinum/20 text-htk-platinum/60'
+                  }`}>
+                    {step}
+                  </div>
+                  {step < 3 && (
+                    <div className={`w-16 h-1 mx-2 ${
+                      currentStep > step ? 'bg-htk-gold' : 'bg-htk-platinum/20'
+                    }`} />
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <Card className="htk-card">
+            <CardContent className="p-8">
+              <form onSubmit={handleSubmit}>
+                {/* Step 1: Job Details */}
+                {currentStep === 1 && (
+                  <div className="space-y-6">
+                    <div className="text-center mb-8">
+                      <h2 className="text-2xl font-semibold htk-gold-text mb-2">Job Details</h2>
+                      <p className="text-htk-platinum/60">Tell us about your project</p>
+                    </div>
+
+                    <div>
+                      <Label className="htk-gold-text mb-2 block">Job Title *</Label>
+                      <Input
+                        placeholder="e.g., Kitchen renovation, Bathroom plumbing repair..."
+                        value={formData.title}
+                        onChange={(e) => handleInputChange('title', e.target.value)}
+                        className="htk-input"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <Label className="htk-gold-text mb-2 block">Category *</Label>
+                      <select
+                        value={formData.category}
+                        onChange={(e) => handleInputChange('category', e.target.value)}
+                        className="htk-input w-full"
+                        required
+                      >
+                        <option value="">Select a category</option>
+                        {categories.map(category => (
+                          <option key={category} value={category}>{category}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <Label className="htk-gold-text mb-2 block">Job Description *</Label>
+                      <textarea
+                        placeholder="Describe your project in detail. Include any specific requirements, materials needed, or preferences..."
+                        value={formData.description}
+                        onChange={(e) => handleInputChange('description', e.target.value)}
+                        className="htk-input min-h-32 resize-y"
+                        required
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label className="htk-gold-text mb-2 block">Budget Range *</Label>
+                        <select
+                          value={formData.budget}
+                          onChange={(e) => handleInputChange('budget', e.target.value)}
+                          className="htk-input w-full"
+                          required
+                        >
+                          <option value="">Select budget range</option>
+                          {budgetRanges.map(range => (
+                            <option key={range} value={range}>{range}</option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div>
+                        <Label className="htk-gold-text mb-2 block">Timeline *</Label>
+                        <select
+                          value={formData.timeline}
+                          onChange={(e) => handleInputChange('timeline', e.target.value)}
+                          className="htk-input w-full"
+                          required
+                        >
+                          <option value="">When do you need this done?</option>
+                          {timelineOptions.map(option => (
+                            <option key={option} value={option}>{option}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-end">
+                      <Button 
+                        type="button" 
+                        onClick={nextStep}
+                        className="htk-button-primary"
+                        disabled={!formData.title || !formData.category || !formData.description || !formData.budget || !formData.timeline}
+                      >
+                        Continue
+                      </Button>
+                    </div>
+                  </div>
+                )}
+
+                {/* Step 2: Location & Photos */}
+                {currentStep === 2 && (
+                  <div className="space-y-6">
+                    <div className="text-center mb-8">
+                      <h2 className="text-2xl font-semibold htk-gold-text mb-2">Location & Photos</h2>
+                      <p className="text-htk-platinum/60">Help tradespeople understand your project better</p>
+                    </div>
+
+                    <div>
+                      <Label className="htk-gold-text mb-2 block">Location *</Label>
+                      <div className="relative">
+                        <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-htk-platinum/60 h-4 w-4" />
+                        <Input
+                          placeholder="Enter your postcode or area (e.g., SW1A 1AA, Central London)"
+                          value={formData.location}
+                          onChange={(e) => handleInputChange('location', e.target.value)}
+                          className="htk-input pl-10"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label className="htk-gold-text mb-2 block">Photos (Optional)</Label>
+                      <div className="border-2 border-dashed border-htk-gold/30 rounded-lg p-8 text-center">
+                        <Upload className="h-12 w-12 text-htk-gold mx-auto mb-4" />
+                        <p className="text-htk-platinum/80 mb-2">Upload photos of your project area</p>
+                        <p className="text-sm text-htk-platinum/60 mb-4">
+                          Photos help tradespeople provide more accurate quotes
+                        </p>
+                        <Button type="button" className="htk-button-secondary">
+                          Choose Files
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-between">
+                      <Button type="button" onClick={prevStep} className="htk-button-secondary">
+                        Back
+                      </Button>
+                      <Button 
+                        type="button" 
+                        onClick={nextStep}
+                        className="htk-button-primary"
+                        disabled={!formData.location}
+                      >
+                        Continue
+                      </Button>
+                    </div>
+                  </div>
+                )}
+
+                {/* Step 3: Contact Information */}
+                {currentStep === 3 && (
+                  <div className="space-y-6">
+                    <div className="text-center mb-8">
+                      <h2 className="text-2xl font-semibold htk-gold-text mb-2">Contact Information</h2>
+                      <p className="text-htk-platinum/60">How should tradespeople contact you?</p>
+                    </div>
+
+                    <div>
+                      <Label className="htk-gold-text mb-2 block">Full Name *</Label>
+                      <Input
+                        placeholder="Your full name"
+                        value={formData.contactName}
+                        onChange={(e) => handleInputChange('contactName', e.target.value)}
+                        className="htk-input"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <Label className="htk-gold-text mb-2 block">Email Address *</Label>
+                      <Input
+                        type="email"
+                        placeholder="your.email@example.com"
+                        value={formData.contactEmail}
+                        onChange={(e) => handleInputChange('contactEmail', e.target.value)}
+                        className="htk-input"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <Label className="htk-gold-text mb-2 block">Phone Number *</Label>
+                      <Input
+                        type="tel"
+                        placeholder="07123 456789"
+                        value={formData.contactPhone}
+                        onChange={(e) => handleInputChange('contactPhone', e.target.value)}
+                        className="htk-input"
+                        required
+                      />
+                    </div>
+
+                    <div className="bg-htk-gold/10 border border-htk-gold/30 rounded-lg p-4">
+                      <h3 className="font-semibold htk-gold-text mb-2">What happens next?</h3>
+                      <ul className="text-sm text-htk-platinum/80 space-y-1">
+                        <li>• Your job will be visible to verified tradespeople in your area</li>
+                        <li>• You'll receive quotes within 24-48 hours</li>
+                        <li>• Compare profiles, reviews, and prices</li>
+                        <li>• Choose the best tradesperson for your project</li>
+                      </ul>
+                    </div>
+
+                    <div className="flex items-center space-x-2">
+                      <input type="checkbox" id="terms" className="rounded border-htk-gold/40" required />
+                      <Label htmlFor="terms" className="text-sm text-htk-platinum/80">
+                        I agree to the <a href="/terms" className="text-htk-gold hover:underline">Terms of Service</a> and <a href="/privacy" className="text-htk-gold hover:underline">Privacy Policy</a>
+                      </Label>
+                    </div>
+
+                    <div className="flex justify-between">
+                      <Button type="button" onClick={prevStep} className="htk-button-secondary">
+                        Back
+                      </Button>
+                      <Button 
+                        type="submit" 
+                        className="htk-button-primary"
+                        disabled={isSubmitting || !formData.contactName || !formData.contactEmail || !formData.contactPhone}
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                            Posting Job...
+                          </>
+                        ) : (
+                          'Post Job'
+                        )}
+                      </Button>
+                    </div>
+                  </div>
+                )}
+              </form>
+            </CardContent>
+          </Card>
+        </div>
       </div>
       <HTKFooter />
     </div>
