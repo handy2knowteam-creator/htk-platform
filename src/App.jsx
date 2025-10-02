@@ -1217,7 +1217,7 @@ function HomePage() {
           </div>
           
           <p className="text-htk-platinum/60">
-            Over 50,000 tradespeople nationwide use HandyToKnow
+            Be one of the first to join HandyToKnow
           </p>
         </div>
       </section>
@@ -1227,20 +1227,24 @@ function HomePage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-4xl font-bold htk-gold-text mb-2">2,500+</div>
+              <div className="text-4xl font-bold htk-gold-text mb-2">0</div>
               <div className="text-htk-platinum/80">Verified Trades</div>
+              <div className="text-sm text-htk-platinum/60 mt-1">Be the first!</div>
             </div>
             <div>
-              <div className="text-4xl font-bold htk-gold-text mb-2">15,000+</div>
-              <div className="text-htk-platinum/80">Jobs Completed</div>
+              <div className="text-4xl font-bold htk-gold-text mb-2">0</div>
+              <div className="text-htk-platinum/80">Jobs Posted</div>
+              <div className="text-sm text-htk-platinum/60 mt-1">Post the first job!</div>
             </div>
             <div>
-              <div className="text-4xl font-bold htk-gold-text mb-2">4.9★</div>
+              <div className="text-4xl font-bold htk-gold-text mb-2">-</div>
               <div className="text-htk-platinum/80">Average Rating</div>
+              <div className="text-sm text-htk-platinum/60 mt-1">Help us build ratings!</div>
             </div>
             <div>
-              <div className="text-4xl font-bold htk-gold-text mb-2">£2.5M+</div>
+              <div className="text-4xl font-bold htk-gold-text mb-2">£0</div>
               <div className="text-htk-platinum/80">Paid to Trades</div>
+              <div className="text-sm text-htk-platinum/60 mt-1">You could be first!</div>
             </div>
           </div>
         </div>
@@ -1279,61 +1283,64 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Recent Completed Jobs */}
+      {/* Customer Reviews */}
       <section className="py-20 htk-bg-secondary">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold htk-gold-text text-center mb-12">Recent Completed Jobs</h2>
-          <p className="text-center text-htk-platinum/80 mb-12">Join over 1,000,000 happy homeowners who have posted their job on HandyToKnow</p>
+          <h2 className="text-3xl font-bold htk-gold-text text-center mb-12">Customer Reviews</h2>
+          <p className="text-center text-htk-platinum/80 mb-12">Be one of the first customers to leave a review on HandyToKnow</p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <Card className="htk-card">
-              <CardContent className="p-6">
+              <CardContent className="p-6 text-center">
                 <div className="mb-4">
-                  <h3 className="font-semibold htk-gold-text">Plumber job in Manchester</h3>
-                  <p className="text-sm text-htk-platinum/60 mb-2">Review for Mike Thompson</p>
+                  <h3 className="font-semibold htk-gold-text">Your Review Goes Here</h3>
+                  <p className="text-sm text-htk-platinum/60 mb-2">Be the first customer</p>
                 </div>
                 <p className="text-htk-platinum/80 mb-4">
-                  "Excellent tradesman. Professional, tidy and very good finished job. Will have Mike back again and could safely recommend to anyone."
+                  "Post a job and be the first to leave a review for a tradesperson on HandyToKnow!"
                 </p>
-                <div className="flex items-center">
+                <div className="flex items-center justify-center">
                   {[1,2,3,4,5].map(i => (
-                    <Star key={i} className="h-4 w-4 fill-htk-gold text-htk-gold" />
+                    <Star key={i} className="h-4 w-4 text-htk-gold/30" />
                   ))}
                 </div>
+                <p className="text-xs text-htk-platinum/60 mt-2">Waiting for first review</p>
               </CardContent>
             </Card>
 
             <Card className="htk-card">
-              <CardContent className="p-6">
+              <CardContent className="p-6 text-center">
                 <div className="mb-4">
-                  <h3 className="font-semibold htk-gold-text">Electrician job in London</h3>
-                  <p className="text-sm text-htk-platinum/60 mb-2">Review for Sarah Johnson</p>
+                  <h3 className="font-semibold htk-gold-text">Your Review Goes Here</h3>
+                  <p className="text-sm text-htk-platinum/60 mb-2">Be the second customer</p>
                 </div>
                 <p className="text-htk-platinum/80 mb-4">
-                  "Sarah arrived on time and was friendly and polite. The job was well done and the area was tidied up on completion. Very happy."
+                  "Help us build our community by posting a job and leaving the second review!"
                 </p>
-                <div className="flex items-center">
+                <div className="flex items-center justify-center">
                   {[1,2,3,4,5].map(i => (
-                    <Star key={i} className="h-4 w-4 fill-htk-gold text-htk-gold" />
+                    <Star key={i} className="h-4 w-4 text-htk-gold/30" />
                   ))}
                 </div>
+                <p className="text-xs text-htk-platinum/60 mt-2">Waiting for second review</p>
               </CardContent>
             </Card>
 
             <Card className="htk-card">
-              <CardContent className="p-6">
+              <CardContent className="p-6 text-center">
                 <div className="mb-4">
-                  <h3 className="font-semibold htk-gold-text">Carpenter job in Birmingham</h3>
-                  <p className="text-sm text-htk-platinum/60 mb-2">Review for David Wilson</p>
+                  <h3 className="font-semibold htk-gold-text">Your Review Goes Here</h3>
+                  <p className="text-sm text-htk-platinum/60 mb-2">Be the third customer</p>
                 </div>
                 <p className="text-htk-platinum/80 mb-4">
-                  "Couldn't give a higher recommendation! He did a fabulous job and was very warm and professional."
+                  "Join our growing community and help us build trust with honest reviews!"
                 </p>
-                <div className="flex items-center">
+                <div className="flex items-center justify-center">
                   {[1,2,3,4,5].map(i => (
-                    <Star key={i} className="h-4 w-4 fill-htk-gold text-htk-gold" />
+                    <Star key={i} className="h-4 w-4 text-htk-gold/30" />
                   ))}
                 </div>
+                <p className="text-xs text-htk-platinum/60 mt-2">Waiting for third review</p>
               </CardContent>
             </Card>
           </div>
@@ -1662,51 +1669,55 @@ function TradesPage() {
   const trades = [
     {
       id: 1,
-      name: 'Mike Thompson',
-      trade: 'Plumber',
-      rating: 4.9,
-      reviews: 28,
-      location: 'London, SW1',
+      name: 'Your Profile Goes Here',
+      trade: 'Be the First Plumber',
+      rating: 0,
+      reviews: 0,
+      location: 'Your Area',
       image: '/api/placeholder/100/100',
-      specialties: ['Emergency Repairs', 'Bathroom Installation', 'Boiler Service'],
-      verified: true,
-      responseTime: '< 2 hours'
+      specialties: ['Sign up to be the first plumber on HandyToKnow'],
+      verified: false,
+      responseTime: 'Join now',
+      isEmpty: true
     },
     {
       id: 2,
-      name: 'Sarah Johnson',
-      trade: 'Electrician',
-      rating: 4.8,
-      reviews: 35,
-      location: 'London, NW3',
+      name: 'Your Profile Goes Here',
+      trade: 'Be the First Electrician',
+      rating: 0,
+      reviews: 0,
+      location: 'Your Area',
       image: '/api/placeholder/100/100',
-      specialties: ['Rewiring', 'Smart Home Setup', 'Safety Inspections'],
-      verified: true,
-      responseTime: '< 1 hour'
+      specialties: ['Sign up to be the first electrician on HandyToKnow'],
+      verified: false,
+      responseTime: 'Join now',
+      isEmpty: true
     },
     {
       id: 3,
-      name: 'David Wilson',
-      trade: 'Carpenter',
-      rating: 4.7,
-      reviews: 22,
-      location: 'London, SE10',
+      name: 'Your Profile Goes Here',
+      trade: 'Be the First Carpenter',
+      rating: 0,
+      reviews: 0,
+      location: 'Your Area',
       image: '/api/placeholder/100/100',
-      specialties: ['Kitchen Fitting', 'Built-in Storage', 'Flooring'],
-      verified: true,
-      responseTime: '< 3 hours'
+      specialties: ['Sign up to be the first carpenter on HandyToKnow'],
+      verified: false,
+      responseTime: 'Join now',
+      isEmpty: true
     },
     {
       id: 4,
-      name: 'Emma Brown',
-      trade: 'Painter',
-      rating: 4.9,
-      reviews: 31,
-      location: 'London, W2',
+      name: 'Your Profile Goes Here',
+      trade: 'Be the First Painter',
+      rating: 0,
+      reviews: 0,
+      location: 'Your Area',
       image: '/api/placeholder/100/100',
-      specialties: ['Interior Painting', 'Exterior Painting', 'Wallpapering'],
-      verified: true,
-      responseTime: '< 2 hours'
+      specialties: ['Sign up to be the first painter on HandyToKnow'],
+      verified: false,
+      responseTime: 'Join now',
+      isEmpty: true
     }
   ]
 
@@ -1729,7 +1740,7 @@ function TradesPage() {
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold htk-gold-text mb-4">Find Trades</h1>
           <p className="text-xl text-htk-platinum/80 max-w-2xl mx-auto">
-            Browse verified tradespeople in your area. All our professionals are vetted, insured, and rated by real customers.
+            Be the first to find tradespeople in your area. Help us build our community of verified professionals.
           </p>
         </div>
 
@@ -1832,19 +1843,30 @@ function TradesPage() {
                   </div>
 
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="flex items-center gap-1">
-                      <Star className="h-4 w-4 text-htk-gold fill-current" />
-                      <span className="font-semibold htk-platinum-text">{trade.rating}</span>
-                      <span className="text-htk-platinum/60 text-sm">({trade.reviews} reviews)</span>
-                    </div>
-                    <div className="flex items-center gap-1 text-sm text-htk-platinum/60">
-                      <Clock className="h-3 w-3" />
-                      {trade.responseTime}
-                    </div>
+                    {trade.isEmpty ? (
+                      <div className="text-center w-full">
+                        <p className="text-htk-platinum/60 text-sm">No ratings yet</p>
+                        <p className="text-htk-platinum/60 text-xs">Be the first to review!</p>
+                      </div>
+                    ) : (
+                      <>
+                        <div className="flex items-center gap-1">
+                          <Star className="h-4 w-4 text-htk-gold fill-current" />
+                          <span className="font-semibold htk-platinum-text">{trade.rating}</span>
+                          <span className="text-htk-platinum/60 text-sm">({trade.reviews} reviews)</span>
+                        </div>
+                        <div className="flex items-center gap-1 text-sm text-htk-platinum/60">
+                          <Clock className="h-3 w-3" />
+                          {trade.responseTime}
+                        </div>
+                      </>
+                    )}
                   </div>
 
                   <div className="mb-4">
-                    <p className="text-sm text-htk-platinum/80 mb-2">Specialties:</p>
+                    <p className="text-sm text-htk-platinum/80 mb-2">
+                      {trade.isEmpty ? 'Join HandyToKnow:' : 'Specialties:'}
+                    </p>
                     <div className="flex flex-wrap gap-1">
                       {trade.specialties.map((specialty, index) => (
                         <Badge key={index} variant="outline" className="text-xs text-htk-gold border-htk-gold/40">
@@ -1855,12 +1877,20 @@ function TradesPage() {
                   </div>
 
                   <div className="flex gap-2">
-                    <Button className="flex-1 htk-button-primary">
-                      View Profile
-                    </Button>
-                    <Button className="htk-button-secondary">
-                      Contact
-                    </Button>
+                    {trade.isEmpty ? (
+                      <Button className="flex-1 htk-button-primary" onClick={() => window.location.href = '/trade-signup'}>
+                        Sign Up Now
+                      </Button>
+                    ) : (
+                      <>
+                        <Button className="flex-1 htk-button-primary">
+                          View Profile
+                        </Button>
+                        <Button className="htk-button-secondary">
+                          Contact
+                        </Button>
+                      </>
+                    )}
                   </div>
                 </CardContent>
               </Card>
