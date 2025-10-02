@@ -8,6 +8,7 @@ import { Textarea } from '@/components/ui/textarea.jsx'
 import { Badge } from '@/components/ui/badge.jsx'
 import { Users, Star, Clock, Zap, CreditCard, TrendingUp, Download, Search, Filter, Mail, Phone, MapPin, Calendar, PoundSterling, Menu, X } from 'lucide-react'
 import './App.css'
+import './mobile-optimizations.css'
 
 // Customer Signup Component
 function CustomerSignup() {
@@ -1176,17 +1177,17 @@ function App() {
 // HomePage Component
 function HomePage() {
   return (
-    <div className="htk-bg-primary min-h-screen">
+    <div className="htk-bg-primary min-h-screen htk-performance-optimized">
       <HTKNavigation />
       
       {/* Hero Section */}
       <section className="py-20">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold htk-gold-text mb-6">
-            Find Tradespeople, Compare Up to 3 Quotes!
+            Connect with Quality Tradespeople
           </h1>
           <p className="text-xl text-htk-platinum/80 mb-8 max-w-3xl mx-auto">
-            It's FREE and there are no obligations
+            The premium platform connecting customers with verified trades. Join our growing community.
           </p>
           
           {/* Postcode Search */}
@@ -1260,89 +1261,177 @@ function HomePage() {
               <div className="w-16 h-16 bg-htk-gold rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl font-bold text-black">1</span>
               </div>
-              <h3 className="text-xl font-semibold htk-platinum-text mb-2">Post Your Job</h3>
-              <p className="text-htk-platinum/80">Tell us about the work you need doing around your home.</p>
+              <h3 className="text-xl font-semibold htk-platinum-text mb-2">Join the Platform</h3>
+              <p className="text-htk-platinum/80">Customers post jobs, trades create profiles. Both join our verified community.</p>
             </div>
             
             <div className="text-center">
               <div className="w-16 h-16 bg-htk-gold rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl font-bold text-black">2</span>
               </div>
-              <h3 className="text-xl font-semibold htk-platinum-text mb-2">Receive up to 3 quotes</h3>
-              <p className="text-htk-platinum/80">Up to 3 local trades will then be in touch to quote for the work.</p>
+              <h3 className="text-xl font-semibold htk-platinum-text mb-2">Connect & Quote</h3>
+              <p className="text-htk-platinum/80">Verified trades respond to local jobs with competitive quotes.</p>
             </div>
             
             <div className="text-center">
               <div className="w-16 h-16 bg-htk-gold rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl font-bold text-black">3</span>
               </div>
-              <h3 className="text-xl font-semibold htk-platinum-text mb-2">Choose your tradesperson</h3>
-              <p className="text-htk-platinum/80">Compare quotes then choose your preferred tradesman.</p>
+              <h3 className="text-xl font-semibold htk-platinum-text mb-2">Build Success</h3>
+              <p className="text-htk-platinum/80">Customers get quality work, trades grow their business through our platform.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Customer Reviews */}
+      {/* Why Choose HTK */}
       <section className="py-20 htk-bg-secondary">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold htk-gold-text text-center mb-12">Customer Reviews</h2>
-          <p className="text-center text-htk-platinum/80 mb-12">Be one of the first customers to leave a review on HandyToKnow</p>
+          <h2 className="text-3xl font-bold htk-gold-text text-center mb-12">Why Choose HandyToKnow?</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <Card className="htk-card">
               <CardContent className="p-6 text-center">
-                <div className="mb-4">
-                  <h3 className="font-semibold htk-gold-text">Your Review Goes Here</h3>
-                  <p className="text-sm text-htk-platinum/60 mb-2">Be the first customer</p>
+                <div className="w-16 h-16 bg-htk-gold/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Users className="w-8 h-8 text-htk-gold" />
                 </div>
-                <p className="text-htk-platinum/80 mb-4">
-                  "Post a job and be the first to leave a review for a tradesperson on HandyToKnow!"
+                <h3 className="font-semibold htk-gold-text mb-2">Verified Professionals</h3>
+                <p className="text-htk-platinum/80">
+                  All tradespeople undergo thorough verification including ID checks, insurance validation, and qualification verification.
                 </p>
-                <div className="flex items-center justify-center">
-                  {[1,2,3,4,5].map(i => (
-                    <Star key={i} className="h-4 w-4 text-htk-gold/30" />
-                  ))}
-                </div>
-                <p className="text-xs text-htk-platinum/60 mt-2">Waiting for first review</p>
               </CardContent>
             </Card>
+            
+            <Card className="htk-card">
+              <CardContent className="p-6 text-center">
+                <div className="w-16 h-16 bg-htk-gold/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Star className="w-8 h-8 text-htk-gold" />
+                </div>
+                <h3 className="font-semibold htk-gold-text mb-2">Quality Guaranteed</h3>
+                <p className="text-htk-platinum/80">
+                  Our rating system and review process ensures you only work with the highest quality professionals in your area.
+                </p>
+              </CardContent>
+            </Card>
+            
+            <Card className="htk-card">
+              <CardContent className="p-6 text-center">
+                <div className="w-16 h-16 bg-htk-gold/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Clock className="w-8 h-8 text-htk-gold" />
+                </div>
+                <h3 className="font-semibold htk-gold-text mb-2">Fast Connections</h3>
+                <p className="text-htk-platinum/80">
+                  Quick matching between customers and qualified tradespeople for efficient business growth.
+                </p>
+              </CardContent>
+            </Card>
+            
+            <Card className="htk-card">
+              <CardContent className="p-6 text-center">
+                <div className="w-16 h-16 bg-htk-gold/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <PoundSterling className="w-8 h-8 text-htk-gold" />
+                </div>
+                <h3 className="font-semibold htk-gold-text mb-2">Competitive Pricing</h3>
+                <p className="text-htk-platinum/80">
+                  Compare multiple quotes to ensure you get the best value for your project without compromising on quality.
+                </p>
+              </CardContent>
+            </Card>
+            
+            <Card className="htk-card">
+              <CardContent className="p-6 text-center">
+                <div className="w-16 h-16 bg-htk-gold/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <MapPin className="w-8 h-8 text-htk-gold" />
+                </div>
+                <h3 className="font-semibold htk-gold-text mb-2">Local Experts</h3>
+                <p className="text-htk-platinum/80">
+                  Connect with trusted local tradespeople who understand your area and can respond quickly to your needs.
+                </p>
+              </CardContent>
+            </Card>
+            
+            <Card className="htk-card">
+              <CardContent className="p-6 text-center">
+                <div className="w-16 h-16 bg-htk-gold/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Zap className="w-8 h-8 text-htk-gold" />
+                </div>
+                <h3 className="font-semibold htk-gold-text mb-2">Easy Process</h3>
+                <p className="text-htk-platinum/80">
+                  Our streamlined platform makes it simple to post jobs, receive quotes, and manage your projects all in one place.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
 
-            <Card className="htk-card">
-              <CardContent className="p-6 text-center">
-                <div className="mb-4">
-                  <h3 className="font-semibold htk-gold-text">Your Review Goes Here</h3>
-                  <p className="text-sm text-htk-platinum/60 mb-2">Be the second customer</p>
-                </div>
-                <p className="text-htk-platinum/80 mb-4">
-                  "Help us build our community by posting a job and leaving the second review!"
-                </p>
-                <div className="flex items-center justify-center">
-                  {[1,2,3,4,5].map(i => (
-                    <Star key={i} className="h-4 w-4 text-htk-gold/30" />
-                  ))}
-                </div>
-                <p className="text-xs text-htk-platinum/60 mt-2">Waiting for second review</p>
-              </CardContent>
-            </Card>
-
-            <Card className="htk-card">
-              <CardContent className="p-6 text-center">
-                <div className="mb-4">
-                  <h3 className="font-semibold htk-gold-text">Your Review Goes Here</h3>
-                  <p className="text-sm text-htk-platinum/60 mb-2">Be the third customer</p>
-                </div>
-                <p className="text-htk-platinum/80 mb-4">
-                  "Join our growing community and help us build trust with honest reviews!"
-                </p>
-                <div className="flex items-center justify-center">
-                  {[1,2,3,4,5].map(i => (
-                    <Star key={i} className="h-4 w-4 text-htk-gold/30" />
-                  ))}
-                </div>
-                <p className="text-xs text-htk-platinum/60 mt-2">Waiting for third review</p>
-              </CardContent>
-            </Card>
+      {/* Early Adopter Benefits */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold htk-gold-text mb-6">Join Our Founding Community</h2>
+            <p className="text-xl text-htk-platinum/80 mb-8">
+              Be among the first to experience HandyToKnow and help shape the future of trade services
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+              <div className="text-left">
+                <h3 className="text-xl font-semibold htk-gold-text mb-4">For Customers:</h3>
+                <ul className="space-y-2 text-htk-platinum/80">
+                  <li className="flex items-center">
+                    <div className="w-2 h-2 bg-htk-gold rounded-full mr-3"></div>
+                    Priority access to verified tradespeople
+                  </li>
+                  <li className="flex items-center">
+                    <div className="w-2 h-2 bg-htk-gold rounded-full mr-3"></div>
+                    Exclusive early adopter discounts
+                  </li>
+                  <li className="flex items-center">
+                    <div className="w-2 h-2 bg-htk-gold rounded-full mr-3"></div>
+                    Direct input on platform features
+                  </li>
+                  <li className="flex items-center">
+                    <div className="w-2 h-2 bg-htk-gold rounded-full mr-3"></div>
+                    Founding member recognition
+                  </li>
+                </ul>
+              </div>
+              
+              <div className="text-left">
+                <h3 className="text-xl font-semibold htk-gold-text mb-4">For Tradespeople:</h3>
+                <ul className="space-y-2 text-htk-platinum/80">
+                  <li className="flex items-center">
+                    <div className="w-2 h-2 bg-htk-gold rounded-full mr-3"></div>
+                    Reduced competition as founding member
+                  </li>
+                  <li className="flex items-center">
+                    <div className="w-2 h-2 bg-htk-gold rounded-full mr-3"></div>
+                    Special launch pricing on subscriptions
+                  </li>
+                  <li className="flex items-center">
+                    <div className="w-2 h-2 bg-htk-gold rounded-full mr-3"></div>
+                    Enhanced profile visibility
+                  </li>
+                  <li className="flex items-center">
+                    <div className="w-2 h-2 bg-htk-gold rounded-full mr-3"></div>
+                    Community leadership opportunities
+                  </li>
+                </ul>
+              </div>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/customer-signup">
+                <Button className="htk-button-primary text-lg px-8 py-4">
+                  Join as Customer
+                </Button>
+              </Link>
+              <Link to="/trade-signup">
+                <Button className="htk-button-secondary text-lg px-8 py-4">
+                  Join as Tradesperson
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
