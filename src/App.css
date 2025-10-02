@@ -1,10 +1,11 @@
-@import "tailwindcss";
 @import "tw-animate-css";
 @import url('/branding/branding.css');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@custom-variant dark (&:is(.dark *));
-
-@theme inline {
+@layer base {
+  :root {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -333,4 +334,5 @@
 .mobile-menu-link.active {
   color: var(--htk-gold);
   background: rgba(185, 151, 91, 0.1);
+}
 }
