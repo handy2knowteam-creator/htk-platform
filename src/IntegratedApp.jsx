@@ -6,8 +6,7 @@ import { Input } from '@/components/ui/input.jsx'
 import { Label } from '@/components/ui/label.jsx'
 import { Textarea } from '@/components/ui/textarea.jsx'
 import { Badge } from '@/components/ui/badge.jsx'
-import { Users, Star, Clock, Zap, CreditCard, TrendingUp, Download, Search, Filter, Mail, Phone, MapPin, Calendar, PoundSterling, Menu, X } from 'lucide-react'
-import './App.css'
+import { Users, Star, Clock, Zap, CreditCard, TrendingUp, Download, Search, Filter, Mail, Phone, MapPin, Calendar, Pound, Menu, X } from 'lucide-react'
 
 // Customer Signup Component
 function CustomerSignup() {
@@ -774,7 +773,7 @@ function AdminDashboard() {
           <Card className="htk-card">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium htk-platinum-text">Monthly Revenue</CardTitle>
-              <PoundSterling className="h-4 w-4 text-htk-gold" />
+              <Pound className="h-4 w-4 text-htk-gold" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold htk-gold-text">£{analytics.totalRevenue}</div>
@@ -958,7 +957,7 @@ function HTKNavigation() {
                 <Link to="/login">
                   <Button variant="ghost" className="text-htk-platinum hover:text-htk-gold">Login</Button>
                 </Link>
-                <Link to="/customer-signup">
+                <Link to="/signup">
                   <Button className="htk-button-primary">Join HTK</Button>
                 </Link>
               </>
@@ -1057,7 +1056,7 @@ function HTKNavigation() {
                     <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
                       <Button variant="ghost" className="w-full text-htk-platinum hover:text-htk-gold">Login</Button>
                     </Link>
-                    <Link to="/customer-signup" onClick={() => setMobileMenuOpen(false)}>
+                    <Link to="/signup" onClick={() => setMobileMenuOpen(false)}>
                       <Button className="w-full htk-button-primary">Join HTK</Button>
                     </Link>
                   </div>
@@ -1143,122 +1142,87 @@ function HTKFooter() {
   )
 }
 
-// Main App Component with all existing pages
-function App() {
-  return (
-    <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/customer-signup" element={<CustomerSignup />} />
-          <Route path="/trade-signup" element={<TradeSignup />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/pricing" element={<PricingPage />} />
-          <Route path="/trades" element={<TradesPage />} />
-          <Route path="/post" element={<PostJobPage />} />
-          <Route path="/competitions" element={<CompetitionsPage />} />
-          <Route path="/leaderboards" element={<LeaderboardsPage />} />
-          <Route path="/community" element={<CommunityPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/success" element={<SuccessPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/dashboard/customer" element={<CustomerDashboard />} />
-          <Route path="/dashboard/trade" element={<TradeDashboard />} />
-          <Route path="/sponsors" element={<SponsorsPage />} />
-        </Routes>
-      </div>
-    </Router>
-  )
-}
+// Import existing components from the original App.jsx
+// (We'll need to copy the existing components here)
 
-// HomePage Component
+// Home Page Component
 function HomePage() {
   return (
     <div className="htk-bg-primary min-h-screen">
       <HTKNavigation />
       
       {/* Hero Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold htk-gold-text mb-6">
-            Connecting Local Trades with Customers
+      <section className="py-20 px-4">
+        <div className="container mx-auto text-center">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 htk-animate-fade-in">
+            Connecting Local <span className="htk-gold-text">Trades</span>
+            <br />with Customers
           </h1>
-          <p className="text-xl text-htk-platinum/80 mb-8 max-w-3xl mx-auto">
-            The premium platform built by trades, for trades. Get quality leads, grow your business, and connect with customers who value your expertise.
+          <p className="text-xl text-htk-platinum/80 mb-8 max-w-2xl mx-auto htk-animate-fade-in">
+            Built by trades, for trades. Credits never expire. Join the community that puts tradespeople first.
           </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center htk-animate-fade-in">
             <Link to="/customer-signup">
-              <Button className="htk-button-primary text-lg px-8 py-4">
+              <Button size="lg" className="htk-button-primary text-lg px-8 py-4">
                 I Need a Tradesperson
               </Button>
             </Link>
             <Link to="/trade-signup">
-              <Button className="htk-button-secondary text-lg px-8 py-4">
+              <Button size="lg" variant="outline" className="text-lg px-8 py-4 border-htk-gold text-htk-gold hover:bg-htk-gold hover:text-black">
                 I Am a Tradesperson
               </Button>
             </Link>
           </div>
-          
-          <p className="text-htk-platinum/60">
-            Or <Link to="/trades" className="htk-gold-text hover:underline">browse tradespeople without signing up</Link>
-          </p>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 htk-bg-secondary">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-4xl font-bold htk-gold-text mb-2">2,500+</div>
-              <div className="text-htk-platinum/80">Verified Trades</div>
+      <section className="py-16 px-4">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div className="htk-animate-scale-in">
+              <Users className="w-12 h-12 text-htk-gold mx-auto mb-4" />
+              <div className="text-3xl font-bold htk-gold-text mb-2">2,500+</div>
+              <div className="text-htk-platinum/80">Verified Tradespeople</div>
             </div>
-            <div>
-              <div className="text-4xl font-bold htk-gold-text mb-2">15,000+</div>
+            <div className="htk-animate-scale-in">
+              <Zap className="w-12 h-12 text-htk-gold mx-auto mb-4" />
+              <div className="text-3xl font-bold htk-gold-text mb-2">15,000+</div>
               <div className="text-htk-platinum/80">Jobs Completed</div>
             </div>
-            <div>
-              <div className="text-4xl font-bold htk-gold-text mb-2">4.9★</div>
+            <div className="htk-animate-scale-in">
+              <Star className="w-12 h-12 text-htk-gold mx-auto mb-4" />
+              <div className="text-3xl font-bold htk-gold-text mb-2">4.9/5</div>
               <div className="text-htk-platinum/80">Average Rating</div>
             </div>
-            <div>
-              <div className="text-4xl font-bold htk-gold-text mb-2">£2.5M+</div>
-              <div className="text-htk-platinum/80">Paid to Trades</div>
+            <div className="htk-animate-scale-in">
+              <Clock className="w-12 h-12 text-htk-gold mx-auto mb-4" />
+              <div className="text-3xl font-bold htk-gold-text mb-2">24/7</div>
+              <div className="text-htk-platinum/80">Support Available</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* How It Works */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold htk-gold-text text-center mb-12">How It Works</h2>
-          
+      <section className="py-16 px-4 htk-bg-secondary">
+        <div className="container mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-12 htk-gold-text">How It Works</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-htk-gold rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-black">1</span>
-              </div>
-              <h3 className="text-xl font-semibold htk-platinum-text mb-2">Post Your Job</h3>
-              <p className="text-htk-platinum/80">Describe your project and budget. It takes less than 2 minutes.</p>
+            <div className="text-center htk-animate-fade-in">
+              <div className="w-16 h-16 bg-htk-gold text-black rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
+              <h3 className="text-xl font-semibold mb-4 htk-platinum-text">Create Account</h3>
+              <p className="text-htk-platinum/80">Join as a customer or tradesperson</p>
             </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 bg-htk-gold rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-black">2</span>
-              </div>
-              <h3 className="text-xl font-semibold htk-platinum-text mb-2">Get Matched</h3>
-              <p className="text-htk-platinum/80">We connect you with verified local tradespeople who want your job.</p>
+            <div className="text-center htk-animate-fade-in">
+              <div className="w-16 h-16 bg-htk-gold text-black rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">2</div>
+              <h3 className="text-xl font-semibold mb-4 htk-platinum-text">Find or Post</h3>
+              <p className="text-htk-platinum/80">Browse trades or post your job</p>
             </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 bg-htk-gold rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-black">3</span>
-              </div>
-              <h3 className="text-xl font-semibold htk-platinum-text mb-2">Get It Done</h3>
-              <p className="text-htk-platinum/80">Choose your tradesperson, agree on price, and get your job completed.</p>
+            <div className="text-center htk-animate-fade-in">
+              <div className="w-16 h-16 bg-htk-gold text-black rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</div>
+              <h3 className="text-xl font-semibold mb-4 htk-platinum-text">Connect</h3>
+              <p className="text-htk-platinum/80">Work together and build trust</p>
             </div>
           </div>
         </div>
@@ -1275,8 +1239,40 @@ function PricingPage() {
     <div className="htk-bg-primary min-h-screen">
       <HTKNavigation />
       <div className="container mx-auto px-4 py-16">
-        <h1 className="text-3xl font-bold htk-gold-text text-center mb-8">Pricing Plans</h1>
-        <p className="text-center text-htk-platinum/80">Choose the plan that works for your business</p>
+        <h1 className="text-4xl font-bold htk-gold-text text-center mb-8">Pricing Plans</h1>
+        <p className="text-center text-htk-platinum/80 mb-12">Choose the plan that works for your business</p>
+        
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+          {[
+            { name: 'Bronze', price: '£29', features: ['Up to 10 leads', 'Basic profile', 'Email support'] },
+            { name: 'Silver', price: '£49', features: ['Up to 25 leads', 'Enhanced profile', 'Phone support'], popular: true },
+            { name: 'Gold', price: '£79', features: ['Up to 50 leads', 'Premium profile', 'Priority support'] },
+            { name: 'Platinum', price: '£129', features: ['Unlimited leads', 'Featured listing', 'Account manager'] }
+          ].map((plan, index) => (
+            <Card key={index} className={`htk-card ${plan.popular ? 'ring-2 ring-htk-gold' : ''}`}>
+              {plan.popular && (
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                  <span className="bg-htk-gold text-black px-3 py-1 rounded-full text-xs font-bold">MOST POPULAR</span>
+                </div>
+              )}
+              <CardHeader className="text-center">
+                <CardTitle className="htk-gold-text">{plan.name}</CardTitle>
+                <div className="text-3xl font-bold htk-platinum-text">{plan.price}<span className="text-sm">/month</span></div>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2 mb-6">
+                  {plan.features.map((feature, i) => (
+                    <li key={i} className="text-sm text-htk-platinum/80 flex items-center">
+                      <span className="text-htk-gold mr-2">✓</span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <Button className="w-full htk-button-primary">Choose Plan</Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
       <HTKFooter />
     </div>
@@ -1288,8 +1284,22 @@ function TradesPage() {
     <div className="htk-bg-primary min-h-screen">
       <HTKNavigation />
       <div className="container mx-auto px-4 py-16">
-        <h1 className="text-3xl font-bold htk-gold-text text-center mb-8">Find Trades</h1>
-        <p className="text-center text-htk-platinum/80">Browse verified tradespeople in your area</p>
+        <h1 className="text-4xl font-bold htk-gold-text text-center mb-8">Find Trades</h1>
+        <div className="text-center text-htk-platinum/80 mb-12">
+          <p>Search for verified tradespeople in your area</p>
+        </div>
+        
+        <div className="max-w-2xl mx-auto mb-8">
+          <div className="flex gap-4">
+            <Input placeholder="Search by trade or location..." className="htk-input flex-1" />
+            <Button className="htk-button-primary">Search</Button>
+          </div>
+        </div>
+
+        <div className="text-center py-16">
+          <h3 className="text-2xl font-bold htk-gold-text mb-4">You're one of the first! 🚩</h3>
+          <p className="text-htk-platinum/80">We're building our network of verified tradespeople. Check back soon!</p>
+        </div>
       </div>
       <HTKFooter />
     </div>
@@ -1301,98 +1311,76 @@ function PostJobPage() {
     <div className="htk-bg-primary min-h-screen">
       <HTKNavigation />
       <div className="container mx-auto px-4 py-16">
-        <h1 className="text-3xl font-bold htk-gold-text text-center mb-8">Post a Job</h1>
-        <p className="text-center text-htk-platinum/80">Tell us about your project and get quotes</p>
+        <div className="max-w-2xl mx-auto">
+          <h1 className="text-4xl font-bold htk-gold-text text-center mb-8">Post a Job</h1>
+          
+          <Card className="htk-card">
+            <CardContent className="p-8">
+              <form className="space-y-6">
+                <div>
+                  <Label className="htk-gold-text">Job Title</Label>
+                  <Input placeholder="e.g., Kitchen Installation" className="htk-input" />
+                </div>
+                
+                <div>
+                  <Label className="htk-gold-text">Description</Label>
+                  <Textarea placeholder="Describe your project..." className="htk-input min-h-[120px]" />
+                </div>
+                
+                <div>
+                  <Label className="htk-gold-text">Budget</Label>
+                  <select className="htk-input w-full">
+                    <option>Select budget range</option>
+                    <option>Under £500</option>
+                    <option>£500 - £1,000</option>
+                    <option>£1,000 - £2,500</option>
+                    <option>£2,500 - £5,000</option>
+                    <option>Over £5,000</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <Label className="htk-gold-text">Photos</Label>
+                  <Input type="file" multiple accept="image/*" className="htk-input" />
+                </div>
+                
+                <Button className="w-full htk-button-primary">Post Job</Button>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
       </div>
       <HTKFooter />
     </div>
   )
 }
 
-function CompetitionsPage() {
-  return (
-    <div className="htk-bg-primary min-h-screen">
-      <HTKNavigation />
-      <div className="container mx-auto px-4 py-16">
-        <h1 className="text-3xl font-bold htk-gold-text text-center mb-8">Competitions</h1>
-        <p className="text-center text-htk-platinum/80">Win prizes and recognition for your work</p>
-      </div>
-      <HTKFooter />
-    </div>
-  )
-}
-
-function LeaderboardsPage() {
-  return (
-    <div className="htk-bg-primary min-h-screen">
-      <HTKNavigation />
-      <div className="container mx-auto px-4 py-16">
-        <h1 className="text-3xl font-bold htk-gold-text text-center mb-8">Leaderboards</h1>
-        <p className="text-center text-htk-platinum/80">Top rated tradespeople based on customer reviews</p>
-      </div>
-      <HTKFooter />
-    </div>
-  )
-}
-
-function CommunityPage() {
-  return (
-    <div className="htk-bg-primary min-h-screen">
-      <HTKNavigation />
-      <div className="container mx-auto px-4 py-16">
-        <h1 className="text-3xl font-bold htk-gold-text text-center mb-8">Community</h1>
-        <p className="text-center text-htk-platinum/80">Connect with other tradespeople and share knowledge</p>
-      </div>
-      <HTKFooter />
-    </div>
-  )
-}
-
-function ContactPage() {
-  return (
-    <div className="htk-bg-primary min-h-screen">
-      <HTKNavigation />
-      <div className="container mx-auto px-4 py-16">
-        <h1 className="text-3xl font-bold htk-gold-text text-center mb-8">Contact Us</h1>
-        <p className="text-center text-htk-platinum/80">Get in touch with our team</p>
-      </div>
-      <HTKFooter />
-    </div>
-  )
-}
-
-function SuccessPage() {
-  const location = useLocation()
-  const searchParams = new URLSearchParams(location.search)
-  const type = searchParams.get('type')
-  
-  return (
-    <div className="htk-bg-primary min-h-screen">
-      <HTKNavigation />
-      <div className="container mx-auto px-4 py-16 text-center">
-        <h1 className="text-3xl font-bold htk-gold-text mb-8">Success!</h1>
-        <p className="text-htk-platinum/80 mb-8">
-          {type === 'customer' 
-            ? "Your job request has been submitted. We'll be in touch within 24 hours."
-            : "Your trade registration has been submitted. You'll receive payment instructions shortly."
-          }
-        </p>
-        <Link to="/">
-          <Button className="htk-button-primary">Return Home</Button>
-        </Link>
-      </div>
-      <HTKFooter />
-    </div>
-  )
-}
-
+// Add other placeholder components as needed
 function LoginPage() {
   return (
     <div className="htk-bg-primary min-h-screen">
       <HTKNavigation />
       <div className="container mx-auto px-4 py-16">
-        <h1 className="text-3xl font-bold htk-gold-text text-center mb-8">Login</h1>
-        <p className="text-center text-htk-platinum/80">Sign in to your HTK account</p>
+        <div className="max-w-md mx-auto">
+          <Card className="htk-card">
+            <CardHeader>
+              <CardTitle className="htk-gold-text text-center">Login</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <form className="space-y-4">
+                <div>
+                  <Label className="htk-gold-text">Email</Label>
+                  <Input type="email" className="htk-input" />
+                </div>
+                <div>
+                  <Label className="htk-gold-text">Password</Label>
+                  <Input type="password" className="htk-input" />
+                </div>
+                <Button className="w-full htk-button-primary">Login</Button>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
       </div>
       <HTKFooter />
     </div>
@@ -1404,14 +1392,16 @@ function SignupPage() {
     <div className="htk-bg-primary min-h-screen">
       <HTKNavigation />
       <div className="container mx-auto px-4 py-16">
-        <h1 className="text-3xl font-bold htk-gold-text text-center mb-8">Join HTK</h1>
-        <div className="max-w-md mx-auto space-y-4">
-          <Link to="/customer-signup">
-            <Button className="w-full htk-button-primary">I Need a Tradesperson</Button>
-          </Link>
-          <Link to="/trade-signup">
-            <Button className="w-full htk-button-secondary">I Am a Tradesperson</Button>
-          </Link>
+        <div className="max-w-md mx-auto text-center">
+          <h1 className="text-3xl font-bold htk-gold-text mb-8">Join HTK</h1>
+          <div className="space-y-4">
+            <Link to="/customer-signup">
+              <Button className="w-full htk-button-primary">I Need a Tradesperson</Button>
+            </Link>
+            <Link to="/trade-signup">
+              <Button className="w-full htk-button-secondary">I Am a Tradesperson</Button>
+            </Link>
+          </div>
         </div>
       </div>
       <HTKFooter />
@@ -1419,42 +1409,86 @@ function SignupPage() {
   )
 }
 
-function CustomerDashboard() {
+function ContactPage() {
   return (
     <div className="htk-bg-primary min-h-screen">
       <HTKNavigation />
       <div className="container mx-auto px-4 py-16">
-        <h1 className="text-3xl font-bold htk-gold-text text-center mb-8">Customer Dashboard</h1>
-        <p className="text-center text-htk-platinum/80">Manage your jobs and find tradespeople</p>
+        <h1 className="text-4xl font-bold htk-gold-text text-center mb-8">Contact Us</h1>
+        <div className="max-w-2xl mx-auto">
+          <Card className="htk-card">
+            <CardContent className="p-8">
+              <div className="text-center mb-8">
+                <p className="text-htk-platinum/80 mb-4">Get in touch with our team</p>
+                <div className="space-y-2">
+                  <p className="text-htk-gold">📧 handy2knowteam@gmail.com</p>
+                  <p className="text-htk-gold">📞 +44 20 1234 5678</p>
+                </div>
+              </div>
+              
+              <form className="space-y-6">
+                <div>
+                  <Label className="htk-gold-text">Name</Label>
+                  <Input className="htk-input" />
+                </div>
+                <div>
+                  <Label className="htk-gold-text">Email</Label>
+                  <Input type="email" className="htk-input" />
+                </div>
+                <div>
+                  <Label className="htk-gold-text">Message</Label>
+                  <Textarea className="htk-input min-h-[120px]" />
+                </div>
+                <Button className="w-full htk-button-primary">Send Message</Button>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
       </div>
       <HTKFooter />
     </div>
   )
 }
 
-function TradeDashboard() {
-  return (
-    <div className="htk-bg-primary min-h-screen">
-      <HTKNavigation />
-      <div className="container mx-auto px-4 py-16">
-        <h1 className="text-3xl font-bold htk-gold-text text-center mb-8">Trade Dashboard</h1>
-        <p className="text-center text-htk-platinum/80">Manage your leads and grow your business</p>
-      </div>
-      <HTKFooter />
-    </div>
-  )
-}
+// Add other placeholder components
+function ForgotPasswordPage() { return <div>Forgot Password - Coming Soon</div> }
+function CustomerDashboard() { return <div>Customer Dashboard - Coming Soon</div> }
+function TradeDashboard() { return <div>Trade Dashboard - Coming Soon</div> }
+function CompetitionsPage() { return <div>Competitions - Coming Soon</div> }
+function LeaderboardsPage() { return <div>Leaderboards - Coming Soon</div> }
+function SponsorsPage() { return <div>Sponsors - Coming Soon</div> }
+function CommunityPage() { return <div>Community - Coming Soon</div> }
+function TradeProfilePage() { return <div>Trade Profile - Coming Soon</div> }
+function SuccessPage() { return <div>Success - Thank you for registering!</div> }
 
-function SponsorsPage() {
+// Main App Component
+function App() {
   return (
-    <div className="htk-bg-primary min-h-screen">
-      <HTKNavigation />
-      <div className="container mx-auto px-4 py-16">
-        <h1 className="text-3xl font-bold htk-gold-text text-center mb-8">Sponsors</h1>
-        <p className="text-center text-htk-platinum/80">Our trusted partners and sponsors</p>
+    <Router>
+      <div className="htk-bg-primary min-h-screen">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/pricing" element={<PricingPage />} />
+          <Route path="/trades" element={<TradesPage />} />
+          <Route path="/post" element={<PostJobPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/customer-signup" element={<CustomerSignup />} />
+          <Route path="/trade-signup" element={<TradeSignup />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/dashboard/customer" element={<CustomerDashboard />} />
+          <Route path="/dashboard/trade" element={<TradeDashboard />} />
+          <Route path="/competitions" element={<CompetitionsPage />} />
+          <Route path="/leaderboards" element={<LeaderboardsPage />} />
+          <Route path="/sponsors" element={<SponsorsPage />} />
+          <Route path="/community" element={<CommunityPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/trade-profile/:id" element={<TradeProfilePage />} />
+          <Route path="/success" element={<SuccessPage />} />
+        </Routes>
       </div>
-      <HTKFooter />
-    </div>
+    </Router>
   )
 }
 
