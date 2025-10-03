@@ -1,0 +1,16 @@
+# HTK Domain Redirects
+# Redirect handy2know.co.uk to handy2know.com
+https://handy2know.co.uk/* https://handy2know.com/:splat 301!
+http://handy2know.co.uk/* https://handy2know.com/:splat 301!
+
+# Redirect www subdomain to main domain
+https://www.handy2know.com/* https://handy2know.com/:splat 301!
+http://www.handy2know.com/* https://handy2know.com/:splat 301!
+https://www.handy2know.co.uk/* https://handy2know.com/:splat 301!
+http://www.handy2know.co.uk/* https://handy2know.com/:splat 301!
+
+# Force HTTPS for main domain
+http://handy2know.com/* https://handy2know.com/:splat 301!
+
+# SPA fallback for React Router
+/*    /index.html   200

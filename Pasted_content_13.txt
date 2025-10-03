@@ -1,0 +1,185 @@
+9:07:09 PM: build-image version: e8c4c0b200e9701a8a8825b9ff63ea7e9f1740e2 (noble)
+9:07:09 PM: buildbot version: a8227f684d13e2f14c4dff2ff89b1b5fbedbc9d9
+9:07:09 PM: Fetching cached dependencies
+9:07:09 PM: Starting to download cache of 405.8MB (Last modified: 2025-10-03 18:56:39 +0000 UTC)
+9:07:11 PM: Finished downloading cache in 1.86s
+9:07:11 PM: Starting to extract cache
+9:07:20 PM: Finished extracting cache in 8.832s
+9:07:20 PM: Finished fetching cache in 10.761s
+9:07:20 PM: Starting to prepare the repo for build
+9:07:20 PM: Preparing Git Reference refs/heads/main
+9:07:21 PM: Custom functions path detected. Proceeding with the specified path: 'netlify/functions'
+9:07:21 PM: Starting to install dependencies
+9:07:22 PM: Started restoring cached python cache
+9:07:22 PM: Finished restoring cached python cache
+9:07:22 PM: Started restoring cached ruby cache
+9:07:22 PM: Finished restoring cached ruby cache
+9:07:23 PM: Started restoring cached go cache
+9:07:23 PM: Finished restoring cached go cache
+9:07:24 PM: Started restoring cached Node.js version
+9:07:24 PM: Finished restoring cached Node.js version
+9:07:24 PM: Attempting Node.js version '22' from .nvmrc
+9:07:24 PM: v22.20.0 is already installed.
+9:07:25 PM: Now using node v22.20.0 (npm v10.9.3)
+9:07:25 PM: Enabling Node.js Corepack
+9:07:25 PM: Started restoring cached build plugins
+9:07:25 PM: Finished restoring cached build plugins
+9:07:25 PM: Started restoring cached corepack dependencies
+9:07:25 PM: Finished restoring cached corepack dependencies
+9:07:25 PM: Started restoring cached pnpm cache
+9:07:25 PM: Finished restoring cached pnpm cache
+9:07:25 PM: No pnpm workspaces detected
+9:07:25 PM: Started restoring cached node modules
+9:07:25 PM: Finished restoring cached node modules
+9:07:25 PM: Installing npm packages using pnpm version 10.17.1
+9:07:26 PM: Lockfile is up to date, resolution step is skipped
+9:07:26 PM: Progress: resolved 1, reused 0, downloaded 0, added 0
+9:07:26 PM: Packages: +264 -233
+9:07:26 PM: ++++++++++++++++++++++++++++++++++++++++++--------------------------------------
+9:07:27 PM: Progress: resolved 264, reused 41, downloaded 115, added 140
+9:07:28 PM: Progress: resolved 264, reused 41, downloaded 223, added 253
+9:07:28 PM: Progress: resolved 264, reused 41, downloaded 223, added 254, done
+9:07:29 PM: dependencies:
+9:07:29 PM: - @tailwindcss/vite
+9:07:29 PM: + class-variance-authority 0.7.1
+9:07:29 PM: + clsx 2.1.1
+9:07:29 PM: + google-auth-library 10.4.0
+9:07:29 PM: + google-spreadsheet 5.0.2
+9:07:29 PM: + nodemailer 7.0.6
+9:07:29 PM: devDependencies:
+9:07:29 PM: + autoprefixer 10.4.21
+9:07:29 PM: + postcss 8.5.6
+9:07:29 PM: ╭ Warning ─────────────────────────────────────────────────────────────────────╮
+9:07:29 PM: │                                                                              │
+9:07:29 PM: │   Ignored build scripts: esbuild.                                            │
+9:07:29 PM: │   Run "pnpm approve-builds" to pick which dependencies should be allowed     │
+9:07:29 PM: │   to run scripts.                                                            │
+9:07:29 PM: │                                                                              │
+9:07:29 PM: ╰──────────────────────────────────────────────────────────────────────────────╯
+9:07:29 PM: Done in 3.4s using pnpm v10.17.1
+9:07:29 PM: npm packages installed using pnpm
+9:07:29 PM: Successfully installed dependencies
+9:07:29 PM: Starting build script
+9:07:30 PM: Detected 1 framework(s)
+9:07:30 PM: "vite" at version "6.3.6"
+9:07:30 PM: Section completed: initializing
+9:07:31 PM: ​
+9:07:31 PM: Netlify Build                                                 
+9:07:31 PM: ────────────────────────────────────────────────────────────────
+9:07:31 PM: ​
+9:07:31 PM: ❯ Version
+9:07:31 PM:   @netlify/build 35.1.8
+9:07:31 PM: ​
+9:07:31 PM: ❯ Flags
+9:07:31 PM:   accountId: 68c656c1613446ea8a2d71dc
+9:07:31 PM:   baseRelDir: true
+9:07:31 PM:   buildId: 68e02cec09e3340008871536
+9:07:31 PM:   deployId: 68e02cec09e3340008871538
+9:07:32 PM: ​
+9:07:32 PM: ❯ Current directory
+9:07:32 PM:   /opt/build/repo
+9:07:32 PM: ​
+9:07:32 PM: ❯ Config file
+9:07:32 PM:   /opt/build/repo/netlify.toml
+9:07:32 PM: ​
+9:07:32 PM: ❯ Context
+9:07:32 PM:   branch-deploy
+9:07:32 PM: ​
+9:07:32 PM: ❯ Installing extensions
+9:07:32 PM:    - async-workloads
+9:07:32 PM:    - neon
+9:07:33 PM: ​
+9:07:33 PM: ❯ Loading extensions
+9:07:33 PM:    - async-workloads
+9:07:33 PM:    - neon
+9:07:34 PM: Installing functions dependencies
+9:07:35 PM: ​
+9:07:35 PM: build.command from netlify.toml                               
+9:07:35 PM: ────────────────────────────────────────────────────────────────
+9:07:35 PM: ​
+9:07:35 PM: $ npm install --legacy-peer-deps && npm run build
+9:07:38 PM: npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+9:07:38 PM: added 26 packages, removed 1 package, changed 64 packages, and audited 407 packages in 3s
+9:07:38 PM: 73 packages are looking for funding
+9:07:38 PM:   run `npm fund` for details
+9:07:38 PM: found 0 vulnerabilities
+9:07:38 PM: > htk-production@0.0.0 build
+9:07:38 PM: > vite build
+9:07:38 PM: vite v6.3.6 building for production...
+9:07:38 PM: transforming...
+9:07:40 PM: Failed during stage 'building site': Build script returned non-zero exit code: 2 (https://ntl.fyi/exit-code-2)
+9:07:40 PM: ✓ 1657 modules transformed.
+9:07:40 PM: ✗ Build failed in 1.33s
+9:07:40 PM: error during build:
+9:07:40 PM: src/AdminDashboard.jsx (6:103): "Pound" is not exported by "node_modules/lucide-react/dist/esm/lucide-react.js", imported by "src/AdminDashboard.jsx".
+9:07:40 PM: file: /opt/build/repo/src/AdminDashboard.jsx:6:103
+9:07:40 PM: 
+9:07:40 PM: 4: import { Input } from '@/components/ui/input.jsx'
+9:07:40 PM: 5: import { Badge } from '@/components/ui/badge.jsx'
+9:07:40 PM: 6: import { Users, CreditCard, TrendingUp, Download, Search, Filter, Mail, Phone, MapPin, Calendar, Star, Pound } from '...
+                                                                                                          ^
+9:07:40 PM: 7:
+9:07:40 PM: 8: function AdminDashboard({ onLogout }) {
+9:07:40 PM: 
+9:07:40 PM:     at getRollupError (file:///opt/build/repo/node_modules/rollup/dist/es/shared/parseAst.js:401:41)
+9:07:40 PM:     at error (file:///opt/build/repo/node_modules/rollup/dist/es/shared/parseAst.js:397:42)
+9:07:40 PM:     at Module.error (file:///opt/build/repo/node_modules/rollup/dist/es/shared/node-entry.js:16939:16)
+9:07:40 PM:     at Module.traceVariable (file:///opt/build/repo/node_modules/rollup/dist/es/shared/node-entry.js:17391:29)
+9:07:40 PM:     at ModuleScope.findVariable (file:///opt/build/repo/node_modules/rollup/dist/es/shared/node-entry.js:15061:39)
+9:07:40 PM:     at FunctionScope.findVariable (file:///opt/build/repo/node_modules/rollup/dist/es/shared/node-entry.js:5642:38)
+9:07:40 PM:     at FunctionBodyScope.findVariable (file:///opt/build/repo/node_modules/rollup/dist/es/shared/node-entry.js:5642:38)
+9:07:40 PM:     at Identifier.bind (file:///opt/build/repo/node_modules/rollup/dist/es/shared/node-entry.js:5413:40)
+9:07:40 PM:     at CallExpression.bind (file:///opt/build/repo/node_modules/rollup/dist/es/shared/node-entry.js:2800:28)
+9:07:40 PM:     at CallExpression.bind (file:///opt/build/repo/node_modules/rollup/dist/es/shared/node-entry.js:12108:15)
+9:07:40 PM: ​
+9:07:40 PM: "build.command" failed                                        
+9:07:40 PM: ────────────────────────────────────────────────────────────────
+9:07:40 PM: ​
+9:07:40 PM:   Error message
+9:07:40 PM:   Command failed with exit code 1: npm install --legacy-peer-deps && npm run build (https://ntl.fyi/exit-code-1)
+9:07:40 PM: ​
+9:07:40 PM:   Error location
+9:07:40 PM:   In build.command from netlify.toml:
+9:07:40 PM:   npm install --legacy-peer-deps && npm run build
+9:07:40 PM: ​
+9:07:40 PM:   Resolved config
+9:07:40 PM:   build:
+9:07:40 PM:     command: npm install --legacy-peer-deps && npm run build
+9:07:40 PM:     commandOrigin: config
+9:07:40 PM:     environment:
+9:07:40 PM:       - ADMIN_PASSWORD
+9:07:40 PM:       - ADMIN_USERNAME
+9:07:40 PM:       - NETLIFY_DATABASE_URL
+9:07:40 PM:       - NETLIFY_DATABASE_URL_UNPOOLED
+9:07:40 PM:       - STRIPE_PUBLISHABLE_KEY
+9:07:40 PM:       - STRIPE_SECRET_KEY
+9:07:40 PM:       - STRIPE_WEBHOOK_SECRET
+9:07:40 PM:       - NODE_VERSION
+9:07:40 PM:       - NPM_FLAGS
+9:07:40 PM:       - NPM_PACKAGE_MANAGER
+9:07:40 PM:     publish: /opt/build/repo/dist
+9:07:40 PM:     publishOrigin: config
+9:07:40 PM:   functionsDirectory: /opt/build/repo/netlify/functions
+9:07:40 PM:   headers:
+9:07:40 PM:     - for: /*
+      values:
+        Referrer-Policy: strict-origin-when-cross-origin
+        X-Content-Type-Options: nosniff
+        X-Frame-Options: DENY
+        X-XSS-Protection: 1; mode=block
+    - for: /assets/*
+      values:
+        Cache-Control: public, max-age=31536000, immutable
+  headersOrigin: config
+  plugins:
+    - inputs: {}
+      origin: config
+      package: "@netlify/plugin-functions-install-core"
+  redirects:
+    - from: /*
+      status: 200
+      to: /index.html
+  redirectsOrigin: config
+9:07:40 PM: Build failed due to a user error: Build script returned non-zero exit code: 2
+9:07:40 PM: Failing build: Failed to build site
+9:07:41 PM: Finished processing build request in 31.763s

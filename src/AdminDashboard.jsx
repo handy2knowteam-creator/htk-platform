@@ -3,13 +3,15 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.j
 import { Button } from '@/components/ui/button.jsx'
 import { Input } from '@/components/ui/input.jsx'
 import { Badge } from '@/components/ui/badge.jsx'
-import { Users, CreditCard, TrendingUp, Download, Search, Filter, Mail, Phone, MapPin, Calendar, Star, Pound } from 'lucide-react'
+import { Users, CreditCard, TrendingUp, Download, Search, Filter, Mail, Phone, MapPin, Calendar, Star, CircleDollarSign } from 'lucide-react'
 
 function AdminDashboard() {
   const [customers, setCustomers] = useState([])
   const [trades, setTrades] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
   const [filterType, setFilterType] = useState('all')
+  const [loading, setLoading] = useState(false)
+  const [lastUpdated, setLastUpdated] = useState(null)
   const [analytics, setAnalytics] = useState({
     totalCustomers: 0,
     totalTrades: 0,
@@ -23,30 +25,53 @@ function AdminDashboard() {
     loadData()
   }, [])
 
-  const loadData = () => {
-    // Load customers
-    const customerData = JSON.parse(localStorage.getItem('htk_customers') || '[]')
-    setCustomers(customerData)
+  const loadData = async () => {
+    setLoading(true)
+    try {
+      // Try to fetch data from Google Sheets via Netlify function
+      const response = await fetch('/.netlify/functions/admin-data')
+      if (response.ok) {
+        const data = await response.json()
+        setCustomers(data.customers || [])
+        setTrades(data.trades || [])
+        setLastUpdated(new Date())
+      } else {
+        // Fallback to localStorage if Netlify function fails
+        const customerData = JSON.parse(localStorage.getItem('htk_customers') || '[]')
+        const tradeData = JSON.parse(localStorage.getItem('htk_trades') || '[]')
+        setCustomers(customerData)
+        setTrades(tradeData)
+        setLastUpdated(new Date())
+      }
+    } catch (error) {
+      console.error('Error loading data:', error)
+      // Fallback to localStorage
+      const customerData = JSON.parse(localStorage.getItem('htk_customers') || '[]')
+      const tradeData = JSON.parse(localStorage.getItem('htk_trades') || '[]')
+      setCustomers(customerData)
+      setTrades(tradeData)
+      setLastUpdated(new Date())
+    } finally {
+      setLoading(false)
+    }
+  }
 
-    // Load trades
-    const tradeData = JSON.parse(localStorage.getItem('htk_trades') || '[]')
-    setTrades(tradeData)
-
-    // Calculate analytics
-    const totalCustomers = customerData.length
-    const totalTrades = tradeData.length
-    const activeSubscriptions = tradeData.filter(trade => trade.subscriptionStatus === 'active').length
+  // Calculate analytics whenever customers or trades data changes
+  useEffect(() => {
+    const totalCustomers = customers.length
+    const totalTrades = trades.length
+    const activeSubscriptions = trades.filter(trade => trade.subscriptionStatus === 'active').length
     
     // Calculate monthly signups (last 30 days)
     const thirtyDaysAgo = new Date()
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
     
-    const monthlySignups = [...customerData, ...tradeData].filter(user => 
+    const monthlySignups = [...customers, ...trades].filter(user => 
       new Date(user.registeredAt) > thirtyDaysAgo
     ).length
 
     // Estimate revenue based on subscription plans
-    const revenueEstimate = tradeData.reduce((total, trade) => {
+    const revenueEstimate = trades.reduce((total, trade) => {
       if (trade.subscriptionStatus === 'active') {
         switch (trade.selectedPlan) {
           case 'bronze': return total + 29
@@ -69,7 +94,7 @@ function AdminDashboard() {
       monthlySignups,
       conversionRate
     })
-  }
+  }, [customers, trades])
 
   const exportData = (type) => {
     let data = []
@@ -185,9 +210,23 @@ function AdminDashboard() {
     <div className="htk-bg-primary min-h-screen">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold htk-gold-text mb-2">HTK Admin Dashboard</h1>
-          <p className="text-htk-platinum/80">Manage customers, trades, and platform analytics</p>
+        <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-bold htk-gold-text mb-2">HTK Admin Dashboard</h1>
+            <p className="text-htk-platinum/80">Manage customers, trades, and platform analytics</p>
+            {lastUpdated && (
+              <p className="text-sm text-htk-platinum/60 mt-1">
+                Last updated: {lastUpdated.toLocaleString()}
+              </p>
+            )}
+          </div>
+          <Button 
+            onClick={loadData} 
+            disabled={loading}
+            className="htk-button-primary"
+          >
+            {loading ? 'Refreshing...' : 'Refresh Data'}
+          </Button>
         </div>
 
         {/* Analytics Cards */}
@@ -215,7 +254,7 @@ function AdminDashboard() {
           <Card className="htk-card">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium htk-platinum-text">Monthly Revenue</CardTitle>
-              <Pound className="h-4 w-4 text-htk-gold" />
+              <CircleDollarSign className="h-4 w-4 text-htk-gold" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold htk-gold-text">£{analytics.totalRevenue}</div>

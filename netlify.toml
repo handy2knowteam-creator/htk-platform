@@ -9,6 +9,52 @@
   # This is a fallback in case other configurations are ignored
   NPM_PACKAGE_MANAGER = "npm"
 
+# Domain redirects - handy2know.co.uk to handy2know.com
+[[redirects]]
+  from = "https://handy2know.co.uk/*"
+  to = "https://handy2know.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://handy2know.co.uk/*"
+  to = "https://handy2know.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.handy2know.co.uk/*"
+  to = "https://handy2know.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.handy2know.co.uk/*"
+  to = "https://handy2know.com/:splat"
+  status = 301
+  force = true
+
+# WWW redirects
+[[redirects]]
+  from = "https://www.handy2know.com/*"
+  to = "https://handy2know.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.handy2know.com/*"
+  to = "https://handy2know.com/:splat"
+  status = 301
+  force = true
+
+# Force HTTPS
+[[redirects]]
+  from = "http://handy2know.com/*"
+  to = "https://handy2know.com/:splat"
+  status = 301
+  force = true
+
+# SPA fallback for React Router
 [[redirects]]
   from = "/*"
   to = "/index.html"
