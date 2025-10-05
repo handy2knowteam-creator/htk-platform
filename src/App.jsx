@@ -209,7 +209,8 @@ function TradeSignup() {
     servicesOffered: '',
     coverageArea: '',
     insuranceFile: null,
-    selectedPlan: ''
+    selectedPlan: '',
+    tradeProfession: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const navigate = useNavigate()
@@ -313,8 +314,8 @@ function TradeSignup() {
     }
 
     if (currentStep === 2) {
-      if (!formData.servicesOffered || !formData.coverageArea) {
-        alert('Please fill in all required fields')
+      if (!formData.servicesOffered || !formData.coverageArea || !formData.tradeProfession) {
+        alert("Please fill in all required fields")
         return
       }
       setCurrentStep(3)
@@ -501,6 +502,34 @@ function TradeSignup() {
           className="htk-input"
           required
         />
+      </div>
+
+      <div>
+        <Label htmlFor="tradeProfession" className="htk-gold-text">Trade/Profession *</Label>
+        <select
+          id="tradeProfession"
+          name="tradeProfession"
+          value={formData.tradeProfession}
+          onChange={handleChange}
+          className="htk-input w-full"
+          required
+        >
+          <option value="">Select your trade</option>
+          <option value="Plumber">Plumber</option>
+          <option value="Electrician">Electrician</option>
+          <option value="Carpenter">Carpenter</option>
+          <option value="Painter">Painter</option>
+          <option value="Roofer">Roofer</option>
+          <option value="Landscaper">Landscaper</option>
+          <option value="Cleaner">Cleaner</option>
+          <option value="Handyman">Handyman</option>
+          <option value="Tiler">Tiler</option>
+          <option value="Plasterer">Plasterer</option>
+          <option value="Glazier">Glazier</option>
+          <option value="Locksmith">Locksmith</option>
+          <option value="HVAC Technician">HVAC Technician</option>
+          <option value="Flooring Specialist">Flooring Specialist</option>
+        </select>
       </div>
 
       <div>
