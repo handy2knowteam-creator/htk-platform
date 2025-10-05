@@ -281,17 +281,11 @@ function TradeSignup() {
   ]
 
   const handleChange = (e) => {
-    if (e.target.type === 'file') {
-      setFormData({
-        ...formData,
-        [e.target.name]: e.target.files[0]
-      })
-    } else {
-      setFormData({
-        ...formData,
-        [e.target.name]: e.target.value
-      })
-    }
+    const { name, value, type, files } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: type === 'file' ? files[0] : value,
+    }));
   }
 
   const handlePlanSelect = (planId) => {
@@ -514,7 +508,7 @@ function TradeSignup() {
           className="htk-input w-full"
           required
         >
-          <option value="">Select your trade</option>
+          <option value="" disabled>Select your trade</option>
           <option value="Plumber">Plumber</option>
           <option value="Electrician">Electrician</option>
           <option value="Carpenter">Carpenter</option>
