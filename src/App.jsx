@@ -288,6 +288,14 @@ function TradeSignup() {
     }));
   }
 
+  const handleSelectChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  }
+
   const handlePlanSelect = (planId) => {
     setFormData({
       ...formData,
@@ -504,11 +512,11 @@ function TradeSignup() {
           id="tradeProfession"
           name="tradeProfession"
           value={formData.tradeProfession}
-          onChange={handleChange}
+          onChange={handleSelectChange}
           className="htk-input w-full"
           required
         >
-          <option value="" disabled>Select your trade</option>
+          <option value="">Select your trade</option>
           <option value="Plumber">Plumber</option>
           <option value="Electrician">Electrician</option>
           <option value="Carpenter">Carpenter</option>
