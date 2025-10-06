@@ -93,7 +93,7 @@ exports.handler = async (event, context) => {
 
     // Email to admin
     const adminEmailHtml = `
-      <h2>New Customer Registration - HTK Platform</h2>
+      <h2>New Customer Registration - Handy 2 Know Platform</h2>
       <p><strong>Timestamp:</strong> ${new Date(timestamp).toLocaleString()}</p>
       <p><strong>Name:</strong> ${fullName}</p>
       <p><strong>Email:</strong> ${formData.email}</p>
@@ -103,7 +103,7 @@ exports.handler = async (event, context) => {
       <p><strong>Budget:</strong> ${formData.budget || 'Not specified'}</p>
       
       <hr>
-      <p>This customer has been added to the HTK Customer database.</p>
+      <p>This customer has been added to the Handy 2 Know Customer database.</p>
       <p>Please follow up within 24 hours.</p>
     `
 
@@ -114,7 +114,7 @@ exports.handler = async (event, context) => {
 
     // Email to customer
     const customerEmailHtml = `
-      <h2>Welcome to HTK - Handy To Know!</h2>
+      <h2>Welcome to Handy 2 Know!</h2>
       <p>Dear ${fullName},</p>
       
       <p>Thank you for submitting your job request. We've received your details and will connect you with verified tradespeople in your area.</p>
@@ -135,14 +135,14 @@ exports.handler = async (event, context) => {
       <p>If you have any questions, please don't hesitate to contact us.</p>
       
       <p>Best regards,<br>
-      The HTK Team<br>
+      The Handy 2 Know Team<br>
       <a href="https://handy2know.com">handy2know.com</a></p>
     `
 
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: formData.email,
-      subject: `Welcome to HTK - Your Job Request Received, ${fullName}`, 
+      subject: `Welcome to Handy 2 Know - Your Job Request Received, ${fullName}`, 
       html: customerEmailHtml
     })
 

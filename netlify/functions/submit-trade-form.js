@@ -88,7 +88,7 @@ exports.handler = async (event, context) => {
 
     // Email to admin
     const adminEmailHtml = `
-      <h2>New Tradesperson Registration - HTK Platform</h2>
+      <h2>New Tradesperson Registration - Handy 2 Know Platform</h2>
       <p><strong>Timestamp:</strong> ${new Date(timestamp).toLocaleString()}</p>
       <p><strong>Business Name:</strong> ${formData.businessName}</p>
       <p><strong>Contact Name:</strong> ${formData.contactName}</p>
@@ -99,7 +99,7 @@ exports.handler = async (event, context) => {
       <p><strong>Selected Plan:</strong> ${formData.selectedPlan || 'Not selected'}</p>
       
       <hr>
-      <p>This tradesperson has been added to the HTK Tradespeople database.</p>
+      <p>This tradesperson has been added to the Handy 2 Know Tradespeople database.</p>
       ${formData.selectedPlan ? '<p><strong>Note:</strong> Payment processing required for subscription plan.</p>' : '<p>Registration completed without subscription plan.</p>'}
     `
 
@@ -112,10 +112,10 @@ exports.handler = async (event, context) => {
 
     // Email to tradesperson
     const tradeEmailHtml = `
-      <h2>Welcome to HTK - Handy To Know!</h2>
+      <h2>Welcome to Handy 2 Know!</h2>
       <p>Dear ${formData.contactName},</p>
       
-      <p>Thank you for registering your business <strong>${formData.businessName}</strong> with HTK. We're excited to have you join our community of skilled tradespeople.</p>
+      <p>Thank you for registering your business <strong>${formData.businessName}</strong> with Handy 2 Know. We're excited to have you join our community of skilled tradespeople.</p>
       
       <h3>Your Registration Details:</h3>
       <p><strong>Business Name:</strong> ${formData.businessName}</p>
@@ -143,14 +143,14 @@ exports.handler = async (event, context) => {
       <p>If you have any questions, please don't hesitate to contact us.</p>
       
       <p>Best regards,<br>
-      The HTK Team<br>
+      The Handy 2 Know Team<br>
       <a href="https://handy2know.com">handy2know.com</a></p>
     `
 
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: formData.email,
-      subject: 'Welcome to HTK - Your Business Registration Received',
+      subject: 'Welcome to Handy 2 Know - Your Business Registration Received',
       html: tradeEmailHtml
     })
 

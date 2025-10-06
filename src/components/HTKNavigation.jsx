@@ -23,10 +23,10 @@ function HTKNavigation() {
             <Link to="/" className="flex items-center space-x-3">
               <img 
                 src="/branding/HTK-official-logo.png" 
-                alt="HandyToKnow - Connecting Local Trades" 
+                alt="Handy 2 Know - Connecting Local Trades" 
                 className="htk-logo w-auto object-contain"             />
               <span className="text-xl font-bold htk-gold-text hidden sm:block">
-                HandyToKnow
+                Handy 2 Know
               </span>
             </Link>
           </div>

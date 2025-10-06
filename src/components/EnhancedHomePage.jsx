@@ -89,7 +89,7 @@ function EnhancedHomePage() {
         <div className="container mx-auto px-4 text-center">
           <div className="htk-animate-fade-in">
             <Badge className="htk-badge-gold mb-6 text-lg px-6 py-2">
-              🏆 UK's #1 Premium Trade Platform
+              🏆 UK's #1 Premium Trade Platform - Handy 2 Know
             </Badge>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
               <span className="htk-gradient-text">Premium Trades</span>
@@ -127,7 +127,7 @@ function EnhancedHomePage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold htk-gold-text mb-6">
-              Why Choose HandyToKnow?
+              Why Choose Handy 2 Know?
             </h2>
             <p className="text-xl text-htk-platinum/80 max-w-3xl mx-auto">
               We've revolutionized how customers and trades connect, creating a premium platform 
@@ -190,7 +190,7 @@ function EnhancedHomePage() {
               What Our Users Say
             </h2>
             <p className="text-xl text-htk-platinum/80 max-w-3xl mx-auto">
-              Real feedback from customers and tradespeople using HandyToKnow
+              Real feedback from customers and tradespeople using Handy 2 Know
             </p>
           </div>
           
@@ -229,7 +229,7 @@ function EnhancedHomePage() {
                   </div>
                 </div>
                 <p className="text-htk-platinum/90 mb-4 italic">
-                  "The quality of tradespeople on HTK is outstanding. Every professional I've hired has been verified, skilled, and reliable. Worth every penny."
+                  "The quality of tradespeople on Handy 2 Know is outstanding. Every professional I've hired has been verified, skilled, and reliable. Worth every penny."
                 </p>
                 <div className="flex items-center">
                   <div className="w-10 h-10 bg-htk-gold rounded-full flex items-center justify-center mr-3">
@@ -253,7 +253,7 @@ function EnhancedHomePage() {
                   </div>
                 </div>
                 <p className="text-htk-platinum/90 mb-4 italic">
-                  "HTK has transformed my business. The credit system is fair, leads are high-quality, and the community support is incredible. Highly recommended."
+                  "Handy 2 Know has transformed my business. The credit system is fair, leads are high-quality, and the community support is incredible. Highly recommended."
                 </p>
                 <div className="flex items-center">
                   <div className="w-10 h-10 bg-htk-gold rounded-full flex items-center justify-center mr-3">
@@ -279,7 +279,7 @@ function EnhancedHomePage() {
             </h2>
             <p className="text-xl text-htk-platinum/80 mb-8 leading-relaxed">
               Whether you need quality tradespeople or want to grow your trade business, 
-              HandyToKnow is your premium platform for success.
+              Handy 2 Know is your premium platform for success.
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
