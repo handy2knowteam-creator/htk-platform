@@ -74,9 +74,16 @@ h6 { font-size: clamp(1rem, 1.5vw, 1rem); }
 
 /* HTK Brand Components */
 .htk-logo {
+  height: 60px; /* Increased default height for desktop */
   max-width: 100%;
-  height: auto;
+  width: auto;
   border-radius: var(--htk-radius-sm);
+}
+
+@media (max-width: 768px) {
+  .htk-logo {
+    height: 50px; /* Adjusted height for mobile */
+  }
 }
 
 .htk-brand-text {

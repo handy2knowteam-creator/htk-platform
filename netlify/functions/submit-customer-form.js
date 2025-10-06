@@ -33,7 +33,7 @@ exports.handler = async (event, context) => {
     const formData = JSON.parse(event.body)
     
     // Validate required fields
-    if (!formData.name || !formData.email || !formData.phone || !formData.postcode) {
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone || !formData.postcode) {
       return {
         statusCode: 400,
         headers: {
@@ -42,6 +42,9 @@ exports.handler = async (event, context) => {
         body: JSON.stringify({ error: 'Missing required fields' })
       }
     }
+
+    const fullName = `${formData.firstName} ${formData.lastName}`;
+
 
     // Initialize Google Sheets
     const serviceAccountAuth = new JWT({
@@ -57,8 +60,7 @@ exports.handler = async (event, context) => {
     let sheet = doc.sheetsByTitle['Customers']
     if (!sheet) {
       sheet = await doc.addSheet({ 
-        title: 'Customers',
-        headerValues: ['Timestamp', 'Name', 'Email', 'Phone', 'Postcode', 'Job Description', 'Budget', 'Status']
+        titl        headerValues: [\'Timestamp\', \'Name\', \'Email\', \'Phone\', \'Postcode\', \'Date of Birth\', \'Password\', \'Job Description\', \'Budget\', \'Remember Me\', \'2FA Enabled\', \'Marketing Consent\', \'Status\']
       })
     }
 
@@ -66,12 +68,17 @@ exports.handler = async (event, context) => {
     const timestamp = new Date().toISOString()
     await sheet.addRow({
       'Timestamp': timestamp,
-      'Name': formData.name,
+      'Name': fullName,
       'Email': formData.email,
       'Phone': formData.phone,
       'Postcode': formData.postcode,
+      'Date of Birth': formData.dateOfBirth || '',
+      'Password': formData.password, // Note: In a real app, this should be hashed before sending to backend
       'Job Description': formData.jobDescription || '',
       'Budget': formData.budget || '',
+      'Remember Me': formData.rememberMe ? 'Yes' : 'No',
+      '2FA Enabled': formData.enableTwoFA ? 'Yes' : 'No',
+      'Marketing Consent': formData.marketingConsent ? 'Yes' : 'No',
       'Status': 'New'
     })
 
@@ -88,7 +95,7 @@ exports.handler = async (event, context) => {
     const adminEmailHtml = `
       <h2>New Customer Registration - HTK Platform</h2>
       <p><strong>Timestamp:</strong> ${new Date(timestamp).toLocaleString()}</p>
-      <p><strong>Name:</strong> ${formData.name}</p>
+      <p><strong>Name:</strong> ${fullName}</p>
       <p><strong>Email:</strong> ${formData.email}</p>
       <p><strong>Phone:</strong> ${formData.phone}</p>
       <p><strong>Postcode:</strong> ${formData.postcode}</p>
@@ -102,15 +109,13 @@ exports.handler = async (event, context) => {
 
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
-      to: 'handy2knowteam@gmail.com',
-      subject: `New Customer Registration: ${formData.name}`,
-      html: adminEmailHtml
+      to: 'handy2knowteam@gmail.com'      subject: `New Customer Registration: ${fullName}`,    html: adminEmailHtml
     })
 
     // Email to customer
     const customerEmailHtml = `
       <h2>Welcome to HTK - Handy To Know!</h2>
-      <p>Dear ${formData.name},</p>
+      <p>Dear ${fullName},</p>
       
       <p>Thank you for submitting your job request. We've received your details and will connect you with verified tradespeople in your area.</p>
       
@@ -137,7 +142,7 @@ exports.handler = async (event, context) => {
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: formData.email,
-      subject: 'Welcome to HTK - Your Job Request Received',
+      subject: `Welcome to HTK - Your Job Request Received, ${fullName}`, 
       html: customerEmailHtml
     })
 
