@@ -41,7 +41,7 @@ function PricingPage() {
       credits: '10 credits monthly',
       description: 'Perfect for getting started',
       icon: <Star className="w-8 h-8 text-htk-gold" />,
-      priceId: 'price_1O9e5j2eZvKYlo2Cc1t12345', // Dummy Price ID for testing
+      priceId: 'price_1S7DacGFrHVFmHVwHWWU7wBv', // Bronze Plan Price ID
       features: [
         '10 job leads per month',
         'Basic profile listing',
@@ -59,7 +59,7 @@ function PricingPage() {
       credits: '70 credits monthly',
       description: 'Most popular for growing businesses',
       icon: <Zap className="w-8 h-8 text-htk-gold" />,
-      priceId: 'price_silver_monthly', // Replace with actual Stripe Price ID
+      priceId: 'price_1S7CpoGFrHVFmHVwrXAQfNij', // Silver Plan Price ID
       features: [
         '70 job leads per month',
         'Enhanced profile with photos',
@@ -78,7 +78,7 @@ function PricingPage() {
       credits: '160 credits monthly',
       description: 'For established trade businesses',
       icon: <Crown className="w-8 h-8 text-htk-gold" />,
-      priceId: 'price_gold_monthly', // Replace with actual Stripe Price ID
+      priceId: 'price_1S7CrMGFrHVFmHVwphKoSgxi', // Gold Plan Price ID
       features: [
         '160 job leads per month',
         'Premium profile with video',
@@ -94,9 +94,9 @@ function PricingPage() {
   ];
 
   const payAsYouGoOptions = [
-    { credits: 10, price: '£10', priceId: 'price_10_credits' },
-    { credits: 50, price: '£50', priceId: 'price_50_credits' },
-    { credits: 100, price: '£100', priceId: 'price_100_credits' }
+    { credits: 10, price: '£10', priceId: 'price_payg_10_credits' }, // Placeholder Price ID
+    { credits: 50, price: '£50', priceId: 'price_payg_50_credits' }, // Placeholder Price ID
+    { credits: 100, price: '£100', priceId: 'price_payg_100_credits' } // Placeholder Price ID
   ];
 
   return (
