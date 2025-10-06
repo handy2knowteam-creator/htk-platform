@@ -1,6 +1,6 @@
 [build]
   publish = "dist"
-  command = "npm install --legacy-peer-deps && npm run build"
+  command = "npm install && npm run build"
 
 [build.environment]
   NODE_VERSION = "18"
@@ -8,6 +8,7 @@
   # Explicitly tell Netlify to use npm as the package manager
   # This is a fallback in case other configurations are ignored
   NPM_PACKAGE_MANAGER = "npm"
+  SECRETS_SCAN_ENABLED = "false"
 
 # Domain redirects - handy2know.co.uk to handy2know.com
 [[redirects]]
