@@ -8,12 +8,14 @@ import { Textarea } from '@/components/ui/textarea.jsx';
 import { Badge } from '@/components/ui/badge.jsx';
 import { CheckCircle, Star, Shield, Zap, Crown } from 'lucide-react';
 import FormUnavailable from './FormUnavailable';
+import EmbeddedPaymentForm from './EmbeddedPaymentForm';
 
 function TradeSignup() {
   // Enable trade signup form to collect data in Google Sheets
   const isBackendAvailable = true; 
 
   const [currentStep, setCurrentStep] = useState(1);
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
   const [formData, setFormData] = useState({
     businessName: '',
     contactName: '',
@@ -166,61 +168,29 @@ function TradeSignup() {
           throw new Error(tradeResult.error || 'Failed to save trade registration');
         }
 
-        // Create Stripe price IDs for each plan
-        const stripePriceIds = {
-          'bronze': process.env.VITE_STRIPE_BRONZE_PRICE_ID || 'price_1QCqGJP123456789bronze',
-          'silver': process.env.VITE_STRIPE_SILVER_PRICE_ID || 'price_1QCqGJP123456789silver',
-          'gold': process.env.VITE_STRIPE_GOLD_PRICE_ID || 'price_1QCqGJP123456789gold'
-        };
-
-        const priceId = stripePriceIds[formData.selectedPlan];
-        
-        if (!priceId) {
-          throw new Error('Invalid subscription plan selected');
-        }
-
-        // Create Stripe checkout session
-        const response = await fetch('/.netlify/functions/create-checkout-session', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            priceId: priceId,
-            successUrl: `${window.location.origin}/success?type=trade&plan=${formData.selectedPlan}&session_id={CHECKOUT_SESSION_ID}`,
-            cancelUrl: `${window.location.origin}/trade-signup?step=3`,
-            customerEmail: formData.email,
-            metadata: {
-              tradeId: tradeResult.tradeId || 'new_trade',
-              businessName: formData.businessName,
-              contactName: formData.contactName,
-              plan: formData.selectedPlan,
-              type: 'trade_subscription'
-            }
-          })
-        });
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || 'Failed to create checkout session');
-        }
-
-        const { sessionId } = await response.json();
-
-        // Redirect to Stripe Checkout
-        const stripe = window.Stripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || 'pk_test_51QCqGJP123456789_test_key');
-        const { error } = await stripe.redirectToCheckout({ sessionId });
-
-        if (error) {
-          throw new Error(error.message);
-        }
+        // Show embedded payment form instead of redirecting to Stripe Checkout
+        setShowPaymentForm(true);
+        setIsSubmitting(false);
+        return;
 
       } catch (error) {
-        console.error('Payment processing error:', error);
+        console.error('Registration error:', error);
         alert(`Registration failed: ${error.message}. Please try again or contact support.`);
         setIsSubmitting(false);
       }
     }
+  };
+
+  const handlePaymentSuccess = (paymentIntent) => {
+    console.log('Payment successful:', paymentIntent);
+    // Redirect to success page
+    navigate(`/success?type=trade&plan=${formData.selectedPlan}&payment_intent=${paymentIntent.id}`);
+  };
+
+  const handlePaymentError = (error) => {
+    console.error('Payment error:', error);
+    alert(`Payment failed: ${error}. Please try again or contact support.`);
+    setShowPaymentForm(false);
   };
 
   const renderStep1 = () => (
@@ -571,58 +541,81 @@ function TradeSignup() {
                 </div>
               ))}
             </div>
-          </div>
+          <div className="max-w-4xl mx-auto">
+          {!showPaymentForm ? (
+            <Card className="htk-card">
+              <CardHeader>
+                <CardTitle className="text-2xl font-bold htk-gold-text text-center">
+                  Join Handy 2 Know Today
+                  {currentStep === 1 && " - Business Information"}
+                  {currentStep === 2 && " - Services & Coverage"}
+                  {currentStep === 3 && " - Choose Your Plan"}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  {currentStep === 1 && renderStep1()}
+                  {currentStep === 2 && renderStep2()}
+                  {currentStep === 3 && renderStep3()}
 
-          <Card className="htk-card">
-            <CardHeader>
-              <CardTitle className="htk-gold-text text-center">
-                {currentStep === 1 && "Business Information"}
-                {currentStep === 2 && "Services & Coverage"}
-                {currentStep === 3 && "Choose Your Plan"}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {currentStep === 1 && renderStep1()}
-                {currentStep === 2 && renderStep2()}
-                {currentStep === 3 && renderStep3()}
-
-                <div className="flex justify-between mt-8">
-                  {currentStep > 1 && (
-                    <Button 
-                      type="button" 
-                      onClick={() => setCurrentStep(currentStep - 1)} 
-                      variant="outline"
-                      className="px-8"
-                    >
-                      Previous
-                    </Button>
-                  )}
-                  {currentStep < 3 && (
-                    <Button 
-                      type="submit" 
-                      className="htk-button-primary ml-auto px-8"
-                    >
-                      Next Step
-                    </Button>
-                  )}
-                  {currentStep === 3 && (
-                    <Button 
-                      type="submit" 
-                      disabled={isSubmitting || !formData.selectedPlan} 
-                      className="htk-button-primary ml-auto px-12"
-                    >
-                      {isSubmitting ? 'Processing...' : 'Register & Subscribe'}
-                    </Button>
-                  )}
-                </div>
-              </form>
-            </CardContent>
-          </Card>
+                  <div className="flex justify-between mt-8">
+                    {currentStep > 1 && (
+                      <Button 
+                        type="button" 
+                        onClick={() => setCurrentStep(currentStep - 1)} 
+                        variant="outline"
+                        className="px-8"
+                      >
+                        Previous
+                      </Button>
+                    )}
+                    {currentStep < 3 && (
+                      <Button 
+                        type="submit" 
+                        className="htk-button-primary ml-auto px-8"
+                      >
+                        Next Step
+                      </Button>
+                    )}
+                    {currentStep === 3 && (
+                      <Button 
+                        type="submit" 
+                        disabled={isSubmitting || !formData.selectedPlan} 
+                        className="htk-button-primary ml-auto px-12"
+                      >
+                        {isSubmitting ? 'Processing...' : 'Continue to Payment'}
+                      </Button>
+                    )}
+                  </div>
+                </form>
+              </CardContent>
+            </Card>
+          ) : (
+            <div>
+              <div className="text-center mb-6">
+                <h2 className="text-3xl font-bold htk-gold-text mb-2">Complete Your Subscription</h2>
+                <p className="text-htk-platinum/80">
+                  You're almost done! Complete your payment to activate your {formData.selectedPlan} plan.
+                </p>
+              </div>
+              
+              <EmbeddedPaymentForm
+                selectedPlan={formData.selectedPlan}
+                formData={formData}
+                onSuccess={handlePaymentSuccess}
+                onError={handlePaymentError}
+              />
+              
+              <div className="text-center mt-6">
+                <Button 
+                  type="button" 
+                  onClick={() => setShowPaymentForm(false)} 
+                  variant="outline"
+                  className="px-8"
+                >
+                  ← Back to Plan Selection
+                </Button>
+              </div>
+            </div>
+          )}
         </div>
-      </div>
-    </div>
-  );
-}
-
-export default TradeSignup;
