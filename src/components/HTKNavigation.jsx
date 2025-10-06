@@ -23,7 +23,7 @@ function HTKNavigation() {
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="flex items-center space-x-3">
               <img 
-                src="/branding/HTK-logo.svg" // Changed to SVG for better quality
+                src="/branding/HTK-logo.png" // Changed to SVG for better quality
                 alt="HandyToKnow - Connecting Local Trades" 
                 className="htk-logo h-12 w-auto"
               />
