@@ -619,3 +619,9 @@ function TradeSignup() {
             </div>
           )}
         </div>
+      </div>
+    </div>
+  );
+}
+
+export default TradeSignup;
