@@ -619,6 +619,8 @@ function TradeSignup() {
             </div>
           )}
         </div>
+          </div>
+        </div>
       </div>
     </div>
   );
