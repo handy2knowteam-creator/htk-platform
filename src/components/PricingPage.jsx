@@ -17,7 +17,7 @@ function PricingPage() {
           planName: planName,
           successUrl: window.location.origin + 
             (planName.includes("Credits") ? "/success?type=credits&amount=" + planName.split(" ")[0] : "/success?type=subscription&plan=" + planName),
-          cancelUrl: window.location.origin + "/pricing",",
+          cancelUrl: window.location.origin + "/pricing"
         }),
       });
 
@@ -42,8 +42,6 @@ function PricingPage() {
       description: 'Perfect for getting started',
       icon: <Star className="w-8 h-8 text-htk-gold" />,
       priceId: 'price_1O9e5j2eZvKYlo2Cc1t12345', // Dummy Price ID for testing
-      successUrl: window.location.origin + '/success',
-      cancelUrl: window.location.origin + '/pricing',
       features: [
         '10 job leads per month',
         'Basic profile listing',
