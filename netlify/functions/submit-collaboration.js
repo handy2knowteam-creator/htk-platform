@@ -84,7 +84,7 @@ exports.handler = async (event, context) => {
       const adminEmailOptions = {
         from: process.env.EMAIL_USER,
         to: 'handy2knowteam@gmail.com',
-        subject: 'New Collaboration Submitted - HTK Platform',
+        subject: 'New Collaboration Submitted - H2K Platform',
         html: `
           <h2>New Trade Collaboration Submitted</h2>
           <p><strong>Title:</strong> ${collaborationData.title}</p>

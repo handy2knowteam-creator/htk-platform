@@ -90,7 +90,7 @@ async function handleSuccessfulPayment(session) {
     // Send notification email to admin
     const emailData = {
       to: 'handy2knowteam@gmail.com',
-      subject: 'New Trade Subscription Payment - HTK Platform',
+      subject: 'New Trade Subscription Payment - H2K Platform',
       html: `
         <h2>New Trade Subscription Activated</h2>
         <p><strong>Business:</strong> ${session.metadata.businessName}</p>

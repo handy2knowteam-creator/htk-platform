@@ -1,10 +1,10 @@
-/* HTK App-specific styles */
+/* H2K App-specific styles */
 
 .App {
   text-align: center;
 }
 
-/* Additional HTK-specific overrides */
+/* Additional H2K-specific overrides */
 .htk-app-container {
   min-height: 100vh;
   background: var(--htk-black);

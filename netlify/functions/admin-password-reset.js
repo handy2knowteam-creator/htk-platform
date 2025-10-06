@@ -95,11 +95,11 @@ exports.handler = async (event, context) => {
         await transporter.sendMail({
           from: process.env.EMAIL_USER || 'handytoknowteam@gmail.com',
           to: email,
-          subject: 'HTK Admin - Password Reset Request',
+          subject: 'H2K Admin - Password Reset Request',
           html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f5f5f5;">
               <div style="background: linear-gradient(135deg, #000000 0%, #333333 100%); padding: 30px; text-align: center;">
-                <h1 style="color: #B9975B; margin: 0; font-size: 28px;">HTK Admin Portal</h1>
+                <h1 style="color: #B9975B; margin: 0; font-size: 28px;">H2K Admin Portal</h1>
                 <p style="color: #ffffff; margin: 10px 0 0 0;">Password Reset Request</p>
               </div>
               <div style="padding: 30px; background: #ffffff;">
@@ -120,7 +120,7 @@ exports.handler = async (event, context) => {
                 </p>
                 <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
                   <p style="color: #999; font-size: 12px; margin: 0;">
-                    This is an automated message from HTK Admin Portal. Please do not reply to this email.
+                    This is an automated message from H2K Admin Portal. Please do not reply to this email.
                   </p>
                 </div>
               </div>

@@ -125,11 +125,11 @@ exports.handler = async (event, context) => {
       await transporter.sendMail({
         from: process.env.EMAIL_USER,
         to: email,
-        subject: 'HTK - Two-Factor Authentication Code',
+        subject: 'H2K - Two-Factor Authentication Code',
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
             <div style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); padding: 30px; text-align: center;">
-              <h1 style="color: #D4AF37; margin: 0;">HTK Platform</h1>
+              <h1 style="color: #D4AF37; margin: 0;">H2K Platform</h1>
             </div>
             <div style="padding: 30px; background: #f9f9f9;">
               <h2 style="color: #333;">Two-Factor Authentication</h2>

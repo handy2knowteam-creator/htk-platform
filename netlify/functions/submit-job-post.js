@@ -145,7 +145,7 @@ exports.handler = async (event, context) => {
       const adminEmailHtml = `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f5f5f5;">
           <div style="background: linear-gradient(135deg, #000000 0%, #333333 100%); padding: 30px; text-align: center;">
-            <h1 style="color: #B9975B; margin: 0; font-size: 28px;">HTK Platform</h1>
+            <h1 style="color: #B9975B; margin: 0; font-size: 28px;">H2K Platform</h1>
             <p style="color: #ffffff; margin: 10px 0 0 0;">New Job Posted</p>
           </div>
           <div style="padding: 30px; background: #ffffff;">
@@ -195,7 +195,7 @@ exports.handler = async (event, context) => {
       const customerEmailHtml = `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f5f5f5;">
           <div style="background: linear-gradient(135deg, #000000 0%, #333333 100%); padding: 30px; text-align: center;">
-            <h1 style="color: #B9975B; margin: 0; font-size: 28px;">HTK Platform</h1>
+            <h1 style="color: #B9975B; margin: 0; font-size: 28px;">H2K Platform</h1>
             <p style="color: #ffffff; margin: 10px 0 0 0;">Job Posted Successfully</p>
           </div>
           <div style="padding: 30px; background: #ffffff;">

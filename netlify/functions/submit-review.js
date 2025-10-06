@@ -78,7 +78,7 @@ exports.handler = async (event, context) => {
       const adminEmailOptions = {
         from: process.env.EMAIL_USER,
         to: 'handy2knowteam@gmail.com',
-        subject: 'New Review Submitted - HTK Platform',
+        subject: 'New Review Submitted - H2K Platform',
         html: `
           <h2>New Review Submitted</h2>
           <p><strong>Customer:</strong> ${reviewData.customerName}</p>
