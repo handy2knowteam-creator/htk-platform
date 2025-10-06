@@ -50,7 +50,7 @@ exports.handler = async (event, context) => {
       scopes: ['https://www.googleapis.com/auth/spreadsheets']
     })
 
-    const doc = new GoogleSpreadsheet("1-Fkowy9rxfncUIb7DiOd4TzWVcCQ4H7vge849ddQRqs", serviceAccountAuth) // Using the provided GOOGLE_SHEET_ID directly
+    const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID, serviceAccountAuth) // Using the GOOGLE_SHEET_ID from environment variables // Using the provided GOOGLE_SHEET_ID directly
     await doc.loadInfo()
 
     // Get or create the "Customers" sheet

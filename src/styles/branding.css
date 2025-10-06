@@ -1,0 +1,406 @@
+/* HTK Premium Branding - Exact Color Scheme */
+:root {
+  /* Primary HTK Colors */
+  --htk-black: #000000;
+  --htk-gold: #B9975B;
+  --htk-gold-dark: #8C6A3C;
+  --htk-gold-darker: #6b4e2b;
+  --htk-gold-light: #a0804b;
+  --htk-platinum: #E5E4E2;
+  --htk-charcoal: #111111;
+  --htk-dark-grey: #222222;
+  --htk-medium-grey: #333333;
+  --htk-light-grey: #666666;
+  
+  /* Gradients */
+  --htk-gold-gradient: linear-gradient(45deg, #8C6A3C, #B9975B, #8C6A3C);
+  --htk-gold-gradient-hover: linear-gradient(45deg, #6b4e2b, #a0804b, #6b4e2b);
+  --htk-gold-gradient-vertical: linear-gradient(180deg, #B9975B, #8C6A3C);
+  
+  /* Shadows */
+  --htk-shadow-gold: 0 4px 20px rgba(185, 151, 91, 0.3);
+  --htk-shadow-dark: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --htk-shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.3);
+  
+  /* Typography */
+  --htk-font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --htk-font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--htk-font-primary);
+  background-color: var(--htk-black);
+  color: var(--htk-platinum);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+/* HTK Utility Classes */
+.htk-bg-primary {
+  background-color: var(--htk-black);
+}
+
+.htk-bg-charcoal {
+  background-color: var(--htk-charcoal);
+}
+
+.htk-bg-dark-grey {
+  background-color: var(--htk-dark-grey);
+}
+
+.htk-gold-text {
+  color: var(--htk-gold);
+}
+
+.htk-platinum-text {
+  color: var(--htk-platinum);
+}
+
+.text-htk-gold {
+  color: var(--htk-gold);
+}
+
+.text-htk-platinum {
+  color: var(--htk-platinum);
+}
+
+.text-htk-platinum\/80 {
+  color: rgba(229, 228, 226, 0.8);
+}
+
+.text-htk-platinum\/60 {
+  color: rgba(229, 228, 226, 0.6);
+}
+
+.text-htk-black {
+  color: var(--htk-black);
+}
+
+/* Premium Button Styles */
+.htk-button-primary {
+  background: var(--htk-gold-gradient);
+  color: var(--htk-black);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--htk-shadow-gold);
+  text-transform: none;
+  letter-spacing: 0.5px;
+}
+
+.htk-button-primary:hover {
+  background: var(--htk-gold-gradient-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(185, 151, 91, 0.4);
+}
+
+.htk-button-secondary {
+  background: transparent;
+  color: var(--htk-gold);
+  border: 2px solid var(--htk-gold);
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: none;
+  letter-spacing: 0.5px;
+}
+
+.htk-button-secondary:hover {
+  background: var(--htk-gold);
+  color: var(--htk-black);
+  transform: translateY(-2px);
+  box-shadow: var(--htk-shadow-gold);
+}
+
+/* Premium Card Styles */
+.htk-card {
+  background: var(--htk-charcoal);
+  border: 1px solid var(--htk-medium-grey);
+  border-radius: 12px;
+  box-shadow: var(--htk-shadow-dark);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.htk-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  border-color: var(--htk-gold);
+}
+
+/* Premium Input Styles */
+.htk-input {
+  background-color: var(--htk-dark-grey);
+  border: 2px solid var(--htk-medium-grey);
+  color: var(--htk-gold);
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.htk-input:focus {
+  outline: none;
+  border-color: var(--htk-gold);
+  box-shadow: 0 0 0 3px rgba(185, 151, 91, 0.1);
+}
+
+.htk-input::placeholder {
+  color: var(--htk-light-grey);
+}
+
+/* Premium Label Styles */
+.htk-label {
+  color: var(--htk-gold);
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 6px;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Premium Badge Styles */
+.htk-badge-gold {
+  background: var(--htk-gold-gradient);
+  color: var(--htk-black);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Premium Table Styles */
+.htk-table {
+  background: var(--htk-charcoal);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--htk-shadow-dark);
+}
+
+.htk-table-head {
+  background: var(--htk-gold);
+  color: var(--htk-black);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 16px;
+}
+
+.htk-table-row {
+  border-bottom: 1px solid var(--htk-medium-grey);
+  transition: background-color 0.2s ease;
+}
+
+.htk-table-row:hover {
+  background-color: rgba(185, 151, 91, 0.05);
+}
+
+.htk-table-cell {
+  padding: 16px;
+  color: var(--htk-platinum);
+}
+
+/* Premium Navigation Styles */
+.htk-nav {
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--htk-medium-grey);
+  box-shadow: var(--htk-shadow-subtle);
+}
+
+.htk-nav-link {
+  color: var(--htk-platinum);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.htk-nav-link:hover {
+  color: var(--htk-gold);
+}
+
+.htk-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--htk-gold-gradient);
+  transition: width 0.3s ease;
+}
+
+.htk-nav-link:hover::after {
+  width: 100%;
+}
+
+/* Premium Logo Styles */
+.htk-logo {
+  height: 50px;
+  width: auto;
+  filter: drop-shadow(0 2px 8px rgba(185, 151, 91, 0.3));
+  transition: transform 0.3s ease;
+}
+
+.htk-logo:hover {
+  transform: scale(1.05);
+}
+
+/* Premium Hero Section */
+.htk-hero {
+  background: linear-gradient(135deg, var(--htk-black) 0%, var(--htk-charcoal) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.htk-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(185, 151, 91, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Premium Animations */
+@keyframes htk-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes htk-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.htk-animate-fade-in {
+  animation: htk-fade-in 0.6s ease-out;
+}
+
+.htk-animate-slide-in {
+  animation: htk-slide-in 0.6s ease-out;
+}
+
+/* Premium Responsive Design */
+@media (max-width: 768px) {
+  .htk-button-primary,
+  .htk-button-secondary {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+  
+  .htk-card {
+    margin-bottom: 20px;
+  }
+  
+  .htk-logo {
+    height: 40px;
+  }
+}
+
+/* Premium Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--htk-charcoal);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--htk-gold);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--htk-gold-dark);
+}
+
+/* Premium Selection */
+::selection {
+  background: var(--htk-gold);
+  color: var(--htk-black);
+}
+
+/* Premium Focus Styles */
+*:focus {
+  outline: 2px solid var(--htk-gold);
+  outline-offset: 2px;
+}
+
+/* Premium Loading States */
+.htk-loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.htk-loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(185, 151, 91, 0.2), transparent);
+  animation: htk-shimmer 1.5s infinite;
+}
+
+@keyframes htk-shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Premium Glass Effect */
+.htk-glass {
+  background: rgba(17, 17, 17, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(185, 151, 91, 0.2);
+}
+
+/* Premium Gradient Text */
+.htk-gradient-text {
+  background: var(--htk-gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
