@@ -41,7 +41,7 @@ function PricingPage() {
       credits: '10 credits monthly',
       description: 'Perfect for getting started',
       icon: <Star className="w-8 h-8 text-htk-gold" />,
-      priceId: 'price_1S7DacGFrHVFmHVwHWWU7wBv', // Bronze Plan Price ID
+      priceId: 'price_1S7CpoGFrHVFmHVwrXAQfNij', // Bronze Plan Price ID
       features: [
         '10 job leads per month',
         'Basic profile listing',
@@ -59,7 +59,7 @@ function PricingPage() {
       credits: '70 credits monthly',
       description: 'Most popular for growing businesses',
       icon: <Zap className="w-8 h-8 text-htk-gold" />,
-      priceId: 'price_1S7CpoGFrHVFmHVwrXAQfNij', // Silver Plan Price ID
+      priceId: 'price_1S7CrMGFrHVFmHVwphKoSgxi', // Silver Plan Price ID
       features: [
         '70 job leads per month',
         'Enhanced profile with photos',
@@ -78,7 +78,7 @@ function PricingPage() {
       credits: '160 credits monthly',
       description: 'For established trade businesses',
       icon: <Crown className="w-8 h-8 text-htk-gold" />,
-      priceId: 'price_1S7CrMGFrHVFmHVwphKoSgxi', // Gold Plan Price ID
+      priceId: 'price_1S7D9YGFrHVFmHVw5X1Nim7s', // Gold Plan Price ID
       features: [
         '160 job leads per month',
         'Premium profile with video',
@@ -87,16 +87,14 @@ function PricingPage() {
         'Credits never expire',
         'Top placement in search',
         'Custom branding options'
-      ],
-      popular: false,
-      buttonText: 'Start Gold Plan'
+      ]
     }
   ];
 
   const payAsYouGoOptions = [
-    { credits: 10, price: '£10', priceId: 'price_1S7D9YGFrHVFmHVw5X1Nim7s' }, // Pay-as-you-go 10 Credits Price ID
-    { credits: 50, price: '£50', priceId: 'price_1S7D9YGFrHVFmHVw5X1Nim7s' }, // Pay-as-you-go 50 Credits Price ID
-    { credits: 100, price: '£100', priceId: 'price_1S7D9YGFrHVFmHVw5X1Nim7s' } // Pay-as-you-go 100 Credits Price ID
+    { credits: 10, price: '£10', priceId: 'price_1S7DacGFrHVFmHVwHWWU7wBv' }, // Pay-as-you-go 10 Credits Price ID
+    { credits: 50, price: '£50', priceId: 'price_1S7DacGFrHVFmHVwHWWU7wBv' }, // Pay-as-you-go 50 Credits Price ID
+    { credits: 100, price: '£100', priceId: 'price_1S7DacGFrHVFmHVwHWWU7wBv' } // Pay-as-you-go 100 Credits Price ID
   ];
 
   return (
