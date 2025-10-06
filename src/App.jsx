@@ -9,7 +9,7 @@ import { Textarea } from '@/components/ui/textarea.jsx'
 import { Badge } from '@/components/ui/badge.jsx'
 import { Users, Star, Clock, Zap, CreditCard, TrendingUp, Download, Search, Filter, Mail, Phone, MapPin, Calendar, PoundSterling, Menu, X } from 'lucide-react'
 import './App.css'
-import './mobile-optimizations.css'
+// import './mobile-optimizations.css'
 import './styles/branding.css'
 
 // Import your page components here
