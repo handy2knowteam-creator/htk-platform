@@ -1,94 +1,93 @@
 /* Animation styles will be handled by Tailwind CSS */
-@import url('/branding/branding.css');
+@import url("/branding/branding.css");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-  
-  /* HTK Custom Colors */
-  --htk-black: #000000;
-  --htk-gold: #B9975B;
-  --htk-platinum: #E5E4E2;
-  --htk-charcoal: #111111;
-  --htk-dark-gold: #8C6A3C;
-  --htk-light-gold: #D4C4A8;
-  --htk-offwhite: #F8F7F5;
-  --htk-form-bg: #222222;
-}
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-ring: var(--sidebar-ring);
 
-:root {
-  --radius: 0.625rem;
-  --background: var(--htk-black);
-  --foreground: var(--htk-platinum);
-  --card: var(--htk-charcoal);
-  --card-foreground: var(--htk-platinum);
-  --popover: var(--htk-charcoal);
-  --popover-foreground: var(--htk-platinum);
-  --primary: var(--htk-gold);
-  --primary-foreground: var(--htk-black);
-  --secondary: var(--htk-charcoal);
-  --secondary-foreground: var(--htk-platinum);
-  --muted: var(--htk-charcoal);
-  --muted-foreground: var(--htk-platinum);
-  --accent: var(--htk-charcoal);
-  --accent-foreground: var(--htk-platinum);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: rgba(185, 151, 91, 0.2);
-  --input: var(--htk-form-bg);
-  --ring: var(--htk-gold);
-  --chart-1: var(--htk-gold);
-  --chart-2: var(--htk-light-gold);
-  --chart-3: var(--htk-dark-gold);
-  --chart-4: var(--htk-platinum);
-  --chart-5: var(--htk-offwhite);
-  --sidebar: var(--htk-charcoal);
-  --sidebar-foreground: var(--htk-platinum);
-  --sidebar-primary: var(--htk-gold);
-  --sidebar-primary-foreground: var(--htk-black);
-  --sidebar-accent: var(--htk-charcoal);
-  --sidebar-accent-foreground: var(--htk-platinum);
-  --sidebar-border: rgba(185, 151, 91, 0.2);
-  --sidebar-ring: var(--htk-gold);
-}
+    /* HTK Custom Colors */
+    --htk-black: #000000;
+    --htk-gold: #B9975B;
+    --htk-platinum: #E5E4E2;
+    --htk-charcoal: #111111;
+    --htk-dark-gold: #8C6A3C;
+    --htk-light-gold: #D4C4A8;
+    --htk-offwhite: #F8F7F5;
+    --htk-form-bg: #222222;
+  }
 
-@layer base {
+  :root {
+    --radius: 0.625rem;
+    --background: var(--htk-black);
+    --foreground: var(--htk-platinum);
+    --card: var(--htk-charcoal);
+    --card-foreground: var(--htk-platinum);
+    --popover: var(--htk-charcoal);
+    --popover-foreground: var(--htk-platinum);
+    --primary: var(--htk-gold);
+    --primary-foreground: var(--htk-black);
+    --secondary: var(--htk-charcoal);
+    --secondary-foreground: var(--htk-platinum);
+    --muted: var(--htk-charcoal);
+    --muted-foreground: var(--htk-platinum);
+    --accent: var(--htk-charcoal);
+    --accent-foreground: var(--htk-platinum);
+    --destructive: oklch(0.577 0.245 27.325);
+    --border: rgba(185, 151, 91, 0.2);
+    --input: var(--htk-form-bg);
+    --ring: var(--htk-gold);
+    --chart-1: var(--htk-gold);
+    --chart-2: var(--htk-light-gold);
+    --chart-3: var(--htk-dark-gold);
+    --chart-4: var(--htk-platinum);
+    --chart-5: var(--htk-offwhite);
+    --sidebar: var(--htk-charcoal);
+    --sidebar-foreground: var(--htk-platinum);
+    --sidebar-primary: var(--htk-gold);
+    --sidebar-primary-foreground: var(--htk-black);
+    --sidebar-accent: var(--htk-charcoal);
+    --sidebar-accent-foreground: var(--htk-platinum);
+    --sidebar-border: rgba(185, 151, 91, 0.2);
+    --sidebar-ring: var(--htk-gold);
+  }
+
   * {
     @apply border-border outline-ring/50;
   }
@@ -252,38 +251,6 @@
   h3 { font-size: 1.5rem; }
 }
 
-
-/* Mobile Menu Fixes */
-@media (max-width: 768px) {
-  .htk-nav .hidden.md\\:flex {
-    display: none !important;
-  }
-  
-  .htk-nav .md\\:hidden {
-    display: block !important;
-  }
-  
-  .htk-nav .md\\:hidden button {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem;
-    color: var(--htk-gold);
-    background: transparent;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .htk-nav .md\\:hidden button:hover {
-    color: var(--htk-platinum);
-  }
-  
-  .htk-nav .md\\:hidden button svg {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-}
-
 /* Mobile Menu Dropdown */
 .mobile-menu-dropdown {
   position: absolute;
@@ -294,6 +261,8 @@
   backdrop-filter: blur(8px);
   border-top: 1px solid rgba(185, 151, 91, 0.2);
   z-index: 50;
+  overflow-y: auto; /* Allow scrolling if content is too long */
+  max-height: calc(100vh - 80px); /* Adjust based on nav height */
 }
 
 .mobile-menu-dropdown a {
@@ -335,4 +304,63 @@
   color: var(--htk-gold);
   background: rgba(185, 151, 91, 0.1);
 }
+
+/* Ensure main content is not hidden behind fixed nav */
+.App main {
+  padding-top: 80px; /* Adjust this value to match your HTKNavigation height */
 }
+
+/* General layout adjustments to prevent overlapping */
+section {
+  padding-top: 4rem; /* Default top padding for sections */
+  padding-bottom: 4rem; /* Default bottom padding for sections */
+}
+
+@media (min-width: 768px) {
+  section {
+    padding-top: 6rem; 
+    padding-bottom: 6rem;
+  }
+}
+
+/* Specific fixes for elements that might be overlapping */
+.htk-hero {
+  position: relative;
+  z-index: 1; /* Ensure hero content is above other elements if needed */
+}
+
+.htk-nav {
+  z-index: 100; /* Ensure nav is always on top */
+}
+
+/* Remove the problematic mobile menu fixes that were causing issues */
+/* @media (max-width: 768px) {
+  .htk-nav .hidden.md\\:flex {
+    display: none !important;
+  }
+  
+  .htk-nav .md\\:hidden {
+    display: block !important;
+  }
+  
+  .htk-nav .md\\:hidden button {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    color: var(--htk-gold);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .htk-nav .md\\:hidden button:hover {
+    color: var(--htk-platinum);
+  }
+  
+  .htk-nav .md\\:hidden button svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+} */
+
