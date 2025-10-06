@@ -21,7 +21,7 @@
     "react-hook-form": "^7.63.0",
     "react-router-dom": "^6.8.1",
     "tailwind-merge": "^1.14.0",
-    "nodemailer": "^7.0.6",
+    "nodemailer": "^6.9.13",
     "stripe": "^14.0.0",
     "google-spreadsheet": "^4.1.2",
     "google-auth-library": "^9.4.1"
