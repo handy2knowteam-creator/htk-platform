@@ -1,0 +1,31 @@
+<svg width="120" height="80" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#B9975B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8C6A3C;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background Circle -->
+  <circle cx="60" cy="40" r="35" fill="url(#goldGradient)" stroke="#8C6A3C" stroke-width="2"/>
+  
+  <!-- HTK Text -->
+  <text x="60" y="35" font-family="Cinzel, serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#000000">HTK</text>
+  
+  <!-- Tagline -->
+  <text x="60" y="50" font-family="Inter, sans-serif" font-size="8" font-weight="600" text-anchor="middle" fill="#000000">HANDY TO KNOW</text>
+  
+  <!-- Tool Icons (simplified) -->
+  <g transform="translate(45, 20)">
+    <!-- Hammer -->
+    <rect x="0" y="8" width="2" height="12" fill="#000000"/>
+    <rect x="-2" y="6" width="6" height="4" fill="#000000"/>
+  </g>
+  
+  <g transform="translate(70, 20)">
+    <!-- Wrench -->
+    <rect x="0" y="8" width="2" height="12" fill="#000000"/>
+    <circle cx="1" cy="6" r="2" fill="none" stroke="#000000" stroke-width="1"/>
+  </g>
+</svg>

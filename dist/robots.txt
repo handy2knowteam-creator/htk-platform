@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /dashboard/
+
+Sitemap: https://handy2know.com/sitemap.xml
+
+# HTK - HandyToKnow Premium Trade Platform
+# Connecting local trades with customers
