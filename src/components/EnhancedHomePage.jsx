@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.jsx';
 import { Button } from '@/components/ui/button.jsx';
 import { Badge } from '@/components/ui/badge.jsx';
-import { 
-  Star, 
-  Shield, 
-  Clock, 
-  Users, 
-  Award, 
-  TrendingUp, 
-  CheckCircle, 
+import {
+  Star,
+  Shield,
+  Clock,
+  Users,
+  Award,
+  TrendingUp,
+  CheckCircle,
   ArrowRight,
   Hammer,
   Wrench,
@@ -21,12 +21,13 @@ import {
 } from 'lucide-react';
 
 function EnhancedHomePage() {
-  const stats = [
-    { number: '10,000+', label: 'Verified Trades', icon: <Users className="w-6 h-6" /> },
-    { number: '50,000+', label: 'Jobs Completed', icon: <CheckCircle className="w-6 h-6" /> },
-    { number: '4.9/5', label: 'Average Rating', icon: <Star className="w-6 h-6" /> },
-    { number: '< 2hrs', label: 'Response Time', icon: <Clock className="w-6 h-6" /> }
-  ];
+  // Removed hardcoded stats as they are not real data yet
+  // const stats = [
+  //   { number: '10,000+', label: 'Verified Trades', icon: <Users className="w-6 h-6" /> },
+  //   { number: '50,000+', label: 'Jobs Completed', icon: <CheckCircle className="w-6 h-6" /> },
+  //   { number: '4.9/5', label: 'Average Rating', icon: <Star className="w-6 h-6" /> },
+  //   { number: '< 2hrs', label: 'Response Time', icon: <Clock className="w-6 h-6" /> }
+  // ];
 
   const features = [
     {
@@ -51,33 +52,35 @@ function EnhancedHomePage() {
     }
   ];
 
-  const tradeTypes = [
-    { name: 'Plumbing', icon: <Wrench className="w-6 h-6" />, count: '2,500+' },
-    { name: 'Electrical', icon: <Zap className="w-6 h-6" />, count: '1,800+' },
-    { name: 'Building', icon: <Home className="w-6 h-6" />, count: '3,200+' },
-    { name: 'Carpentry', icon: <Hammer className="w-6 h-6" />, count: '1,600+' }
-  ];
+  // Removed hardcoded trade types with counts as they are not real data yet
+  // const tradeTypes = [
+  //   { name: 'Plumbing', icon: <Wrench className="w-6 h-6" />, count: '2,500+' },
+  //   { name: 'Electrical', icon: <Zap className="w-6 h-6" />, count: '1,800+' },
+  //   { name: 'Building', icon: <Home className="w-6 h-6" />, count: '3,200+' },
+  //   { name: 'Carpentry', icon: <Hammer className="w-6 h-6" />, count: '1,600+' }
+  // ];
 
-  const testimonials = [
-    {
-      name: 'Sarah Johnson',
-      location: 'London',
-      rating: 5,
-      text: 'Found an amazing electrician through HTK. Professional, punctual, and reasonably priced. Will definitely use again!'
-    },
-    {
-      name: 'Mike Thompson',
-      location: 'Manchester',
-      rating: 5,
-      text: 'As a plumber, HTK has transformed my business. Quality leads, fair pricing, and no commission fees!'
-    },
-    {
-      name: 'Emma Davis',
-      location: 'Birmingham',
-      rating: 5,
-      text: 'Kitchen renovation was seamless. The carpenter was skilled, tidy, and completed on time and budget.'
-    }
-  ];
+  // Removed hardcoded testimonials as they are not real data yet
+  // const testimonials = [
+  //   {
+  //     name: 'Sarah Johnson',
+  //     location: 'London',
+  //     rating: 5,
+  //     text: 'Found an amazing electrician through HTK. Professional, punctual, and reasonably priced. Will definitely use again!'
+  //   },
+  //   {
+  //     name: 'Mike Thompson',
+  //     location: 'Manchester',
+  //     rating: 5,
+  //     text: 'As a plumber, HTK has transformed my business. Quality leads, fair pricing, and no commission fees!'
+  //   },
+  //   {
+  //     name: 'Emma Davis',
+  //     location: 'Birmingham',
+  //     rating: 5,
+  //     text: 'Kitchen renovation was seamless. The carpenter was skilled, tidy, and completed on time and budget.'
+  //   }
+  // ];
 
   return (
     <div className="htk-bg-primary">
@@ -112,21 +115,9 @@ function EnhancedHomePage() {
             </div>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
-            {stats.map((stat, index) => (
-              <div key={index} className="htk-animate-slide-in text-center">
-                <div className="flex justify-center mb-3 text-htk-gold">
-                  {stat.icon}
-                </div>
-                <div className="text-3xl md:text-4xl font-bold htk-gold-text mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-htk-platinum/80 font-medium">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
+          {/* Stats - Replaced with 'Coming Soon' or removed */}
+          <div className="mt-16 text-center">
+            <p className="text-xl text-htk-platinum/80">Statistics and user data coming soon!</p>
           </div>
         </div>
       </section>
@@ -166,7 +157,7 @@ function EnhancedHomePage() {
         </div>
       </section>
 
-      {/* Trade Types Section */}
+      {/* Trade Types Section - Replaced with 'Coming Soon' or removed */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
@@ -179,30 +170,11 @@ function EnhancedHomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {tradeTypes.map((trade, index) => (
-              <Link key={index} to="/trades" className="group">
-                <Card className="htk-card text-center p-6 group-hover:scale-105 transition-all duration-300">
-                  <CardContent className="pt-6">
-                    <div className="flex justify-center mb-4 text-htk-gold group-hover:scale-110 transition-transform duration-300">
-                      {trade.icon}
-                    </div>
-                    <h3 className="text-lg font-semibold htk-gold-text mb-2">
-                      {trade.name}
-                    </h3>
-                    <p className="text-htk-platinum/60 text-sm">
-                      {trade.count} professionals
-                    </p>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
-          </div>
-
           <div className="text-center mt-12">
+            <p className="text-xl text-htk-platinum/80">Trade categories and directory coming soon!</p>
             <Link to="/trades">
-              <Button className="htk-button-primary text-lg px-8 py-4">
-                View All Trades
+              <Button className="htk-button-primary text-lg px-8 py-4 mt-4">
+                View All Trades (Coming Soon)
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
@@ -210,7 +182,7 @@ function EnhancedHomePage() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Testimonials Section - Replaced with 'Coming Soon' or removed */}
       <section className="py-20 bg-htk-charcoal">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
@@ -218,34 +190,8 @@ function EnhancedHomePage() {
               What Our Users Say
             </h2>
             <p className="text-xl text-htk-platinum/80 max-w-3xl mx-auto">
-              Join thousands of satisfied customers and successful tradespeople 
-              who trust HandyToKnow.
+              Be among the first to experience HandyToKnow. Testimonials coming soon!
             </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="htk-card p-6">
-                <CardContent className="pt-6">
-                  <div className="flex mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-htk-platinum/80 mb-6 italic leading-relaxed">
-                    "{testimonial.text}"
-                  </p>
-                  <div className="border-t border-htk-medium-grey pt-4">
-                    <p className="font-semibold htk-gold-text">
-                      {testimonial.name}
-                    </p>
-                    <p className="text-htk-platinum/60 text-sm">
-                      {testimonial.location}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
           </div>
         </div>
       </section>
@@ -348,3 +294,4 @@ function EnhancedHomePage() {
 }
 
 export default EnhancedHomePage;
+
