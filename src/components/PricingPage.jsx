@@ -94,9 +94,9 @@ function PricingPage() {
   ];
 
   const payAsYouGoOptions = [
-    { credits: 10, price: '£10', priceId: 'price_payg_10_credits' }, // Placeholder Price ID
-    { credits: 50, price: '£50', priceId: 'price_payg_50_credits' }, // Placeholder Price ID
-    { credits: 100, price: '£100', priceId: 'price_payg_100_credits' } // Placeholder Price ID
+    { credits: 10, price: '£10', priceId: 'price_1S7D9YGFrHVFmHVw5X1Nim7s' }, // Pay-as-you-go 10 Credits Price ID
+    { credits: 50, price: '£50', priceId: 'price_1S7D9YGFrHVFmHVw5X1Nim7s' }, // Pay-as-you-go 50 Credits Price ID
+    { credits: 100, price: '£100', priceId: 'price_1S7D9YGFrHVFmHVw5X1Nim7s' } // Pay-as-you-go 100 Credits Price ID
   ];
 
   return (
