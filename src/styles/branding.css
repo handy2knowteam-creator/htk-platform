@@ -53,6 +53,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
   padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -64,12 +65,12 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 0 1rem 0;
 }
 
-h1 { font-size: 3.5rem; }
-h2 { font-size: 2.5rem; }
-h3 { font-size: 2rem; }
-h4 { font-size: 1.5rem; }
-h5 { font-size: 1.25rem; }
-h6 { font-size: 1rem; }
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
+h5 { font-size: clamp(1.125rem, 2vw, 1.25rem); }
+h6 { font-size: clamp(1rem, 1.5vw, 1rem); }
 
 /* HTK Brand Components */
 .htk-logo {
@@ -107,6 +108,8 @@ h6 { font-size: 1rem; }
   cursor: pointer;
   transition: var(--htk-transition);
   box-shadow: var(--htk-shadow);
+  min-height: 44px; /* Touch-friendly minimum */
+  white-space: nowrap;
 }
 
 .htk-button-primary {
@@ -150,6 +153,8 @@ h6 { font-size: 1rem; }
   padding: 1.5rem;
   box-shadow: var(--htk-shadow);
   transition: var(--htk-transition);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .htk-card:hover {
@@ -174,6 +179,7 @@ h6 { font-size: 1rem; }
   font-size: 1rem;
   transition: var(--htk-transition);
   box-sizing: border-box;
+  min-height: 44px; /* Touch-friendly minimum */
 }
 
 .htk-input:focus {
@@ -200,6 +206,9 @@ h6 { font-size: 1rem; }
   background: var(--htk-black);
   border-bottom: 1px solid rgba(185, 151, 91, 0.2);
   backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
 }
 
 .htk-nav-link {
@@ -209,6 +218,10 @@ h6 { font-size: 1rem; }
   transition: var(--htk-transition);
   padding: 0.5rem 1rem;
   border-radius: var(--htk-radius-sm);
+  display: block;
+  min-height: 44px; /* Touch-friendly */
+  display: flex;
+  align-items: center;
 }
 
 .htk-nav-link:hover {
@@ -230,6 +243,9 @@ h6 { font-size: 1rem; }
   padding: 0.75rem 1rem;
   border-radius: var(--htk-radius-sm);
   transition: var(--htk-transition);
+  min-height: 44px; /* Touch-friendly */
+  display: flex;
+  align-items: center;
 }
 
 .htk-mobile-nav-link:hover {
@@ -264,6 +280,9 @@ h6 { font-size: 1rem; }
 .htk-hero {
   background: linear-gradient(135deg, var(--htk-black) 0%, var(--htk-charcoal) 100%);
   position: relative;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
 }
 
 .htk-hero::before {
@@ -361,27 +380,239 @@ h6 { font-size: 1rem; }
 .htk-rounded-sm { border-radius: var(--htk-radius-sm); }
 .htk-rounded-lg { border-radius: var(--htk-radius-lg); }
 
-/* Responsive Typography */
-@media (max-width: 768px) {
-  h1 { font-size: 2.5rem; }
-  h2 { font-size: 2rem; }
-  h3 { font-size: 1.75rem; }
-  h4 { font-size: 1.25rem; }
-  h5 { font-size: 1.125rem; }
-  h6 { font-size: 1rem; }
+/* Container and Layout Utilities */
+.htk-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
-@media (max-width: 480px) {
-  h1 { font-size: 2rem; }
-  h2 { font-size: 1.75rem; }
-  h3 { font-size: 1.5rem; }
+.htk-section {
+  padding: 4rem 0;
+}
+
+.htk-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.htk-grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.htk-grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.htk-grid-4 {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.htk-flex {
+  display: flex;
+  gap: 1rem;
+}
+
+.htk-flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.htk-flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.htk-flex-wrap {
+  flex-wrap: wrap;
+}
+
+.htk-flex-col {
+  flex-direction: column;
+}
+
+/* Mobile-First Responsive Design */
+@media (max-width: 1024px) {
+  .htk-section {
+    padding: 3rem 0;
+  }
+  
+  .htk-grid-4 {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .htk-container {
+    padding: 0 0.75rem;
+  }
+  
+  .htk-section {
+    padding: 2rem 0;
+  }
+  
+  .htk-hero {
+    min-height: 50vh;
+    text-align: center;
+  }
   
   .htk-button {
     padding: 10px 20px;
     font-size: 0.875rem;
+    width: 100%;
+    max-width: 300px;
   }
   
   .htk-card {
     padding: 1rem;
   }
+  
+  .htk-grid-2,
+  .htk-grid-3,
+  .htk-grid-4 {
+    grid-template-columns: 1fr;
+  }
+  
+  .htk-flex {
+    flex-direction: column;
+  }
+  
+  .htk-flex-between {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  
+  /* Mobile navigation improvements */
+  .htk-nav-link {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+  }
+  
+  .htk-mobile-nav-link {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .htk-container {
+    padding: 0 0.5rem;
+  }
+  
+  .htk-section {
+    padding: 1.5rem 0;
+  }
+  
+  .htk-hero {
+    min-height: 40vh;
+    padding: 2rem 0;
+  }
+  
+  .htk-button {
+    padding: 12px 16px;
+    font-size: 0.875rem;
+    min-height: 48px; /* Larger touch target on mobile */
+  }
+  
+  .htk-card {
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+  }
+  
+  .htk-input {
+    padding: 14px 16px;
+    font-size: 16px; /* Prevent zoom on iOS */
+    min-height: 48px;
+  }
+  
+  /* Improve form layouts on mobile */
+  .htk-form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .htk-form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .htk-button:hover {
+    transform: none;
+  }
+  
+  .htk-card:hover {
+    transform: none;
+  }
+  
+  .htk-nav-link:hover,
+  .htk-mobile-nav-link:hover {
+    background: rgba(185, 151, 91, 0.2);
+  }
+}
+
+/* High DPI display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .htk-logo {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .htk-animate-fade-in,
+  .htk-animate-scale-in {
+    animation: none;
+  }
+}
+
+/* Focus styles for keyboard navigation */
+.htk-button:focus,
+.htk-input:focus,
+.htk-nav-link:focus,
+.htk-mobile-nav-link:focus {
+  outline: 2px solid var(--htk-gold);
+  outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+  .htk-nav,
+  .htk-button,
+  .mobile-menu-dropdown {
+    display: none !important;
+  }
+  
+  .htk-card {
+    border: 1px solid #ccc;
+    box-shadow: none;
+  }
+  
+  .htk-gold-text,
+  .htk-platinum-text {
+    color: #000 !important;
+  }
+}
+
+/* Dark mode support (for future implementation) */
+@media (prefers-color-scheme: dark) {
+  /* HTK already uses dark theme by default */
+}
+
+/* Light mode override (if needed) */
+@media (prefers-color-scheme: light) {
+  /* Keep HTK dark theme regardless of system preference */
 }

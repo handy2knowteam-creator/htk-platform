@@ -5,9 +5,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.j
 import { Input } from '@/components/ui/input.jsx';
 import { Label } from '@/components/ui/label.jsx';
 import { Textarea } from '@/components/ui/textarea.jsx';
-import HTKNavigation from './HTKNavigation';
-import HTKFooter from './HTKFooter';
-import FormUnavailable from './FormUnavailable'; // Import the FormUnavailable component
+import { Badge } from '@/components/ui/badge.jsx';
+import { CheckCircle, Star, Shield, Zap, Crown } from 'lucide-react';
+import FormUnavailable from './FormUnavailable';
 
 function TradeSignup() {
   // Enable trade signup form to collect data in Google Sheets
@@ -23,72 +23,73 @@ function TradeSignup() {
     coverageArea: '',
     insuranceFile: null,
     selectedPlan: '',
-    tradeProfession: ''
+    tradeProfession: '',
+    businessAddress: '',
+    website: '',
+    yearsExperience: '',
+    qualifications: '',
+    insuranceProvider: '',
+    publicLiabilityAmount: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
+  // Updated subscription plans according to HTK model
   const subscriptionPlans = [
     {
       id: 'bronze',
       name: 'Bronze',
-      price: '£29',
+      price: '£9.99',
       period: '/month',
+      credits: '10 credits monthly',
+      icon: Shield,
       features: [
-        'Up to 10 leads per month',
         'Basic profile listing',
+        '10 job lead credits per month',
         'Customer messaging',
         'Mobile app access',
-        'Email support'
+        'Email support',
+        'Basic verification badge'
       ]
     },
     {
       id: 'silver',
       name: 'Silver',
-      price: '£49',
+      price: '£49.99',
       period: '/month',
+      credits: '70 credits monthly',
       popular: true,
+      icon: Star,
       features: [
-        'Up to 25 leads per month',
         'Enhanced profile with photos',
-        'Priority listing',
-        'Customer messaging',
+        '70 job lead credits per month',
+        'Priority listing in search',
+        'Advanced customer messaging',
         'Mobile app access',
         'Phone support',
-        'Basic analytics'
+        'Verification badge',
+        'Basic analytics dashboard'
       ]
     },
     {
       id: 'gold',
       name: 'Gold',
-      price: '£79',
+      price: '£99.99',
       period: '/month',
+      credits: '160 credits monthly',
+      icon: Crown,
       features: [
-        'Up to 50 leads per month',
         'Premium profile with video',
+        '160 job lead credits per month',
         'Top priority listing',
-        'Advanced customer messaging',
+        'Featured placement',
+        'Advanced messaging & quotes',
         'Mobile app access',
         'Priority phone support',
-        'Advanced analytics',
-        'Marketing tools'
-      ]
-    },
-    {
-      id: 'platinum',
-      name: 'Platinum',
-      price: '£129',
-      period: '/month',
-      features: [
-        'Unlimited leads',
-        'Premium profile with video',
-        'Featured listing',
-        'Advanced customer messaging',
-        'Mobile app access',
-        'Dedicated account manager',
+        'Premium verification badge',
         'Advanced analytics',
         'Marketing tools',
-        'API access'
+        'Group buying discounts'
       ]
     }
   ];
@@ -152,7 +153,11 @@ function TradeSignup() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(formData)
+          body: JSON.stringify({
+            ...formData,
+            registrationDate: new Date().toISOString(),
+            source: 'website_signup'
+          })
         });
 
         const tradeResult = await tradeResponse.json();
@@ -163,9 +168,9 @@ function TradeSignup() {
 
         // Create Stripe price IDs for each plan
         const stripePriceIds = {
-          'Silver': import.meta.env.VITE_STRIPE_SILVER_PRICE_ID || 'price_1QCqGJP123456789silver',
-          'Gold': import.meta.env.VITE_STRIPE_GOLD_PRICE_ID || 'price_1QCqGJP123456789gold',
-          'Platinum': import.meta.env.VITE_STRIPE_PLATINUM_PRICE_ID || 'price_1QCqGJP123456789platinum'
+          'bronze': process.env.VITE_STRIPE_BRONZE_PRICE_ID || 'price_1QCqGJP123456789bronze',
+          'silver': process.env.VITE_STRIPE_SILVER_PRICE_ID || 'price_1QCqGJP123456789silver',
+          'gold': process.env.VITE_STRIPE_GOLD_PRICE_ID || 'price_1QCqGJP123456789gold'
         };
 
         const priceId = stripePriceIds[formData.selectedPlan];
@@ -186,10 +191,11 @@ function TradeSignup() {
             cancelUrl: `${window.location.origin}/trade-signup?step=3`,
             customerEmail: formData.email,
             metadata: {
-              tradeId: tradeResult.tradeId,
+              tradeId: tradeResult.tradeId || 'new_trade',
               businessName: formData.businessName,
               contactName: formData.contactName,
-              plan: formData.selectedPlan
+              plan: formData.selectedPlan,
+              type: 'trade_subscription'
             }
           })
         });
@@ -261,7 +267,7 @@ function TradeSignup() {
             type="email"
             value={formData.email}
             onChange={handleChange}
-            placeholder="contact@yourbusiness.com"
+            placeholder="business@example.com"
             className="htk-input"
             required
           />
@@ -280,6 +286,50 @@ function TradeSignup() {
             required
           />
         </div>
+
+        <div className="md:col-span-2">
+          <Label htmlFor="businessAddress" className="htk-gold-text">Business Address</Label>
+          <Textarea
+            id="businessAddress"
+            name="businessAddress"
+            value={formData.businessAddress}
+            onChange={handleChange}
+            placeholder="Your business address"
+            className="htk-input"
+            rows={3}
+          />
+        </div>
+
+        <div>
+          <Label htmlFor="website" className="htk-gold-text">Website (Optional)</Label>
+          <Input
+            id="website"
+            name="website"
+            type="url"
+            value={formData.website}
+            onChange={handleChange}
+            placeholder="https://yourwebsite.com"
+            className="htk-input"
+          />
+        </div>
+
+        <div>
+          <Label htmlFor="yearsExperience" className="htk-gold-text">Years of Experience</Label>
+          <select
+            id="yearsExperience"
+            name="yearsExperience"
+            value={formData.yearsExperience}
+            onChange={handleSelectChange}
+            className="htk-input w-full"
+          >
+            <option value="">Select experience</option>
+            <option value="0-2">0-2 years</option>
+            <option value="3-5">3-5 years</option>
+            <option value="6-10">6-10 years</option>
+            <option value="11-20">11-20 years</option>
+            <option value="20+">20+ years</option>
+          </select>
+        </div>
       </div>
     </div>
   );
@@ -291,115 +341,197 @@ function TradeSignup() {
         <p className="text-htk-platinum/80">What services do you offer and where?</p>
       </div>
 
-      <div>
-        <Label htmlFor="servicesOffered" className="htk-gold-text">Services Offered *</Label>
-        <Textarea
-          id="servicesOffered"
-          name="servicesOffered"
-          value={formData.servicesOffered}
-          onChange={handleChange}
-          placeholder="e.g., Plumbing, Heating, Bathroom Installation, Emergency Repairs..."
-          className="htk-input min-h-[120px]"
-          rows={5}
-          required
-        />
-      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <Label htmlFor="tradeProfession" className="htk-gold-text">Primary Trade *</Label>
+          <select
+            id="tradeProfession"
+            name="tradeProfession"
+            value={formData.tradeProfession}
+            onChange={handleSelectChange}
+            className="htk-input w-full"
+            required
+          >
+            <option value="">Select your trade</option>
+            <option value="Plumber">Plumber</option>
+            <option value="Electrician">Electrician</option>
+            <option value="Carpenter">Carpenter</option>
+            <option value="Builder">Builder</option>
+            <option value="Painter & Decorator">Painter & Decorator</option>
+            <option value="Roofer">Roofer</option>
+            <option value="Heating Engineer">Heating Engineer</option>
+            <option value="Landscaper">Landscaper</option>
+            <option value="Tiler">Tiler</option>
+            <option value="Plasterer">Plasterer</option>
+            <option value="Kitchen Fitter">Kitchen Fitter</option>
+            <option value="Bathroom Fitter">Bathroom Fitter</option>
+            <option value="Flooring Specialist">Flooring Specialist</option>
+            <option value="Window Fitter">Window Fitter</option>
+            <option value="Handyman">Handyman</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
 
-      <div>
-        <Label htmlFor="coverageArea" className="htk-gold-text">Coverage Area *</Label>
-        <Input
-          id="coverageArea"
-          name="coverageArea"
-          type="text"
-          value={formData.coverageArea}
-          onChange={handleChange}
-          placeholder="e.g., London, Greater Manchester, South East England"
-          className="htk-input"
-          required
-        />
-      </div>
+        <div>
+          <Label htmlFor="coverageArea" className="htk-gold-text">Coverage Area *</Label>
+          <Input
+            id="coverageArea"
+            name="coverageArea"
+            type="text"
+            value={formData.coverageArea}
+            onChange={handleChange}
+            placeholder="e.g., London, Birmingham, 20 mile radius"
+            className="htk-input"
+            required
+          />
+        </div>
 
-      <div>
-        <Label htmlFor="tradeProfession" className="htk-gold-text">Trade Profession *</Label>
-        <select
-          id="tradeProfession"
-          name="tradeProfession"
-          value={formData.tradeProfession}
-          onChange={handleSelectChange}
-          className="htk-input w-full"
-          required
-        >
-          <option value="">Select your trade</option>
-          <option value="Plumber">Plumber</option>
-          <option value="Electrician">Electrician</option>
-          <option value="Carpenter">Carpenter</option>
-          <option value="Builder">Builder</option>
-          <option value="Painter">Painter</option>
-          <option value="Decorator">Decorator</option>
-          <option value="Roofer">Roofer</option>
-          <option value="Landscaper">Landscaper</option>
-          <option value="Gardener">Gardener</option>
-          <option value="Handyman">Handyman</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
+        <div className="md:col-span-2">
+          <Label htmlFor="servicesOffered" className="htk-gold-text">Services Offered *</Label>
+          <Textarea
+            id="servicesOffered"
+            name="servicesOffered"
+            value={formData.servicesOffered}
+            onChange={handleChange}
+            placeholder="Describe the services you offer in detail..."
+            className="htk-input"
+            rows={4}
+            required
+          />
+        </div>
 
-      <div>
-        <Label htmlFor="insuranceFile" className="htk-gold-text">Public Liability Insurance (Optional)</Label>
-        <Input
-          id="insuranceFile"
-          name="insuranceFile"
-          type="file"
-          onChange={handleChange}
-          className="htk-input file:htk-button-primary file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold"
-        />
-        <p className="text-xs text-htk-platinum/60 mt-1">Upload your public liability insurance document (PDF, JPG, PNG)</p>
+        <div>
+          <Label htmlFor="qualifications" className="htk-gold-text">Qualifications & Certifications</Label>
+          <Textarea
+            id="qualifications"
+            name="qualifications"
+            value={formData.qualifications}
+            onChange={handleChange}
+            placeholder="List your qualifications, certifications, and memberships"
+            className="htk-input"
+            rows={3}
+          />
+        </div>
+
+        <div>
+          <Label htmlFor="insuranceProvider" className="htk-gold-text">Insurance Provider</Label>
+          <Input
+            id="insuranceProvider"
+            name="insuranceProvider"
+            type="text"
+            value={formData.insuranceProvider}
+            onChange={handleChange}
+            placeholder="Your insurance company"
+            className="htk-input"
+          />
+        </div>
+
+        <div>
+          <Label htmlFor="publicLiabilityAmount" className="htk-gold-text">Public Liability Cover</Label>
+          <select
+            id="publicLiabilityAmount"
+            name="publicLiabilityAmount"
+            value={formData.publicLiabilityAmount}
+            onChange={handleSelectChange}
+            className="htk-input w-full"
+          >
+            <option value="">Select coverage amount</option>
+            <option value="£1,000,000">£1,000,000</option>
+            <option value="£2,000,000">£2,000,000</option>
+            <option value="£5,000,000">£5,000,000</option>
+            <option value="£10,000,000">£10,000,000</option>
+          </select>
+        </div>
+
+        <div className="md:col-span-2">
+          <Label htmlFor="insuranceFile" className="htk-gold-text">Insurance Certificate (Optional)</Label>
+          <Input
+            id="insuranceFile"
+            name="insuranceFile"
+            type="file"
+            onChange={handleChange}
+            accept=".pdf,.jpg,.jpeg,.png"
+            className="htk-input"
+          />
+          <p className="text-htk-platinum/60 text-sm mt-1">Upload your public liability insurance certificate</p>
+        </div>
       </div>
     </div>
   );
 
   const renderStep3 = () => (
-    <div className="space-y-6">
-      <div className="text-center mb-6">
+    <div className="space-y-8">
+      <div className="text-center mb-8">
         <h2 className="text-2xl font-bold htk-gold-text mb-2">Choose Your Plan</h2>
-        <p className="text-htk-platinum/80">Select the subscription plan that best suits your business needs</p>
+        <p className="text-htk-platinum/80">Select the subscription that works best for your business</p>
+        <p className="text-htk-gold text-sm mt-2">Credits never expire • 1 credit = £1 • Small jobs from £3, large jobs up to £100</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {subscriptionPlans.map((plan) => (
-          <Card
-            key={plan.id}
-            className={`htk-card p-6 flex flex-col justify-between ${formData.selectedPlan === plan.id ? 'border-htk-gold border-2' : ''}`}
-          >
-            <div>
-              <CardTitle className="text-xl font-bold htk-gold-text mb-2 flex items-center justify-between">
-                {plan.name}
-                {plan.popular && <Badge className="bg-htk-gold text-htk-primary">Popular</Badge>}
-              </CardTitle>
-              <CardDescription className="text-htk-platinum/80 text-3xl font-bold mb-4">
-                {plan.price}<span className="text-base font-normal">{plan.period}</span>
-              </CardDescription>
-              <ul className="space-y-2 text-htk-platinum/90 text-sm">
-                {plan.features.map((feature, index) => (
-                  <li key={index} className="flex items-center">
-                    <svg className="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <Button
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {subscriptionPlans.map((plan) => {
+          const IconComponent = plan.icon;
+          return (
+            <Card 
+              key={plan.id}
+              className={`htk-card cursor-pointer transition-all duration-300 hover:scale-105 ${
+                formData.selectedPlan === plan.id 
+                  ? 'ring-2 ring-htk-gold bg-gray-800' 
+                  : 'hover:bg-gray-800'
+              } ${plan.popular ? 'relative' : ''}`}
               onClick={() => handlePlanSelect(plan.id)}
-              className={`mt-6 w-full ${formData.selectedPlan === plan.id ? 'htk-button-primary' : 'htk-button-secondary'}`}
             >
-              {formData.selectedPlan === plan.id ? 'Selected' : 'Select Plan'}
-            </Button>
-          </Card>
-        ))}
+              {plan.popular && (
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                  <Badge className="bg-htk-gold text-black font-bold px-3 py-1">
+                    Most Popular
+                  </Badge>
+                </div>
+              )}
+              
+              <CardHeader className="text-center pb-4">
+                <div className="flex justify-center mb-3">
+                  <IconComponent className="w-8 h-8 text-htk-gold" />
+                </div>
+                <CardTitle className="htk-gold-text text-xl">{plan.name}</CardTitle>
+                <div className="mt-2">
+                  <span className="text-3xl font-bold text-htk-platinum">{plan.price}</span>
+                  <span className="text-htk-platinum/60">{plan.period}</span>
+                </div>
+                <p className="text-htk-gold text-sm font-medium">{plan.credits}</p>
+              </CardHeader>
+              
+              <CardContent>
+                <ul className="space-y-3">
+                  {plan.features.map((feature, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                      <span className="text-htk-platinum text-sm">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                
+                <Button 
+                  type="button"
+                  onClick={() => handlePlanSelect(plan.id)}
+                  className={`w-full mt-6 ${
+                    formData.selectedPlan === plan.id 
+                      ? 'htk-button-primary' 
+                      : 'htk-button-secondary'
+                  }`}
+                >
+                  {formData.selectedPlan === plan.id ? 'Selected' : 'Select Plan'}
+                </Button>
+              </CardContent>
+            </Card>
+          );
+        })}
       </div>
 
-      <div className="text-center text-sm text-htk-platinum/60 mt-4">
-        <p>By selecting a plan, you agree to our Terms of Service and Privacy Policy</p>
+      <div className="text-center text-sm text-htk-platinum/60 space-y-2">
+        <p>• All plans include mobile app access and customer messaging</p>
+        <p>• Credits can be topped up anytime at £1 per credit</p>
+        <p>• Cancel or change your plan anytime</p>
+        <p>By selecting a plan, you agree to our <a href="/terms" className="htk-gold-text hover:underline">Terms of Service</a> and <a href="/privacy" className="htk-gold-text hover:underline">Privacy Policy</a></p>
       </div>
     </div>
   );
@@ -407,36 +539,47 @@ function TradeSignup() {
   if (!isBackendAvailable) {
     return (
       <div className="htk-bg-primary min-h-screen">
-        <HTKNavigation />
         <FormUnavailable formName="Trade Signup" />
-        <HTKFooter />
       </div>
     );
   }
 
   return (
     <div className="htk-bg-primary min-h-screen">
-      <HTKNavigation />
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold htk-gold-text mb-2">Join HTK as a Professional Trade</h1>
-            <p className="text-htk-platinum/80">Register your business and connect with customers seeking your expertise</p>
+            <h1 className="text-4xl font-bold htk-gold-text mb-4">Join HTK as a Professional Trade</h1>
+            <p className="text-htk-platinum/80 text-lg">Register your business and connect with customers seeking your expertise</p>
+          </div>
+
+          {/* Progress Indicator */}
+          <div className="flex justify-center mb-8">
+            <div className="flex items-center space-x-4">
+              {[1, 2, 3].map((stepNum) => (
+                <div key={stepNum} className="flex items-center">
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold ${
+                    currentStep >= stepNum ? 'bg-htk-gold text-black' : 'bg-gray-600 text-gray-300'
+                  }`}>
+                    {currentStep > stepNum ? <CheckCircle className="w-5 h-5" /> : stepNum}
+                  </div>
+                  {stepNum < 3 && (
+                    <div className={`w-16 h-1 mx-2 ${
+                      currentStep > stepNum ? 'bg-htk-gold' : 'bg-gray-600'
+                    }`} />
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
 
           <Card className="htk-card">
             <CardHeader>
-              <div className="flex justify-center space-x-8 mb-4">
-                <div className={`text-center ${currentStep === 1 ? 'htk-gold-text font-bold' : 'text-htk-platinum/60'}`}>
-                  1. Business Info
-                </div>
-                <div className={`text-center ${currentStep === 2 ? 'htk-gold-text font-bold' : 'text-htk-platinum/60'}`}>
-                  2. Services
-                </div>
-                <div className={`text-center ${currentStep === 3 ? 'htk-gold-text font-bold' : 'text-htk-platinum/60'}`}>
-                  3. Choose Plan
-                </div>
-              </div>
+              <CardTitle className="htk-gold-text text-center">
+                {currentStep === 1 && "Business Information"}
+                {currentStep === 2 && "Services & Coverage"}
+                {currentStep === 3 && "Choose Your Plan"}
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -446,18 +589,30 @@ function TradeSignup() {
 
                 <div className="flex justify-between mt-8">
                   {currentStep > 1 && (
-                    <Button type="button" onClick={() => setCurrentStep(currentStep - 1)} className="htk-button-secondary">
+                    <Button 
+                      type="button" 
+                      onClick={() => setCurrentStep(currentStep - 1)} 
+                      variant="outline"
+                      className="px-8"
+                    >
                       Previous
                     </Button>
                   )}
                   {currentStep < 3 && (
-                    <Button type="submit" className="htk-button-primary ml-auto">
-                      Next
+                    <Button 
+                      type="submit" 
+                      className="htk-button-primary ml-auto px-8"
+                    >
+                      Next Step
                     </Button>
                   )}
                   {currentStep === 3 && (
-                    <Button type="submit" disabled={isSubmitting} className="htk-button-primary ml-auto">
-                      {isSubmitting ? 'Registering...' : 'Register & Pay'}
+                    <Button 
+                      type="submit" 
+                      disabled={isSubmitting || !formData.selectedPlan} 
+                      className="htk-button-primary ml-auto px-12"
+                    >
+                      {isSubmitting ? 'Processing...' : 'Register & Subscribe'}
                     </Button>
                   )}
                 </div>
@@ -466,10 +621,8 @@ function TradeSignup() {
           </Card>
         </div>
       </div>
-      <HTKFooter />
     </div>
   );
 }
 
 export default TradeSignup;
-

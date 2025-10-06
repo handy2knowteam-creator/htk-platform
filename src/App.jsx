@@ -8,8 +8,10 @@ import TradeSignup from './components/TradeSignup';
 import PricingPage from './components/PricingPage';
 import TradesPage from './components/TradesPage';
 import PostJobPage from './components/PostJobPage';
-import LoginPage from './components/LoginPage';
+import CustomerAuth from './components/CustomerAuth';
 import AdminDashboard from './components/AdminDashboard';
+import SuccessPage from './components/SuccessPage';
+import JobSearchPage from './components/JobSearchPage';
 import ComingSoon from './components/ComingSoon';
 import NotFoundPage from './components/NotFoundPage';
 import TermsOfService from './components/TermsOfService';
@@ -30,8 +32,10 @@ function App() {
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/trades" element={<TradesPage />} />
             <Route path="/post" element={<PostJobPage />} />
-            <Route path="/login" element={<LoginPage />} />
+            <Route path="/login" element={<CustomerAuth />} />
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/success" element={<SuccessPage />} />
+            <Route path="/jobs" element={<JobSearchPage />} />
             <Route path="/how-it-works" element={<ComingSoon title="How It Works" />} />
             <Route path="/community" element={<ComingSoon title="Community" />} />
             <Route path="/dashboard/customer" element={<ComingSoon title="Customer Dashboard" />} />
