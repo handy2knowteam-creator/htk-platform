@@ -17,13 +17,13 @@ function HTKNavigation() {
   };
 
   return (
-    <nav className="htk-nav sticky top-0 z-50">
+    <nav className="htk-nav sticky top-0 z-50 w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="flex items-center space-x-3">
               <img 
-                src="/branding/HTK-logo.png" // Changed to SVG for better quality
+                src="/branding/HTK-logo.png" 
                 alt="HandyToKnow - Connecting Local Trades" 
                 className="htk-logo h-12 w-auto"
               />
