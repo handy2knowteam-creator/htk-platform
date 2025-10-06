@@ -9,7 +9,7 @@ function HTKFooter() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h3 className="text-xl font-bold htk-gold-text mb-4">HTK - Handy To Know</h3>
-            <p className="text-sm">The premium community-first platform connecting skilled professionals with customers. Zero commission fees. Fair pricing. Community profit sharing.</p>
+            <p className="text-sm">The premium community-first platform connecting skilled professionals with customers. Fair pricing. Quality connections. Community profit sharing.</p>
           </div>
           <div>
             <h3 className="text-xl font-bold htk-gold-text mb-4">Quick Links</h3>

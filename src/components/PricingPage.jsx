@@ -102,7 +102,7 @@ function PricingPage() {
       <div className="container mx-auto px-4 py-16">
         <div className="text-center mb-16">
           <h1 className="text-5xl font-bold htk-gold-text mb-4">Pricing & Credits</h1>
-          <p className="text-xl text-htk-platinum/80 mb-8">Fair pricing. No commission fees. Credits never expire.</p>
+          <p className="text-xl text-htk-platinum/80 mb-8">Fair pricing. Transparent costs. Credits never expire.</p>
           <div className="inline-flex items-center bg-htk-charcoal rounded-lg p-1">
             <Badge className="htk-badge-gold mr-2">1 Credit = £1</Badge>
             <Badge className="bg-green-600 text-white">No Expiry</Badge>
@@ -209,7 +209,7 @@ function PricingPage() {
             <div className="text-center">
               <div className="bg-htk-gold text-htk-black rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4 font-bold">4</div>
               <h3 className="text-lg font-semibold htk-gold-text mb-2">Win Jobs</h3>
-              <p className="text-htk-platinum/80">No commission fees - keep 100% of your earnings</p>
+              <p className="text-htk-platinum/80">Keep 100% of your earnings from completed jobs</p>
             </div>
           </div>
         </div>
@@ -228,10 +228,10 @@ function PricingPage() {
             </Card>
             <Card className="htk-card">
               <CardHeader>
-                <CardTitle className="htk-gold-text">Are there commission fees?</CardTitle>
+                <CardTitle className="htk-gold-text">Are there any additional fees?</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-htk-platinum">Absolutely not. You keep 100% of what you earn. We only charge for the initial lead.</p>
+                <p className="text-htk-platinum">No. You keep 100% of what you earn. We only charge for the initial lead access.</p>
               </CardContent>
             </Card>
             <Card className="htk-card">

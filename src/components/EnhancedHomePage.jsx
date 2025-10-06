@@ -98,7 +98,7 @@ function EnhancedHomePage() {
             </h1>
             <p className="text-xl md:text-2xl text-htk-platinum/80 mb-8 max-w-3xl mx-auto leading-relaxed">
               Connect with verified, top-rated tradespeople in your area. 
-              No commission fees, no hidden costs, just quality work guaranteed.
+              Transparent pricing, no hidden costs, just quality work guaranteed.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
               <Link to="/customer-signup">
@@ -205,7 +205,7 @@ function EnhancedHomePage() {
                   </div>
                 </div>
                 <p className="text-htk-platinum/90 mb-4 italic">
-                  "Finally, a platform that puts tradespeople first. No commission fees means I can offer better prices to my customers while still making a fair profit."
+                  "Finally, a platform that puts tradespeople first. Fair pricing means I can offer better prices to my customers while still making a fair profit."
                 </p>
                 <div className="flex items-center">
                   <div className="w-10 h-10 bg-htk-gold rounded-full flex items-center justify-center mr-3">
@@ -322,7 +322,7 @@ function EnhancedHomePage() {
                   <ul className="text-left space-y-3 mb-6">
                     <li className="flex items-center">
                       <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
-                      <span className="text-htk-platinum">No commission fees</span>
+                      <span className="text-htk-platinum">Fair subscription pricing</span>
                     </li>
                     <li className="flex items-center">
                       <CheckCircle className="w-5 h-5 text-green-500 mr-3" />

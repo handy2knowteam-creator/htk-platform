@@ -131,7 +131,7 @@ body {
 
 /* Logo styles */
 .htk-logo {
-  height: 3rem;
+  max-height: 32px; /* Adjusted for optimal fit within nav bar */
   width: auto;
 }
 
@@ -170,7 +170,7 @@ body {
 /* Responsive design */
 @media (max-width: 768px) {
   .htk-logo {
-    height: 2.5rem;
+  
   }
   
   .htk-button-primary,
@@ -183,3 +183,4 @@ body {
     padding: 1rem;
   }
 }
+

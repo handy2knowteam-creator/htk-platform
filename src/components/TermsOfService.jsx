@@ -37,7 +37,7 @@ function TermsOfService() {
                 <section className="mb-8">
                   <h2 className="text-2xl font-bold htk-gold-text mb-4">2. Platform Description</h2>
                   <p className="text-htk-platinum/90 mb-4">
-                    HTK is a premium platform connecting skilled tradespeople with customers seeking quality services. We operate on a credit-based system with no commission fees for completed work.
+                    HTK is a premium platform connecting skilled tradespeople with customers seeking quality services. We operate on a credit-based system for lead access.
                   </p>
                 </section>
 
@@ -72,9 +72,9 @@ function TermsOfService() {
                 </section>
 
                 <section className="mb-8">
-                  <h2 className="text-2xl font-bold htk-gold-text mb-4">5. No Commission Policy</h2>
+                  <h2 className="text-2xl font-bold htk-gold-text mb-4">5. Payment Policy</h2>
                   <p className="text-htk-platinum/90 mb-4">
-                    HTK does not charge commission fees on completed work. Tradespeople keep 100% of their earnings from jobs secured through our platform.
+                    HTK operates on a credit-based system for lead access. Tradespeople keep 100% of their earnings from jobs secured through our platform.
                   </p>
                 </section>
 
