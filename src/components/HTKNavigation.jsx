@@ -23,7 +23,7 @@ function HTKNavigation() {
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="flex items-center space-x-3">
               <img 
-                src="/branding/HTK-logo.png" 
+                src="/branding/HTK-official-logo.png" 
                 alt="HandyToKnow - Connecting Local Trades" 
                 className="htk-logo h-12 w-auto"
               />
@@ -83,13 +83,13 @@ function HTKNavigation() {
       {isCustomerMenuOpen && (
         <div className="md:hidden mobile-menu-dropdown" id="customer-mobile-menu">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link to="/how-it-works" className="htk-mobile-nav-link">How It Works (Customer)</Link>
-            <Link to="/customer-signup" className="htk-mobile-nav-link">Find Premium Tradespeople</Link>
-            <Link to="/pricing" className="htk-mobile-nav-link">Pricing/Credits</Link>
-            <Link to="/trades" className="htk-mobile-nav-link">Trade Directory</Link>
-            <Link to="/post" className="htk-mobile-nav-link">Post a Job</Link>
-            <Link to="/dashboard/customer" className="htk-mobile-nav-link">Customer Dashboard</Link>
-            <Link to="/contact" className="htk-mobile-nav-link">Contact</Link>
+            <Link to="/how-it-works" className="htk-mobile-nav-link" onClick={toggleCustomerMenu}>How It Works (Customer)</Link>
+            <Link to="/customer-signup" className="htk-mobile-nav-link" onClick={toggleCustomerMenu}>Find Premium Tradespeople</Link>
+            <Link to="/pricing" className="htk-mobile-nav-link" onClick={toggleCustomerMenu}>Pricing/Credits</Link>
+            <Link to="/trades" className="htk-mobile-nav-link" onClick={toggleCustomerMenu}>Trade Directory</Link>
+            <Link to="/post" className="htk-mobile-nav-link" onClick={toggleCustomerMenu}>Post a Job</Link>
+            <Link to="/dashboard/customer" className="htk-mobile-nav-link" onClick={toggleCustomerMenu}>Customer Dashboard</Link>
+            <Link to="/contact" className="htk-mobile-nav-link" onClick={toggleCustomerMenu}>Contact</Link>
           </div>
         </div>
       )}
@@ -98,13 +98,13 @@ function HTKNavigation() {
       {isTradeMenuOpen && (
         <div className="md:hidden mobile-menu-dropdown" id="trade-mobile-menu">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link to="/how-it-works" className="htk-mobile-nav-link">How It Works (Trade)</Link>
-            <Link to="/trade-signup" className="htk-mobile-nav-link">Join as Professional Trade</Link>
-            <Link to="/pricing" className="htk-mobile-nav-link">Pricing/Credits</Link>
-            <Link to="/dashboard/trade" className="htk-mobile-nav-link">Trade Dashboard</Link>
-            <Link to="/community" className="htk-mobile-nav-link">Community</Link>
-            <Link to="/admin" className="htk-mobile-nav-link">Admin</Link>
-            <Link to="/contact" className="htk-mobile-nav-link">Contact</Link>
+            <Link to="/how-it-works" className="htk-mobile-nav-link" onClick={toggleTradeMenu}>How It Works (Trade)</Link>
+            <Link to="/trade-signup" className="htk-mobile-nav-link" onClick={toggleTradeMenu}>Join as Professional Trade</Link>
+            <Link to="/pricing" className="htk-mobile-nav-link" onClick={toggleTradeMenu}>Pricing/Credits</Link>
+            <Link to="/dashboard/trade" className="htk-mobile-nav-link" onClick={toggleTradeMenu}>Trade Dashboard</Link>
+            <Link to="/community" className="htk-mobile-nav-link" onClick={toggleTradeMenu}>Community</Link>
+            <Link to="/admin" className="htk-mobile-nav-link" onClick={toggleTradeMenu}>Admin</Link>
+            <Link to="/contact" className="htk-mobile-nav-link" onClick={toggleTradeMenu}>Contact</Link>
           </div>
         </div>
       )}

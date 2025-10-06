@@ -7,8 +7,12 @@ import { Label } from '@/components/ui/label.jsx';
 import { Textarea } from '@/components/ui/textarea.jsx';
 import HTKNavigation from './HTKNavigation';
 import HTKFooter from './HTKFooter';
+import FormUnavailable from './FormUnavailable'; // Import the FormUnavailable component
 
 function PostJobPage() {
+  // Enable job posting form to collect jobs in Google Sheets
+  const isBackendAvailable = true; 
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -62,6 +66,16 @@ function PostJobPage() {
       setIsSubmitting(false);
     }
   };
+
+  if (!isBackendAvailable) {
+    return (
+      <div className="htk-bg-primary min-h-screen">
+        <HTKNavigation />
+        <FormUnavailable formName="Job Posting" />
+        <HTKFooter />
+      </div>
+    );
+  }
 
   return (
     <div className="htk-bg-primary min-h-screen">
@@ -194,3 +208,4 @@ function PostJobPage() {
 }
 
 export default PostJobPage;
+

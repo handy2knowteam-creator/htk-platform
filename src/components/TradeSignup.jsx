@@ -1,5 +1,4 @@
-
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button.jsx';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.jsx';
@@ -8,8 +7,12 @@ import { Label } from '@/components/ui/label.jsx';
 import { Textarea } from '@/components/ui/textarea.jsx';
 import HTKNavigation from './HTKNavigation';
 import HTKFooter from './HTKFooter';
+import FormUnavailable from './FormUnavailable'; // Import the FormUnavailable component
 
 function TradeSignup() {
+  // Enable trade signup form to collect data in Google Sheets
+  const isBackendAvailable = true; 
+
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     businessName: '',
@@ -400,6 +403,16 @@ function TradeSignup() {
       </div>
     </div>
   );
+
+  if (!isBackendAvailable) {
+    return (
+      <div className="htk-bg-primary min-h-screen">
+        <HTKNavigation />
+        <FormUnavailable formName="Trade Signup" />
+        <HTKFooter />
+      </div>
+    );
+  }
 
   return (
     <div className="htk-bg-primary min-h-screen">

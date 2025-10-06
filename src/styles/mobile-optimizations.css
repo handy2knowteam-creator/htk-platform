@@ -1,0 +1,154 @@
+/* HTK Mobile Optimizations */
+
+/* Mobile-first responsive design */
+@media (max-width: 640px) {
+  /* Navigation improvements */
+  .htk-nav {
+    padding: 0.5rem 1rem;
+  }
+  
+  .htk-logo {
+    height: 2.5rem;
+  }
+  
+  /* Hero section mobile optimization */
+  .htk-hero {
+    padding: 3rem 0;
+  }
+  
+  .htk-hero h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  
+  .htk-hero p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* Button improvements for mobile */
+  .htk-button {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+  }
+  
+  /* Card layout improvements */
+  .htk-card {
+    margin-bottom: 1rem;
+    padding: 1rem;
+  }
+  
+  /* Form improvements */
+  .htk-input,
+  .htk-input[type="text"],
+  .htk-input[type="email"],
+  .htk-input[type="tel"],
+  textarea.htk-input {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 0.875rem;
+  }
+  
+  /* Container spacing */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Grid improvements */
+  .grid {
+    gap: 1rem;
+  }
+  
+  /* Typography adjustments */
+  h2 {
+    font-size: 1.875rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+  }
+  
+  /* Mobile menu improvements */
+  .mobile-menu-dropdown {
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  
+  .htk-mobile-nav-link {
+    padding: 1rem;
+    font-size: 1.125rem;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .htk-hero h1 {
+    font-size: 3rem;
+  }
+  
+  .grid-cols-1.md\\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  
+  .htk-button {
+    width: auto;
+  }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+  .htk-button,
+  .htk-nav-link,
+  .htk-mobile-nav-link {
+    min-height: 44px; /* Apple's recommended touch target size */
+  }
+  
+  /* Remove hover effects on touch devices */
+  .htk-button:hover,
+  .htk-card:hover {
+    transform: none;
+  }
+}
+
+/* Landscape phone optimization */
+@media (max-width: 896px) and (orientation: landscape) {
+  .htk-hero {
+    padding: 2rem 0;
+  }
+  
+  .htk-hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .htk-logo {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .htk-animate-fade-in,
+  .htk-animate-scale-in {
+    animation: none;
+  }
+  
+  .htk-button,
+  .htk-card {
+    transition: none;
+  }
+}
+
+/* Dark mode support (system preference) */
+@media (prefers-color-scheme: dark) {
+  /* HTK already uses dark theme, but ensure consistency */
+  body {
+    background: var(--htk-black);
+    color: var(--htk-platinum);
+  }
+}

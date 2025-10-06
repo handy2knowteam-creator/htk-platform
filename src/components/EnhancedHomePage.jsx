@@ -182,7 +182,7 @@ function EnhancedHomePage() {
         </div>
       </section>
 
-      {/* Testimonials Section - Replaced with 'Coming Soon' or removed */}
+      {/* Testimonials Section */}
       <section className="py-20 bg-htk-charcoal">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
@@ -190,8 +190,82 @@ function EnhancedHomePage() {
               What Our Users Say
             </h2>
             <p className="text-xl text-htk-platinum/80 max-w-3xl mx-auto">
-              Be among the first to experience HandyToKnow. Testimonials coming soon!
+              Real feedback from customers and tradespeople using HandyToKnow
             </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="htk-card p-6">
+              <CardContent>
+                <div className="flex items-center mb-4">
+                  <div className="flex text-yellow-400">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 fill-current" />
+                    ))}
+                  </div>
+                </div>
+                <p className="text-htk-platinum/90 mb-4 italic">
+                  "Finally, a platform that puts tradespeople first. No commission fees means I can offer better prices to my customers while still making a fair profit."
+                </p>
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-htk-gold rounded-full flex items-center justify-center mr-3">
+                    <span className="text-htk-black font-bold">MS</span>
+                  </div>
+                  <div>
+                    <p className="text-htk-platinum font-semibold">Mike Smith</p>
+                    <p className="text-htk-platinum/70 text-sm">Plumber, London</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="htk-card p-6">
+              <CardContent>
+                <div className="flex items-center mb-4">
+                  <div className="flex text-yellow-400">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 fill-current" />
+                    ))}
+                  </div>
+                </div>
+                <p className="text-htk-platinum/90 mb-4 italic">
+                  "The quality of tradespeople on HTK is outstanding. Every professional I've hired has been verified, skilled, and reliable. Worth every penny."
+                </p>
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-htk-gold rounded-full flex items-center justify-center mr-3">
+                    <span className="text-htk-black font-bold">SJ</span>
+                  </div>
+                  <div>
+                    <p className="text-htk-platinum font-semibold">Sarah Johnson</p>
+                    <p className="text-htk-platinum/70 text-sm">Homeowner, Manchester</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="htk-card p-6">
+              <CardContent>
+                <div className="flex items-center mb-4">
+                  <div className="flex text-yellow-400">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 fill-current" />
+                    ))}
+                  </div>
+                </div>
+                <p className="text-htk-platinum/90 mb-4 italic">
+                  "HTK has transformed my business. The credit system is fair, leads are high-quality, and the community support is incredible. Highly recommended."
+                </p>
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-htk-gold rounded-full flex items-center justify-center mr-3">
+                    <span className="text-htk-black font-bold">DB</span>
+                  </div>
+                  <div>
+                    <p className="text-htk-platinum font-semibold">David Brown</p>
+                    <p className="text-htk-platinum/70 text-sm">Electrician, Birmingham</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>

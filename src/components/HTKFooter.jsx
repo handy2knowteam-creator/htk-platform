@@ -24,7 +24,7 @@ function HTKFooter() {
           <div>
             <h3 className="text-xl font-bold htk-gold-text mb-4">Contact Us</h3>
             <p className="text-sm">Email: <a href="mailto:handy2knowteam@gmail.com" className="text-htk-platinum hover:text-htk-gold">handy2knowteam@gmail.com</a></p>
-            <p className="text-sm mt-2">© 2024 HTK Platform. Live on handy2know.com</p>
+            <p className="text-sm mt-2">© 2025 HTK Platform. Live on handy2know.com</p>
           </div>
         </div>
         <div className="border-t border-htk-platinum/20 mt-8 pt-8 text-center text-sm text-htk-platinum/60">

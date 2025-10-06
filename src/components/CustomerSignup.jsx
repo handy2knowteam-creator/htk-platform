@@ -1,15 +1,18 @@
-
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button.jsx';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.jsx';
 import { Input } from '@/components/ui/input.jsx';
 import { Label } from '@/components/ui/label.jsx';
 import { Textarea } from '@/components/ui/textarea.jsx';
-import HTKNavigation from './HTKNavigation'; // Assuming you have a Navigation component
-import HTKFooter from './HTKFooter'; // Assuming you have a Footer component
+import HTKNavigation from './HTKNavigation';
+import HTKFooter from './HTKFooter';
+import FormUnavailable from './FormUnavailable'; // Import the FormUnavailable component
 
 function CustomerSignup() {
+  // Enable customer signup form to collect data in Google Sheets
+  const isBackendAvailable = true; 
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -51,7 +54,6 @@ function CustomerSignup() {
       const result = await response.json();
 
       if (response.ok && result.success) {
-        // Show success message and redirect
         alert(`Thank you ${formData.name}! Your job request has been submitted. We'll be in touch within 24 hours.`);
         navigate("/success?type=customer");
       } else {
@@ -65,6 +67,16 @@ function CustomerSignup() {
       setIsSubmitting(false);
     }
   };
+
+  if (!isBackendAvailable) {
+    return (
+      <div className="htk-bg-primary min-h-screen">
+        <HTKNavigation />
+        <FormUnavailable formName="Customer Signup" />
+        <HTKFooter />
+      </div>
+    );
+  }
 
   return (
     <div className="htk-bg-primary min-h-screen">

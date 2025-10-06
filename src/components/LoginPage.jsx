@@ -1,8 +1,22 @@
 import React from 'react';
 import HTKNavigation from './HTKNavigation';
 import HTKFooter from './HTKFooter';
+import FormUnavailable from './FormUnavailable.jsx'; // Import the FormUnavailable component
 
 function LoginPage() {
+  // Set to false for now as per requirement: forms show 'temporarily unavailable' when no backend exists
+  const isBackendAvailable = false; 
+
+  if (!isBackendAvailable) {
+    return (
+      <div className="htk-bg-primary min-h-screen">
+        <HTKNavigation />
+        <FormUnavailable formName="Login" />
+        <HTKFooter />
+      </div>
+    );
+  }
+
   return (
     <div className="htk-bg-primary min-h-screen">
       <HTKNavigation />
@@ -16,3 +30,4 @@ function LoginPage() {
 }
 
 export default LoginPage;
+
