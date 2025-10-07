@@ -541,6 +541,8 @@ function TradeSignup() {
                 </div>
               ))}
             </div>
+          </div>
+
           <div className="max-w-4xl mx-auto">
           {!showPaymentForm ? (
             <Card className="htk-card">
@@ -618,7 +620,6 @@ function TradeSignup() {
               </div>
             </div>
           )}
-        </div>
           </div>
         </div>
       </div>

@@ -7,8 +7,17 @@ import {
   useElements
 } from '@stripe/react-stripe-js';
 
-// Load Stripe
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || 'pk_test_51QCqGJP123456789_test_key');
+// Load Stripe with proper environment variable handling
+const getStripePublishableKey = () => {
+  const key = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
+  if (!key) {
+    console.error('VITE_STRIPE_PUBLISHABLE_KEY is not set in environment variables');
+    return 'pk_test_51QCqGJP123456789_test_key'; // fallback for development
+  }
+  return key;
+};
+
+const stripePromise = loadStripe(getStripePublishableKey());
 
 const CheckoutForm = ({ selectedPlan, formData, onSuccess, onError }) => {
   const stripe = useStripe();
@@ -16,7 +25,7 @@ const CheckoutForm = ({ selectedPlan, formData, onSuccess, onError }) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [clientSecret, setClientSecret] = useState('');
 
-  // Plan configurations
+  // Plan configurations with proper environment variable handling
   const planConfig = {
     bronze: {
       priceId: import.meta.env.VITE_STRIPE_BRONZE_PRICE_ID || 'price_1S7CpoGFrHVFmHVwrXA0fNij',
@@ -35,6 +44,16 @@ const CheckoutForm = ({ selectedPlan, formData, onSuccess, onError }) => {
     }
   };
 
+  // Debug environment variables
+  useEffect(() => {
+    console.log('Stripe Environment Variables:', {
+      publishableKey: import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY ? 'Set' : 'Missing',
+      bronzePriceId: import.meta.env.VITE_STRIPE_BRONZE_PRICE_ID ? 'Set' : 'Missing',
+      silverPriceId: import.meta.env.VITE_STRIPE_SILVER_PRICE_ID ? 'Set' : 'Missing',
+      goldPriceId: import.meta.env.VITE_STRIPE_GOLD_PRICE_ID ? 'Set' : 'Missing'
+    });
+  }, []);
+
   // Create payment intent when component mounts
   useEffect(() => {
     if (selectedPlan && planConfig[selectedPlan]) {
@@ -44,31 +63,51 @@ const CheckoutForm = ({ selectedPlan, formData, onSuccess, onError }) => {
 
   const createPaymentIntent = async () => {
     try {
+      console.log('Creating payment intent for plan:', selectedPlan);
+      console.log('Using price ID:', planConfig[selectedPlan].priceId);
+      
+      const requestBody = {
+        priceId: planConfig[selectedPlan].priceId,
+        customerEmail: formData.email,
+        customerName: formData.contactName,
+        businessName: formData.businessName,
+        metadata: {
+          businessName: formData.businessName,
+          contactName: formData.contactName,
+          email: formData.email,
+          phone: formData.phone,
+          selectedPlan: selectedPlan
+        }
+      };
+
+      console.log('Payment intent request:', requestBody);
+
       const response = await fetch('/.netlify/functions/create-payment-intent', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          priceId: planConfig[selectedPlan].priceId,
-          customerEmail: formData.email,
-          customerName: formData.contactName,
-          businessName: formData.businessName,
-          metadata: {
-            businessName: formData.businessName,
-            contactName: formData.contactName,
-            email: formData.email,
-            phone: formData.phone,
-            selectedPlan: selectedPlan
-          }
-        }),
+        body: JSON.stringify(requestBody),
       });
 
-      const { clientSecret } = await response.json();
-      setClientSecret(clientSecret);
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Payment intent creation failed:', response.status, errorText);
+        throw new Error(`HTTP ${response.status}: ${errorText}`);
+      }
+
+      const result = await response.json();
+      console.log('Payment intent response:', result);
+
+      if (result.clientSecret) {
+        setClientSecret(result.clientSecret);
+        console.log('Client secret set successfully');
+      } else {
+        throw new Error('No client secret received from server');
+      }
     } catch (error) {
       console.error('Error creating payment intent:', error);
-      onError('Failed to initialize payment. Please try again.');
+      onError(`Failed to initialize payment: ${error.message}. Please try again.`);
     }
   };
 
@@ -126,6 +165,19 @@ const CheckoutForm = ({ selectedPlan, formData, onSuccess, onError }) => {
     return (
       <div className="text-center py-8">
         <p className="text-htk-platinum/80">Please select a subscription plan to continue.</p>
+      </div>
+    );
+  }
+
+  // Show loading state while initializing payment
+  if (!clientSecret) {
+    return (
+      <div className="max-w-md mx-auto">
+        <div className="htk-card p-6 text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-htk-gold mx-auto mb-4"></div>
+          <h3 className="text-xl font-bold htk-gold-text mb-2">Initializing Payment</h3>
+          <p className="text-htk-platinum/80">Setting up your {planConfig[selectedPlan].name} subscription...</p>
+        </div>
       </div>
     );
   }

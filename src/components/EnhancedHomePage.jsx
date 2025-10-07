@@ -92,7 +92,7 @@ function EnhancedHomePage() {
               🏆 UK's #1 Premium Trade Platform - Handy 2 Know
             </Badge>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
-              <span className="htk-gradient-text">Premium Trades</span>
+              <span className="htk-premium-shine">Premium Trades</span>
               <br />
               <span className="text-htk-platinum">At Your Fingertips</span>
             </h1>
@@ -161,7 +161,7 @@ function EnhancedHomePage() {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold htk-gold-text mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold htk-shiny-gold mb-6">
               Find Expert Trades
             </h2>
             <p className="text-xl text-htk-platinum/80 max-w-3xl mx-auto">
@@ -186,7 +186,7 @@ function EnhancedHomePage() {
       <section className="py-20 bg-htk-charcoal">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold htk-gold-text mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold htk-shiny-gold mb-6">
               What Our Users Say
             </h2>
             <p className="text-xl text-htk-platinum/80 max-w-3xl mx-auto">

@@ -310,6 +310,81 @@ h6 { font-size: clamp(1rem, 1.5vw, 1rem); }
   background-clip: text;
 }
 
+/* HTK Shiny Text Effects */
+.htk-shiny-text {
+  background: linear-gradient(
+    110deg,
+    var(--htk-dark-gold) 0%,
+    var(--htk-gold) 25%,
+    #F4E4BC 50%,
+    var(--htk-gold) 75%,
+    var(--htk-dark-gold) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: htk-shine 3s ease-in-out infinite;
+}
+
+.htk-shiny-gold {
+  background: linear-gradient(
+    110deg,
+    var(--htk-gold) 0%,
+    #F4E4BC 25%,
+    #FFFFFF 50%,
+    #F4E4BC 75%,
+    var(--htk-gold) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: htk-shine 2.5s ease-in-out infinite;
+}
+
+.htk-premium-shine {
+  background: linear-gradient(
+    110deg,
+    var(--htk-dark-gold) 0%,
+    var(--htk-gold) 20%,
+    #F4E4BC 40%,
+    #FFFFFF 50%,
+    #F4E4BC 60%,
+    var(--htk-gold) 80%,
+    var(--htk-dark-gold) 100%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: htk-premium-shine 4s ease-in-out infinite;
+}
+
+@keyframes htk-shine {
+  0% {
+    background-position: -200% 0;
+  }
+  50% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes htk-premium-shine {
+  0% {
+    background-position: -300% 0;
+  }
+  50% {
+    background-position: 300% 0;
+  }
+  100% {
+    background-position: -300% 0;
+  }
+}
+
 /* HTK Status Indicators */
 .htk-badge {
   display: inline-flex;
