@@ -7,6 +7,8 @@ import { Check, Star, Zap, Crown } from 'lucide-react';
 function PricingPage() {
   const handlePurchase = async (priceId, planName) => {
     try {
+      console.log('Initiating purchase for:', { priceId, planName });
+      
       const response = await fetch('/.netlify/functions/create-checkout-session', {
         method: 'POST',
         headers: {
@@ -17,18 +19,43 @@ function PricingPage() {
           planName: planName,
           successUrl: window.location.origin + 
             (planName.includes("Credits") ? "/success?type=credits&amount=" + planName.split(" ")[0] : "/success?type=subscription&plan=" + planName),
-          cancelUrl: window.location.origin + "/pricing"
+          cancelUrl: window.location.origin + "/pricing",
+          customerEmail: null, // Will be collected in Stripe checkout
+          metadata: {
+            planName: planName,
+            source: 'htk-platform'
+          }
         }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to create checkout session');
+        const errorText = await response.text();
+        console.error('Checkout session error:', errorText);
+        throw new Error(`Failed to create checkout session: ${response.status}`);
       }
 
-      const { url } = await response.json();
-      window.location.href = url;
+      const data = await response.json();
+      console.log('Checkout session response:', data);
+      
+      // Handle both sessionId and url responses
+      if (data.sessionId) {
+        // Redirect to Stripe checkout using sessionId
+        const stripe = window.Stripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+        const { error } = await stripe.redirectToCheckout({
+          sessionId: data.sessionId
+        });
+        if (error) {
+          console.error('Stripe redirect error:', error);
+          throw new Error(error.message);
+        }
+      } else if (data.url) {
+        // Direct URL redirect
+        window.location.href = data.url;
+      } else {
+        throw new Error('Invalid response from checkout session');
+      }
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Payment error:', error);
       alert('Payment system temporarily unavailable. Please try again later.');
     }
   };
@@ -41,7 +68,7 @@ function PricingPage() {
       credits: '10 credits monthly',
       description: 'Perfect for getting started',
       icon: <Star className="w-8 h-8 text-htk-gold" />,
-      priceId: 'price_1S7CpoGFrHVFmHVwrXAQfNij', // Bronze Plan Price ID
+      priceId: import.meta.env.VITE_STRIPE_BRONZE_PRICE_ID || 'price_1S7CpoGFrHVFmHVwrXAQfNij',
       features: [
         '10 job leads per month',
         'Basic profile listing',
@@ -59,7 +86,7 @@ function PricingPage() {
       credits: '70 credits monthly',
       description: 'Most popular for growing businesses',
       icon: <Zap className="w-8 h-8 text-htk-gold" />,
-      priceId: 'price_1S7CrMGFrHVFmHVwphKoSgxi', // Silver Plan Price ID
+      priceId: import.meta.env.VITE_STRIPE_SILVER_PRICE_ID || 'price_1S7CrMGFrHVFmHVwphKoSgxi',
       features: [
         '70 job leads per month',
         'Enhanced profile with photos',
@@ -78,7 +105,7 @@ function PricingPage() {
       credits: '160 credits monthly',
       description: 'For established trade businesses',
       icon: <Crown className="w-8 h-8 text-htk-gold" />,
-      priceId: 'price_1S7D9YGFrHVFmHVw5X1Nim7s', // Gold Plan Price ID
+      priceId: import.meta.env.VITE_STRIPE_GOLD_PRICE_ID || 'price_1S7D9YGFrHVFmHVw5X1Nim7s',
       features: [
         '160 job leads per month',
         'Premium profile with video',
@@ -92,9 +119,21 @@ function PricingPage() {
   ];
 
   const payAsYouGoOptions = [
-    { credits: 10, price: '£10', priceId: 'price_1S7DacGFrHVFmHVwHWWU7wBv' }, // Pay-as-you-go 10 Credits Price ID
-    { credits: 50, price: '£50', priceId: 'price_1S7DacGFrHVFmHVwHWWU7wBv' }, // Pay-as-you-go 50 Credits Price ID
-    { credits: 100, price: '£100', priceId: 'price_1S7DacGFrHVFmHVwHWWU7wBv' } // Pay-as-you-go 100 Credits Price ID
+    { 
+      credits: 10, 
+      price: '£10', 
+      priceId: import.meta.env.VITE_STRIPE_EXTRA_CREDITS_PRICE_ID || 'price_1S7DacGFrHVFmHVwHWWU7wBv' 
+    },
+    { 
+      credits: 50, 
+      price: '£50', 
+      priceId: import.meta.env.VITE_STRIPE_EXTRA_CREDITS_PRICE_ID || 'price_1S7DacGFrHVFmHVwHWWU7wBv' 
+    },
+    { 
+      credits: 100, 
+      price: '£100', 
+      priceId: import.meta.env.VITE_STRIPE_EXTRA_CREDITS_PRICE_ID || 'price_1S7DacGFrHVFmHVwHWWU7wBv' 
+    }
   ];
 
   return (
