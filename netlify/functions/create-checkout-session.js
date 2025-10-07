@@ -1,5 +1,3 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
-
 exports.handler = async (event, context) => {
   // Handle CORS preflight
   if (event.httpMethod === 'OPTIONS') {
@@ -25,6 +23,28 @@ exports.handler = async (event, context) => {
   }
 
   try {
+    // Check environment variables first
+    const envCheck = {
+      STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY ? 'Present' : 'Missing',
+      STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET ? 'Present' : 'Missing'
+    }
+
+    console.log('Environment variables:', envCheck)
+
+    if (!process.env.STRIPE_SECRET_KEY) {
+      return {
+        statusCode: 500,
+        headers: { 'Access-Control-Allow-Origin': '*' },
+        body: JSON.stringify({ 
+          error: 'Stripe secret key not configured',
+          envCheck: envCheck
+        })
+      }
+    }
+
+    // Initialize Stripe
+    const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
+    
     const { priceId, successUrl, cancelUrl, customerEmail, metadata } = JSON.parse(event.body)
 
     // Create Stripe checkout session
